@@ -1,19 +1,18 @@
-package ro.musiclover.manicureappointments.entity;
+package ro.musiclover.manicureappointments.model.manicurist;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import ro.musiclover.manicureappointments.entity.Appointment;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Getter
-@Setter
-public class Manicurist {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Data
+public class ManicuristRequest {
+
     private Integer id;
 
     @NotBlank
@@ -27,8 +26,4 @@ public class Manicurist {
 
     @Past(message = "Hire date must be less than today")
     private Date hireDate;
-
-    @OneToMany(mappedBy = "manicurist")
-    @JsonIgnore
-    private List<Appointment> appointments;
 }

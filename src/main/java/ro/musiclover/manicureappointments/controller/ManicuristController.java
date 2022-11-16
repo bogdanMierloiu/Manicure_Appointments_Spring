@@ -1,37 +1,41 @@
 package ro.musiclover.manicureappointments.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ro.musiclover.manicureappointments.entity.Manicurist;
+import ro.musiclover.manicureappointments.model.manicurist.ManicuristRequest;
+import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
 import ro.musiclover.manicureappointments.service.implementation.ManicuristService;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("manicurist")
 @RequiredArgsConstructor
+@Validated
 public class ManicuristController {
     private final ManicuristService manicuristService;
 
     @PostMapping("/create")
-    public void createManicurist(@RequestBody Manicurist manicurist) {
-        manicuristService.createManicurist(manicurist);
+    public ManicuristResponse createManicurist(@RequestBody @Valid ManicuristRequest manicuristRequest) {
+        return manicuristService.createManicurist(manicuristRequest);
     }
 
     @GetMapping("/list")
-    public List<Manicurist> showAllManicurists() {
+    public List<ManicuristResponse> showAllManicurists() {
         return manicuristService.allManicurists();
     }
 
     @GetMapping("/find/{id}")
-    public Optional<Manicurist> findManicuristById(@PathVariable Integer id) {
+    public ManicuristResponse findManicuristById(@PathVariable Integer id) {
         return manicuristService.findManicuristById(id);
     }
 
-    @PutMapping("/update/{id}")
-    public void updateManicurist(@PathVariable Integer id, @RequestBody Manicurist manicurist) {
-        manicuristService.updateManicurist(id, manicurist);
+    @PatchMapping("/update/{id}")
+    public void updateManicurist(@PathVariable Integer id, @RequestBody @Valid ManicuristRequest manicuristRequest) {
+        manicuristService.updateManicurist(id, manicuristRequest);
     }
 
     @DeleteMapping("/delete/{id}")

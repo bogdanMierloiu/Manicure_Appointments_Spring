@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -12,25 +13,22 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "appointments")
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "appointment_id")
+
     private Integer id;
 
-    @Column(name = "appointment_date", nullable = false)
+    @NotBlank
     private LocalDate appointmentDate;
 
-    @Column(name = "appointment_time", nullable = false)
+    @NotBlank
     private LocalTime appointmentTime;
 
-    @ManyToOne
-    @JoinColumn(name = "manicurist_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Manicurist manicurist;
 
-    @ManyToOne
-    @JoinColumn(name = "customers_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
 
     @ManyToMany(cascade = {CascadeType.ALL})

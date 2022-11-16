@@ -2,90 +2,80 @@ package ro.musiclover.manicureappointments.service.implementation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ro.musiclover.manicureappointments.entity.Manicurist;
+import ro.musiclover.manicureappointments.exception.BusinessException;
+import ro.musiclover.manicureappointments.mapper.manicurist.ManicuristMapper;
+import ro.musiclover.manicureappointments.model.manicurist.ManicuristRequest;
+import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
 import ro.musiclover.manicureappointments.repository.ManicuristRepository;
 import ro.musiclover.manicureappointments.service.interfaces.IManicurist;
 
-import java.sql.Date;
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ManicuristService extends Base<Manicurist> implements IManicurist {
+@RequiredArgsConstructor
+@Transactional
+public class ManicuristService implements IManicurist {
 
     private final ManicuristRepository manicuristRepository;
+    private final ManicuristMapper manicuristMapper;
 
-    public ManicuristService(ManicuristRepository manicuristRepository) {
-        super(Manicurist.class);
-        this.manicuristRepository = manicuristRepository;
+
+    @Override
+    public ManicuristResponse createManicurist(ManicuristRequest manicuristRequest) {
+        validatePhoneNumber(manicuristRequest.getPhoneNumber());
+        Manicurist manicurist = manicuristMapper.map(manicuristRequest);
+        return manicuristMapper.map(manicuristRepository.save(manicurist));
     }
 
     @Override
-    public void createManicurist(Manicurist manicurist) {
-        validateInputStrings(manicurist);
-        validateHireDate(manicurist);
-        manicuristRepository.save(manicurist);
+    public List<ManicuristResponse> allManicurists() {
+        return manicuristMapper.map(manicuristRepository.findAll());
+
     }
 
     @Override
-    public List<Manicurist> allManicurists() {
-        return manicuristRepository.findAll();
+    public ManicuristResponse findManicuristById(Integer id) {
+        Manicurist manicurist = manicuristRepository.findById(id).orElseThrow(
+                () -> new BusinessException(
+                        String.format("The manicurist with id: %s not exist", id))
+        );
+        return manicuristMapper.map(manicurist);
     }
 
     @Override
-    public Optional<Manicurist> findManicuristById(Integer id) {
-        checkId(id);
-        Optional<Manicurist> optionalManicurist = manicuristRepository.findById(id);
-        checkFindById(optionalManicurist);
-        return optionalManicurist;
-    }
-
-    @Override
-    public void updateManicurist(Integer id, Manicurist manicurist) {
-        checkId(id);
-        validateInputStrings(manicurist);
-        validateHireDate(manicurist);
-        Optional<Manicurist> manicuristToUpdate = manicuristRepository.findById(id);
-        checkFindById(manicuristToUpdate);
-        manicuristToUpdate.get().setFirstName(manicurist.getFirstName());
-        manicuristToUpdate.get().setLastName(manicurist.getLastName());
-        manicuristToUpdate.get().setPhoneNumber(manicurist.getPhoneNumber());
-        manicuristToUpdate.get().setHireDate(manicurist.getHireDate());
-        manicuristRepository.save(manicuristToUpdate.get());
-
+    public void updateManicurist(Integer id, ManicuristRequest manicuristRequest) {
+        validatePhoneNumber(manicuristRequest.getPhoneNumber());
+        Manicurist manicuristToUpdate = manicuristRepository.findById(id).orElseThrow(
+                () -> new BusinessException(
+                        String.format("The manicurist with id: %s not exist", id)
+                )
+        );
+        manicuristToUpdate.setFirstName(manicuristRequest.getFirstName());
+        manicuristToUpdate.setLastName(manicuristRequest.getLastName());
+        manicuristToUpdate.setPhoneNumber(manicuristRequest.getPhoneNumber());
+        manicuristToUpdate.setHireDate(manicuristRequest.getHireDate());
+        manicuristMapper.map(manicuristRepository.save(manicuristToUpdate));
     }
 
     @Override
     public void deleteManicurist(Integer id) {
-        checkId(id);
+//        checkId(id);
         Optional<Manicurist> manicuristToDelete = manicuristRepository.findById(id);
-        checkFindById(manicuristToDelete);
+//        checkFindById(manicuristToDelete);
         manicuristRepository.delete(manicuristToDelete.get());
 
     }
 
-    public void validateInputStrings(Manicurist manicurist) {
-        if (manicurist.getFirstName().isBlank()) {
-            throw new IllegalArgumentException("The first name is invalid");
-        }
-        if (manicurist.getLastName().isBlank()) {
-            throw new IllegalArgumentException("The last name is invalid");
-        }
-        if (manicurist.getPhoneNumber().isBlank() ||
-                !manicurist.getPhoneNumber().matches("[0-9]+") ||
-                manicurist.getPhoneNumber().length() < 10) {
-            throw new IllegalArgumentException("Invalid phone number");
-        }
-    }
 
-    public void validateHireDate(Manicurist manicurist) {
-        if (manicurist.getHireDate().after(Date.valueOf(
-                LocalDate.now().plus(1, ChronoUnit.DAYS))) ||
-                manicurist.getHireDate().toString().isBlank()) {
-            throw new DateTimeException("Invalid date");
+    @Override
+    public void validatePhoneNumber(String string) {
+        if (string.isBlank() ||
+                !string.matches("[0-9]+") ||
+                string.length() < 10) {
+            throw new IllegalArgumentException("Invalid phone number");
         }
     }
 

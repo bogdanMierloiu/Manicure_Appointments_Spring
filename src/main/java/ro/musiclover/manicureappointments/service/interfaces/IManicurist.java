@@ -1,19 +1,23 @@
 package ro.musiclover.manicureappointments.service.interfaces;
 
 import ro.musiclover.manicureappointments.entity.Manicurist;
+import ro.musiclover.manicureappointments.model.manicurist.ManicuristRequest;
+import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IManicurist {
-    void createManicurist(Manicurist manicurist);
+    ManicuristResponse createManicurist(ManicuristRequest manicuristRequest);
 
-    List<Manicurist> allManicurists();
+    List<ManicuristResponse> allManicurists();
 
-    Optional<Manicurist> findManicuristById(Integer id);
+    ManicuristResponse findManicuristById(Integer id);
 
-    void updateManicurist(Integer id, Manicurist manicurist);
+    void updateManicurist(Integer id, ManicuristRequest manicuristRequest);
 
     void deleteManicurist(Integer id);
+
+    void validatePhoneNumber(String string);
 
 }
