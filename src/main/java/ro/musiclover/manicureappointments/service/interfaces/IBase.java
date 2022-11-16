@@ -12,7 +12,7 @@ public interface IBase<T> {
 
     void validateInputStrings(String string);
 
-//    void validatePhoneNumber(String string);
+    void validatePhoneNumber(String string);
 
 
 

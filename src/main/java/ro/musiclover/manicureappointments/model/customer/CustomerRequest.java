@@ -1,12 +1,13 @@
-package ro.musiclover.manicureappointments.model.manicurist;
+package ro.musiclover.manicureappointments.model.customer;
 import lombok.Data;
+import ro.musiclover.manicureappointments.exception.BusinessException;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import java.util.Date;
+
 
 @Data
-public class ManicuristRequest {
+public class CustomerRequest {
 
     private Integer id;
 
@@ -16,9 +17,6 @@ public class ManicuristRequest {
     @NotBlank(message = "Invalid last name")
     private String lastName;
 
-    @NotBlank(message = "Invalid last name")
+    @NotBlank(message = "Invalid phone number")
     private String phoneNumber;
-
-    @Past(message = "Hire date must be less than today")
-    private Date hireDate;
 }

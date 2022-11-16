@@ -1,45 +1,46 @@
 package ro.musiclover.manicureappointments.service.implementation;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ro.musiclover.manicureappointments.entity.Customer;
+import ro.musiclover.manicureappointments.mapper.CustomerMapper;
+import ro.musiclover.manicureappointments.model.customer.CustomerRequest;
+import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
 import ro.musiclover.manicureappointments.repository.CustomerRepository;
 import ro.musiclover.manicureappointments.service.interfaces.ICustomer;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class CustomerService extends Base<Customer> implements ICustomer {
 
     private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
 
-    public CustomerService(CustomerRepository customerRepository) {
-        super(Customer.class);
-        this.customerRepository = customerRepository;
+    @Override
+    public CustomerResponse createCustomer(CustomerRequest customerRequest) {
+        validatePhoneNumber(customerRequest.getPhoneNumber());
+        Customer customer = customerMapper.map(customerRequest);
+        return customerMapper.map(customerRepository.save(customer));
     }
 
     @Override
-    public void createCustomer(Customer customer) {
-        validateInputStrings(customer.getFirstName());
-        validateInputStrings(customer.getLastName());
-//        validatePhoneNumber(customer.getPhoneNumber());
-        validateUnique(customer);
-        customerRepository.save(customer);
-    }
-
-    @Override
-    public List<Customer> getAllCustomers() {
+    public List<CustomerResponse> getAllCustomers() {
         return null;
     }
 
     @Override
-    public Optional<Customer> findCustomerById(Integer id) {
-        return Optional.empty();
+    public CustomerResponse findCustomerById(Integer id) {
+        return null;
     }
 
     @Override
-    public void updateCustomer(Integer id, Customer customer) {
+    public void updateCustomer(Integer id, CustomerRequest customerRequest) {
 
     }
 
@@ -47,14 +48,4 @@ public class CustomerService extends Base<Customer> implements ICustomer {
     public void deleteCustomer(Integer id) {
 
     }
-
-    public void validateUnique(Customer customer) {
-        List<Customer> allCustomers = customerRepository.findAll();
-        for (Customer customerFromList : allCustomers) {
-            if (customer.equals(customerFromList)) {
-                throw new IllegalArgumentException("This customer already exist");
-            }
-        }
-    }
-
 }

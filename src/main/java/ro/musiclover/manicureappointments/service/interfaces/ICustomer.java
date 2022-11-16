@@ -1,19 +1,21 @@
 package ro.musiclover.manicureappointments.service.interfaces;
 
 import ro.musiclover.manicureappointments.entity.Customer;
+import ro.musiclover.manicureappointments.model.customer.CustomerRequest;
+import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ICustomer {
 
-    void createCustomer(Customer customer);
+    CustomerResponse createCustomer(CustomerRequest customerRequest);
 
-    List<Customer> getAllCustomers();
+    List<CustomerResponse> getAllCustomers();
 
-    Optional<Customer> findCustomerById(Integer id);
+    CustomerResponse findCustomerById(Integer id);
 
-    void updateCustomer(Integer id, Customer customer);
+    void updateCustomer(Integer id, CustomerRequest customerRequest);
 
     void deleteCustomer(Integer id);
 }

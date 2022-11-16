@@ -1,4 +1,4 @@
-package ro.musiclover.manicureappointments.mapper.manicurist;
+package ro.musiclover.manicureappointments.mapper;
 
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.ComponentScan;

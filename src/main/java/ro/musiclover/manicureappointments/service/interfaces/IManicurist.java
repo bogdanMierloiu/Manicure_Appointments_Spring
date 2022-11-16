@@ -18,6 +18,4 @@ public interface IManicurist {
 
     void deleteManicurist(Integer id);
 
-    void validatePhoneNumber(String string);
-
 }
