@@ -1,7 +1,6 @@
 package ro.musiclover.manicureappointments.model.manicurist;
 import lombok.Data;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.util.Date;
 

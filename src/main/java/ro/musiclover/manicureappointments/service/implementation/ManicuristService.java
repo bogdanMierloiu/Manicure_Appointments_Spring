@@ -47,6 +47,7 @@ public class ManicuristService extends Base<Manicurist> implements IManicurist {
 
     @Override
     public void updateManicurist(Integer id, ManicuristRequest manicuristRequest) {
+        checkDuplicate(manicuristRequest);
         validatePhoneNumber(manicuristRequest.getPhoneNumber());
         Manicurist manicuristToUpdate = manicuristRepository.findById(id).orElseThrow(
                 () -> new BusinessException(
@@ -57,7 +58,6 @@ public class ManicuristService extends Base<Manicurist> implements IManicurist {
         manicuristToUpdate.setLastName(manicuristRequest.getLastName());
         manicuristToUpdate.setPhoneNumber(manicuristRequest.getPhoneNumber());
         manicuristToUpdate.setHireDate(manicuristRequest.getHireDate());
-        manicuristMapper.map(manicuristRepository.save(manicuristToUpdate));
     }
 
     @Override
