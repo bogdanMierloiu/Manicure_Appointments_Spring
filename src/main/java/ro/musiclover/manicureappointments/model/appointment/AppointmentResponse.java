@@ -1,9 +1,14 @@
 package ro.musiclover.manicureappointments.model.appointment;
 import lombok.Data;
+import ro.musiclover.manicureappointments.entity.Customer;
+import ro.musiclover.manicureappointments.entity.Manicurist;
+import ro.musiclover.manicureappointments.entity.NailsService;
+
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 public class AppointmentResponse {
@@ -17,10 +22,10 @@ public class AppointmentResponse {
     @NotNull
     private LocalTime appointmentTime;
 
-    private Integer manicuristId;
+    private Manicurist manicurist;
 
-    private Integer customerId;
+    private Customer customer;
 
-    private int[] nailsServicesIds;
+    private List<NailsService> allServices;
 
 }

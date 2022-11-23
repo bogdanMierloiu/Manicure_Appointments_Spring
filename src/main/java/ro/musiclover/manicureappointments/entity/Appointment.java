@@ -2,7 +2,7 @@ package ro.musiclover.manicureappointments.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-;
 
 @Entity
 @Getter
@@ -18,9 +17,8 @@ import java.util.List;
 public class Appointment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotNull
     @Future(message = "Please check the date")
@@ -35,10 +33,10 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "appointment_services",
+            joinColumns = {@JoinColumn(name = "appointment_id")},
+            inverseJoinColumns = {@JoinColumn(name = "service_id")})
     private List<NailsService> nailsServices = new ArrayList<>();
 
 }

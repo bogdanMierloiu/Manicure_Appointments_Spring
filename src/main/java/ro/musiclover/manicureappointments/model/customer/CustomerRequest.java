@@ -1,10 +1,6 @@
 package ro.musiclover.manicureappointments.model.customer;
 import lombok.Data;
-import ro.musiclover.manicureappointments.exception.BusinessException;
-
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 
 @Data
 public class CustomerRequest {

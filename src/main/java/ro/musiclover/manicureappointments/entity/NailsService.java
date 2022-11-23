@@ -14,10 +14,11 @@ import java.util.List;
 @Getter
 @Setter
 public class NailsService {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer id;
+
     @NotBlank
     private String serviceName;
 
@@ -25,6 +26,6 @@ public class NailsService {
     @Positive
     private Integer price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Appointment appointment;
+    @ManyToMany(mappedBy = "nailsServices")
+    private List<Appointment> appointments = new ArrayList<>();
 }

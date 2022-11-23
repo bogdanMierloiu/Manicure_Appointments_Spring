@@ -36,25 +36,27 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
 
     @Override
     public AppointmentResponse createAppointment(AppointmentRequest appointmentRequest) {
-        Appointment appointmentInitial = appointmentMapper.map(appointmentRequest);
-        appointmentRepository.save(appointmentInitial);
-        Appointment appointmentToSave = appointmentRepository.findById(appointmentRequest.getId()).orElseThrow();
-        Manicurist manicurist = manicuristRepository.findById(appointmentRequest.getManicuristId()).orElseThrow(
-                () -> new BusinessException("Manicurist not found")
+        Appointment appointmentToSave = appointmentMapper.map(appointmentRequest);
+
+        appointmentToSave.setManicurist(manicuristRepository.findById(appointmentRequest.getManicuristId()).orElseThrow(
+                        () -> new BusinessException("Manicurist not found")
+                )
+        )
+        ;
+
+        appointmentToSave.setCustomer(customerRepository.findById(appointmentRequest.getCustomerId()).orElseThrow(
+                        () -> new BusinessException("Customer not found")
+                )
         );
-        appointmentToSave.setManicurist(manicurist);
-        Customer customer = customerRepository.findById(appointmentRequest.getCustomerId()).orElseThrow(
-                () -> new BusinessException("Customer not found")
-        );
-        appointmentToSave.setCustomer(customer);
+
         List<NailsService> nailsServices = new ArrayList<>();
         for (Integer id : appointmentRequest.getNailsServicesIds()) {
             NailsService nailsService = nailsServiceRepository.findById(id).orElseThrow(
                     () -> new BusinessException("NailsService not found")
             );
             nailsServices.add(nailsService);
-            appointmentToSave.setNailsServices((List<NailsService>) nailsService);
         }
+        appointmentToSave.getNailsServices().addAll(nailsServices);
 
         Appointment appointmentForResponse = appointmentRepository.save(appointmentToSave);
         return appointmentMapper.map(appointmentForResponse);

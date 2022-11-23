@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Manicurist {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

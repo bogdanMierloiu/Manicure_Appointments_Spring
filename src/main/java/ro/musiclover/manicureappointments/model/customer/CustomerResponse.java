@@ -1,6 +1,6 @@
 package ro.musiclover.manicureappointments.model.customer;
 import lombok.Data;
-import javax.validation.constraints.NotBlank;
+
 
 
 @Data
