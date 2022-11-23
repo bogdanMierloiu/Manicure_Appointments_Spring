@@ -33,4 +33,19 @@ public class AppointmentController {
     public List<AppointmentResponse> findAll() {
         return appointmentService.findAll();
     }
+
+    @PatchMapping("update/date/{id}")
+    public void updateDate(@PathVariable Integer id, @RequestBody @Valid AppointmentRequest appointmentRequest) {
+        appointmentService.updateAppointmentDate(id, appointmentRequest);
+    }
+
+    @PatchMapping("update/time/{id}")
+    public void updateTime(@PathVariable Integer id, @RequestBody @Valid AppointmentRequest appointmentRequest) {
+        appointmentService.updateAppointmentTime(id, appointmentRequest);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public void delete(@PathVariable Integer id) {
+        appointmentService.delete(id);
+    }
 }

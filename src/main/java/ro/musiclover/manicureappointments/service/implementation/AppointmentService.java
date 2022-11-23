@@ -58,8 +58,11 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
         }
         appointmentToSave.getNailsServices().addAll(nailsServices);
 
-        Appointment appointmentForResponse = appointmentRepository.save(appointmentToSave);
-        return appointmentMapper.map(appointmentForResponse);
+        appointmentRepository.save(appointmentToSave);
+
+        AppointmentResponse appointmentForResponse = appointmentMapper.map(appointmentToSave);
+
+        return appointmentForResponse;
     }
 
     @Override
@@ -76,13 +79,27 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
     }
 
     @Override
-    public void updateAppointment(Integer id, AppointmentRequest appointmentRequest) {
+    public void updateAppointmentDate(Integer id, AppointmentRequest appointmentRequest) {
+        Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
+                () -> new BusinessException("Appointment not found")
+        );
+        appointmentToUpdate.setAppointmentDate(appointmentRequest.getAppointmentDate());
+    }
 
+    @Override
+    public void updateAppointmentTime(Integer id, AppointmentRequest appointmentRequest) {
+        Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
+                () -> new BusinessException("Appointment not found")
+        );
+        appointmentToUpdate.setAppointmentTime(appointmentRequest.getAppointmentTime());
     }
 
     @Override
     public void delete(Integer id) {
-
+        Appointment appointmentToDelete = appointmentRepository.findById(id).orElseThrow(
+                () -> new BusinessException("Appointment not found")
+        );
+        appointmentRepository.delete(appointmentToDelete);
     }
 
 

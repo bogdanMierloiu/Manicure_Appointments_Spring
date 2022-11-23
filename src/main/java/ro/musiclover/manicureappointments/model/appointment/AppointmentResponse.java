@@ -26,6 +26,7 @@ public class AppointmentResponse {
 
     private Customer customer;
 
-    private List<NailsService> allServices;
+    private List<NailsService> nailsServices ;
+
 
 }

@@ -13,7 +13,9 @@ public interface IAppointment {
 
     List<AppointmentResponse> findAll();
 
-    void updateAppointment(Integer id, AppointmentRequest appointmentRequest);
+    void updateAppointmentDate(Integer id, AppointmentRequest appointmentRequest);
+
+    void updateAppointmentTime(Integer id, AppointmentRequest appointmentRequest);
 
     void delete(Integer id);
 
