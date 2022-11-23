@@ -8,6 +8,7 @@ import ro.musiclover.manicureappointments.model.appointment.AppointmentResponse;
 import ro.musiclover.manicureappointments.service.implementation.AppointmentService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("appointment")
@@ -19,7 +20,17 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
 
     @PostMapping("create")
-    public AppointmentResponse createAppointment(@RequestBody @Valid AppointmentRequest appointmentRequest) {
+    public AppointmentResponse createAppointment(@RequestBody AppointmentRequest appointmentRequest) {
         return appointmentService.createAppointment(appointmentRequest);
+    }
+
+    @GetMapping("find/{id}")
+    public AppointmentResponse findById(@PathVariable Integer id) {
+        return appointmentService.findById(id);
+    }
+
+    @GetMapping("list")
+    public List<AppointmentResponse> findAll() {
+        return appointmentService.findAll();
     }
 }

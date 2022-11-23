@@ -26,6 +26,5 @@ public class Customer {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "customer")
-    @JsonIgnore
     private List<Appointment> appointments;
 }

@@ -29,6 +29,5 @@ public class Manicurist {
     private Date hireDate;
 
     @OneToMany(mappedBy = "manicurist")
-    @JsonIgnore
     private List<Appointment> appointments;
 }

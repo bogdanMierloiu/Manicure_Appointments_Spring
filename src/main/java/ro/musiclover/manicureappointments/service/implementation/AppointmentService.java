@@ -2,6 +2,7 @@ package ro.musiclover.manicureappointments.service.implementation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ro.musiclover.manicureappointments.entity.Appointment;
 import ro.musiclover.manicureappointments.entity.Customer;
 import ro.musiclover.manicureappointments.entity.Manicurist;
@@ -20,9 +21,12 @@ import ro.musiclover.manicureappointments.service.interfaces.IAppointment;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
+@Transactional
 @RequiredArgsConstructor
-public class AppointmentService implements IAppointment {
+public class AppointmentService extends Base<Appointment> implements IAppointment {
     private final AppointmentRepository appointmentRepository;
     private final AppointmentMapper appointmentMapper;
     private final ManicuristRepository manicuristRepository;
@@ -32,7 +36,9 @@ public class AppointmentService implements IAppointment {
 
     @Override
     public AppointmentResponse createAppointment(AppointmentRequest appointmentRequest) {
-        Appointment appointmentToSave = appointmentMapper.map(appointmentRequest);
+        Appointment appointmentInitial = appointmentMapper.map(appointmentRequest);
+        appointmentRepository.save(appointmentInitial);
+        Appointment appointmentToSave = appointmentRepository.findById(appointmentRequest.getId()).orElseThrow();
         Manicurist manicurist = manicuristRepository.findById(appointmentRequest.getManicuristId()).orElseThrow(
                 () -> new BusinessException("Manicurist not found")
         );
@@ -53,5 +59,30 @@ public class AppointmentService implements IAppointment {
         Appointment appointmentForResponse = appointmentRepository.save(appointmentToSave);
         return appointmentMapper.map(appointmentForResponse);
     }
+
+    @Override
+    public AppointmentResponse findById(Integer id) {
+        return appointmentMapper.map(appointmentRepository.findById(id).orElseThrow(
+                        () -> new BusinessException("Appointment not found")
+                )
+        );
+    }
+
+    @Override
+    public List<AppointmentResponse> findAll() {
+        return appointmentMapper.map(appointmentRepository.findAll());
+    }
+
+    @Override
+    public void updateAppointment(Integer id, AppointmentRequest appointmentRequest) {
+
+    }
+
+    @Override
+    public void delete(Integer id) {
+
+    }
+
+
 }
 

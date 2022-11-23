@@ -25,6 +25,6 @@ public class NailsService {
     @Positive
     private Integer price;
 
-    @ManyToMany(mappedBy = "nailsServices")
-    private List<Appointment> appointments = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Appointment appointment;
 }

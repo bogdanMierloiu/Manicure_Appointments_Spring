@@ -10,7 +10,7 @@ import ro.musiclover.manicureappointments.model.appointment.AppointmentResponse;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-22T21:32:52+0200",
+    date = "2022-11-23T17:02:42+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -24,7 +24,9 @@ public class AppointmentMapperImpl implements AppointmentMapper {
 
         Appointment appointment = new Appointment();
 
-        appointment.setId( appointmentRequest.getId() );
+        if ( appointmentRequest.getId() != null ) {
+            appointment.setId( appointmentRequest.getId() );
+        }
         appointment.setAppointmentDate( appointmentRequest.getAppointmentDate() );
         appointment.setAppointmentTime( appointmentRequest.getAppointmentTime() );
 
