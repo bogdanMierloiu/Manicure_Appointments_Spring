@@ -3,8 +3,7 @@ package ro.musiclover.manicureappointments.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ro.musiclover.manicureappointments.model.appointment.AppointmentRequest;
-import ro.musiclover.manicureappointments.model.appointment.AppointmentResponse;
+import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.service.implementation.AppointmentService;
 
 import javax.validation.Valid;
@@ -35,17 +34,29 @@ public class AppointmentController {
     }
 
     @PatchMapping("update/date/{id}")
-    public void updateDate(@PathVariable Integer id, @RequestBody @Valid AppointmentRequest appointmentRequest) {
-        appointmentService.updateAppointmentDate(id, appointmentRequest);
+    public void updateDate(@PathVariable Integer id, @RequestBody @Valid RequestUpdateDate requestUpdateDate) {
+        appointmentService.updateAppointmentDate(id, requestUpdateDate);
     }
 
     @PatchMapping("update/time/{id}")
-    public void updateTime(@PathVariable Integer id, @RequestBody @Valid AppointmentRequest appointmentRequest) {
-        appointmentService.updateAppointmentTime(id, appointmentRequest);
+    public void updateTime(@PathVariable Integer id, @RequestBody @Valid RequestUpdateTime requestUpdateTime) {
+        appointmentService.updateAppointmentTime(id, requestUpdateTime);
     }
+
+    @PatchMapping("update/services/{id}")
+    public void updateServices(@PathVariable Integer id, @RequestBody RequestUpdateServices requestUpdateServices) {
+        appointmentService.updateNailsServices(id, requestUpdateServices);
+    }
+
+    @PatchMapping("update/customer/{id}")
+    public void updateCustomer(@PathVariable Integer id, @RequestBody RequestUpdateCustomer requestUpdateCustomer) {
+        appointmentService.updateCustomer(id, requestUpdateCustomer);
+    }
+
 
     @DeleteMapping("delete/{id}")
     public void delete(@PathVariable Integer id) {
         appointmentService.delete(id);
     }
+
 }

@@ -12,7 +12,7 @@ import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePric
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-23T17:39:44+0200",
+    date = "2022-11-24T11:08:50+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -24,13 +24,13 @@ public class NailsServiceMapperImpl implements NailsServiceMapper {
             return null;
         }
 
-        NailsService nailsService = new NailsService();
+        NailsService.NailsServiceBuilder nailsService = NailsService.builder();
 
-        nailsService.setId( nailsServiceRequest.getId() );
-        nailsService.setServiceName( nailsServiceRequest.getServiceName() );
-        nailsService.setPrice( nailsServiceRequest.getPrice() );
+        nailsService.id( nailsServiceRequest.getId() );
+        nailsService.serviceName( nailsServiceRequest.getServiceName() );
+        nailsService.price( nailsServiceRequest.getPrice() );
 
-        return nailsService;
+        return nailsService.build();
     }
 
     @Override
@@ -68,12 +68,12 @@ public class NailsServiceMapperImpl implements NailsServiceMapper {
             return null;
         }
 
-        NailsService nailsService = new NailsService();
+        NailsService.NailsServiceBuilder nailsService = NailsService.builder();
 
-        nailsService.setId( requestUpdateName.getId() );
-        nailsService.setServiceName( requestUpdateName.getServiceName() );
+        nailsService.id( requestUpdateName.getId() );
+        nailsService.serviceName( requestUpdateName.getServiceName() );
 
-        return nailsService;
+        return nailsService.build();
     }
 
     @Override
@@ -82,11 +82,11 @@ public class NailsServiceMapperImpl implements NailsServiceMapper {
             return null;
         }
 
-        NailsService nailsService = new NailsService();
+        NailsService.NailsServiceBuilder nailsService = NailsService.builder();
 
-        nailsService.setId( requestUpdatePrice.getId() );
-        nailsService.setPrice( requestUpdatePrice.getPrice() );
+        nailsService.id( requestUpdatePrice.getId() );
+        nailsService.price( requestUpdatePrice.getPrice() );
 
-        return nailsService;
+        return nailsService.build();
     }
 }

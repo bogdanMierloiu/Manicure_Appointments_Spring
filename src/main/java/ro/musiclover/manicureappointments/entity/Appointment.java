@@ -1,19 +1,22 @@
 package ro.musiclover.manicureappointments.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Appointment {
 
     @Id
@@ -35,8 +38,9 @@ public class Appointment {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "appointment_services",
-            joinColumns = {@JoinColumn(name = "appointment_id")},
-            inverseJoinColumns = {@JoinColumn(name = "service_id")})
-    private List<NailsService> nailsServices = new ArrayList<>();
+            joinColumns = {@JoinColumn(name = "appointment_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "service_id", referencedColumnName = "id")})
+    @Builder.Default
+    private Set<NailsService> nailsServices = new HashSet<>();
 
 }

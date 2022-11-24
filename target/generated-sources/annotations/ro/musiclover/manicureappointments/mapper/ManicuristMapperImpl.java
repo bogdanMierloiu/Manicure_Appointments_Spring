@@ -10,7 +10,7 @@ import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-23T17:39:44+0200",
+    date = "2022-11-24T11:08:50+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -39,15 +39,15 @@ public class ManicuristMapperImpl implements ManicuristMapper {
             return null;
         }
 
-        Manicurist manicurist = new Manicurist();
+        Manicurist.ManicuristBuilder manicurist = Manicurist.builder();
 
-        manicurist.setId( manicuristRequest.getId() );
-        manicurist.setFirstName( manicuristRequest.getFirstName() );
-        manicurist.setLastName( manicuristRequest.getLastName() );
-        manicurist.setPhoneNumber( manicuristRequest.getPhoneNumber() );
-        manicurist.setHireDate( manicuristRequest.getHireDate() );
+        manicurist.id( manicuristRequest.getId() );
+        manicurist.firstName( manicuristRequest.getFirstName() );
+        manicurist.lastName( manicuristRequest.getLastName() );
+        manicurist.phoneNumber( manicuristRequest.getPhoneNumber() );
+        manicurist.hireDate( manicuristRequest.getHireDate() );
 
-        return manicurist;
+        return manicurist.build();
     }
 
     @Override

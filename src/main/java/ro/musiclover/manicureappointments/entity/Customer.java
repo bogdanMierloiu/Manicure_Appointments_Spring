@@ -1,12 +1,18 @@
 package ro.musiclover.manicureappointments.entity;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Customer {
 
     @Id
@@ -21,6 +27,7 @@ public class Customer {
 
     @NotBlank
     private String phoneNumber;
+    
 
     @OneToMany(mappedBy = "customer")
     private List<Appointment> appointments;

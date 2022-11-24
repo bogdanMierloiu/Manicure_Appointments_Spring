@@ -3,6 +3,7 @@ package ro.musiclover.manicureappointments.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ro.musiclover.manicureappointments.model.customer.CustomerDetailResponse;
 import ro.musiclover.manicureappointments.model.customer.CustomerRequest;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
 import ro.musiclover.manicureappointments.service.implementation.CustomerService;
@@ -31,6 +32,11 @@ public class CustomerController {
     @GetMapping("find/{id}")
     public CustomerResponse findCustomerById(@PathVariable Integer id) {
         return customerService.findCustomerById(id);
+    }
+
+    @GetMapping("find/details/{id}")
+    public CustomerDetailResponse findByIdWithDetails(@PathVariable Integer id) {
+        return customerService.findByIdWithDetails(id);
     }
 
     @PatchMapping("update/{id}")

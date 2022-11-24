@@ -10,21 +10,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
-public class AppointmentRequest {
+public class RequestUpdateServices {
+
 
     private Integer id;
-
-    @NotNull
-    @Future(message = "Please check the date")
-    private LocalDate appointmentDate;
-
-    @NotNull
-    private LocalTime appointmentTime;
-
-    private Integer manicuristId;
-
-    private Integer customerId;
-
     private int[] nailsServicesIds;
 
 }

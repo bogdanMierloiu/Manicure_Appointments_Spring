@@ -2,15 +2,17 @@ package ro.musiclover.manicureappointments.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 import ro.musiclover.manicureappointments.entity.Appointment;
+import ro.musiclover.manicureappointments.entity.NailsService;
 import ro.musiclover.manicureappointments.model.appointment.AppointmentRequest;
 import ro.musiclover.manicureappointments.model.appointment.AppointmentResponse;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-23T17:39:44+0200",
+    date = "2022-11-24T11:08:50+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -22,13 +24,13 @@ public class AppointmentMapperImpl implements AppointmentMapper {
             return null;
         }
 
-        Appointment appointment = new Appointment();
+        Appointment.AppointmentBuilder appointment = Appointment.builder();
 
-        appointment.setId( appointmentRequest.getId() );
-        appointment.setAppointmentDate( appointmentRequest.getAppointmentDate() );
-        appointment.setAppointmentTime( appointmentRequest.getAppointmentTime() );
+        appointment.id( appointmentRequest.getId() );
+        appointment.appointmentDate( appointmentRequest.getAppointmentDate() );
+        appointment.appointmentTime( appointmentRequest.getAppointmentTime() );
 
-        return appointment;
+        return appointment.build();
     }
 
     @Override
@@ -42,6 +44,12 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         appointmentResponse.setId( appointment.getId() );
         appointmentResponse.setAppointmentDate( appointment.getAppointmentDate() );
         appointmentResponse.setAppointmentTime( appointment.getAppointmentTime() );
+        appointmentResponse.setManicurist( appointment.getManicurist() );
+        appointmentResponse.setCustomer( appointment.getCustomer() );
+        Set<NailsService> set = appointment.getNailsServices();
+        if ( set != null ) {
+            appointmentResponse.setNailsServices( new ArrayList<NailsService>( set ) );
+        }
 
         return appointmentResponse;
     }
