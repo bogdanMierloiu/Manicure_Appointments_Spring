@@ -3,11 +3,17 @@ import lombok.Data;
 import ro.musiclover.manicureappointments.entity.Customer;
 import ro.musiclover.manicureappointments.entity.Manicurist;
 import ro.musiclover.manicureappointments.entity.NailsService;
+import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
+import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
+import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
+import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
+import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,11 +28,11 @@ public class AppointmentResponse {
     @NotNull
     private LocalTime appointmentTime;
 
-    private Manicurist manicurist;
+    private ManicuristResponseForAppointment manicurist;
 
-    private Customer customer;
+    private CustomerResponseForAppointment customer;
 
-    private List<NailsService> nailsServices ;
+    private final List<NailsServiceResponse> nailsServices = new ArrayList<>();
 
 
 }

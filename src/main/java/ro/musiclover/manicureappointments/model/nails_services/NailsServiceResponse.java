@@ -12,12 +12,7 @@ import javax.validation.constraints.Positive;
 public class NailsServiceResponse {
 
     private Integer id;
-
-    @NotBlank
     private String serviceName;
-
-    @NotNull
-    @Positive
     private Integer price;
 
 }

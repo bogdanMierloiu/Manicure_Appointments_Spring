@@ -12,6 +12,12 @@ import ro.musiclover.manicureappointments.mapper.AppointmentMapper;
 import ro.musiclover.manicureappointments.mapper.ManicuristMapper;
 import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.model.customer.CustomerDetailResponse;
+import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
+import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
+import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
+import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
+import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCustomerDetail;
+import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
 import ro.musiclover.manicureappointments.repository.AppointmentRepository;
 import ro.musiclover.manicureappointments.repository.CustomerRepository;
 import ro.musiclover.manicureappointments.repository.ManicuristRepository;
@@ -36,18 +42,20 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
 
     @Override
     public AppointmentResponse createAppointment(AppointmentRequest appointmentRequest) {
+        for (Appointment appointment : appointmentRepository.findAll()) {
+            if (appointment.getAppointmentDate().isEqual(appointmentRequest.getAppointmentDate()) &&
+            appointment.getAppointmentTime().equals(appointmentRequest.getAppointmentTime())) {
+                throw new BusinessException("You already have an appointment at this date and time");
+            }
+        }
+
         Appointment appointmentToSave = appointmentMapper.map(appointmentRequest);
 
         appointmentToSave.setManicurist(manicuristRepository.findById(appointmentRequest.getManicuristId()).orElseThrow(
-                        () -> new BusinessException("Manicurist not found")
-                )
-        )
-        ;
+                () -> new BusinessException("Manicurist not found")));
 
         appointmentToSave.setCustomer(customerRepository.findById(appointmentRequest.getCustomerId()).orElseThrow(
-                        () -> new BusinessException("Customer not found")
-                )
-        );
+                () -> new BusinessException("Customer not found")));
 
         List<NailsService> nailsServices = new ArrayList<>();
         for (Integer id : appointmentRequest.getNailsServicesIds()) {
@@ -60,7 +68,33 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
 
         appointmentRepository.save(appointmentToSave);
 
-        AppointmentResponse appointmentForResponse = appointmentMapper.map(appointmentToSave);
+        AppointmentResponse appointmentForResponse = new AppointmentResponse();
+
+        appointmentForResponse.setId(appointmentToSave.getId());
+        appointmentForResponse.setAppointmentDate(appointmentToSave.getAppointmentDate());
+        appointmentForResponse.setAppointmentTime(appointmentToSave.getAppointmentTime());
+
+        ManicuristResponseForAppointment manicuristResponse = new ManicuristResponseForAppointment();
+        manicuristResponse.setFirstName(appointmentToSave.getManicurist().getFirstName());
+        manicuristResponse.setLastName(appointmentToSave.getManicurist().getLastName());
+
+        CustomerResponseForAppointment customerResponse = new CustomerResponseForAppointment();
+        customerResponse.setId(appointmentToSave.getCustomer().getId());
+        customerResponse.setFirstName(appointmentToSave.getCustomer().getFirstName());
+        customerResponse.setLastName(appointmentToSave.getCustomer().getLastName());
+
+        List<NailsServiceResponse> serviceResponses = new ArrayList<>();
+        for (NailsService nailsService : nailsServices) {
+            NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
+            nailsServiceResponse.setId(nailsService.getId());
+            nailsServiceResponse.setServiceName(nailsService.getServiceName());
+            nailsServiceResponse.setPrice(nailsService.getPrice());
+            serviceResponses.add(nailsServiceResponse);
+        }
+
+        appointmentForResponse.setManicurist(manicuristResponse);
+        appointmentForResponse.setCustomer(customerResponse);
+        appointmentForResponse.getNailsServices().addAll(serviceResponses);
 
         return appointmentForResponse;
     }

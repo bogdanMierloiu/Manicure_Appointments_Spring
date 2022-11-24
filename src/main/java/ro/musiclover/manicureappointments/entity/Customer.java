@@ -27,7 +27,7 @@ public class Customer {
 
     @NotBlank
     private String phoneNumber;
-    
+
 
     @OneToMany(mappedBy = "customer")
     private List<Appointment> appointments;
