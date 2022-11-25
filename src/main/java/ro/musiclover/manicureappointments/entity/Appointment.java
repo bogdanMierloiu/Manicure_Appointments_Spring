@@ -24,7 +24,7 @@ public class Appointment {
     private Integer id;
 
     @NotNull
-    @Future(message = "Please check the date")
+    @Future (message = "Please check the date")
     private LocalDate appointmentDate;
 
     @NotNull

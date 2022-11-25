@@ -24,6 +24,8 @@ import ro.musiclover.manicureappointments.repository.ManicuristRepository;
 import ro.musiclover.manicureappointments.repository.NailsServiceRepository;
 import ro.musiclover.manicureappointments.service.interfaces.IAppointment;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +46,7 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
     public AppointmentResponse createAppointment(AppointmentRequest appointmentRequest) {
         for (Appointment appointment : appointmentRepository.findAll()) {
             if (appointment.getAppointmentDate().isEqual(appointmentRequest.getAppointmentDate()) &&
-            appointment.getAppointmentTime().equals(appointmentRequest.getAppointmentTime())) {
+                    appointment.getAppointmentTime().equals(appointmentRequest.getAppointmentTime())) {
                 throw new BusinessException("You already have an appointment at this date and time");
             }
         }
@@ -107,10 +109,17 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
         );
     }
 
+    @Override
+    public List<AppointmentResponse> findByAppointmentDate(LocalDate date) {
+        List<AppointmentResponse> listByDate = appointmentRepository.findByAppointmentDate(date);
+        return listByDate;
+    }
 
     @Override
     public List<AppointmentResponse> findAll() {
         return appointmentMapper.map(appointmentRepository.findAll());
+
+
     }
 
     @Override

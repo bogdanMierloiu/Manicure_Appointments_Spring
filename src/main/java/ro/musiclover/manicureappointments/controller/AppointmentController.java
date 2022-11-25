@@ -7,6 +7,8 @@ import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.service.implementation.AppointmentService;
 
 import javax.validation.Valid;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,6 +30,11 @@ public class AppointmentController {
         return appointmentService.findById(id);
     }
 
+
+    @GetMapping("find/date/{date}")
+    public List<AppointmentResponse> findByDate(@PathVariable LocalDate date){
+        return appointmentService.findByAppointmentDate(date);
+    }
     @GetMapping("list")
     public List<AppointmentResponse> findAll() {
         return appointmentService.findAll();
@@ -52,7 +59,6 @@ public class AppointmentController {
     public void updateCustomer(@PathVariable Integer id, @RequestBody RequestUpdateCustomer requestUpdateCustomer) {
         appointmentService.updateCustomer(id, requestUpdateCustomer);
     }
-
 
     @DeleteMapping("delete/{id}")
     public void delete(@PathVariable Integer id) {
