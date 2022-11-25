@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ro.musiclover.manicureappointments.model.customer.CustomerDetailResponse;
 import ro.musiclover.manicureappointments.model.customer.CustomerRequest;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
+import ro.musiclover.manicureappointments.model.customer.CustomerUpdateStatus;
 import ro.musiclover.manicureappointments.service.implementation.CustomerService;
 
 import javax.validation.Valid;
@@ -29,6 +30,11 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
+    @GetMapping("list/active")
+    public List<CustomerResponse> getAllActiveCustomers() {
+        return customerService.getAllActiveCustomers();
+    }
+
     @GetMapping("find/{id}")
     public CustomerResponse findCustomerById(@PathVariable Integer id) {
         return customerService.findCustomerById(id);
@@ -50,9 +56,10 @@ public class CustomerController {
         customerService.updateCustomer(id, customerRequest);
     }
 
-    @DeleteMapping("delete/{id}")
-    public void deleteCustomerById(@PathVariable Integer id) {
-        customerService.deleteCustomer(id);
+
+    @PatchMapping("update/status/{id}")
+    public void updateStatus(@PathVariable Integer id, @RequestBody CustomerUpdateStatus customerUpdateStatus) {
+        customerService.updateStatus(id, customerUpdateStatus);
     }
 
 

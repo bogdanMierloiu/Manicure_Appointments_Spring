@@ -30,6 +30,7 @@ ro\musiclover\manicureappointments\model\nails_services\RequestUpdateName.class
 ro\musiclover\manicureappointments\service\interfaces\IAppointment.class
 ro\musiclover\manicureappointments\model\appointment\RequestUpdateTime.class
 ro\musiclover\manicureappointments\entity\NailsService.class
+ro\musiclover\manicureappointments\model\customer\CustomerUpdateStatus.class
 ro\musiclover\manicureappointments\model\manicurist\ManicuristResponse.class
 ro\musiclover\manicureappointments\model\manicurist\ManicuristResponseForAppointment.class
 ro\musiclover\manicureappointments\repository\CustomerRepository.class

@@ -12,6 +12,7 @@ import ro.musiclover.manicureappointments.model.appointment.AppointmentResponseF
 import ro.musiclover.manicureappointments.model.customer.CustomerDetailResponse;
 import ro.musiclover.manicureappointments.model.customer.CustomerRequest;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
+import ro.musiclover.manicureappointments.model.customer.CustomerUpdateStatus;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCustomerDetail;
 import ro.musiclover.manicureappointments.repository.CustomerRepository;
 import ro.musiclover.manicureappointments.repository.MyRepository;
@@ -42,6 +43,18 @@ public class CustomerService extends Base<Customer> implements ICustomer {
     @Override
     public List<CustomerResponse> getAllCustomers() {
         return customerMapper.map(customerRepository.findAll());
+    }
+
+    @Override
+    public List<CustomerResponse> getAllActiveCustomers() {
+        List<Customer> customersFromDb = customerRepository.findAll();
+        List<CustomerResponse> customersForResponse = new ArrayList<>();
+        for (Customer customer : customersFromDb) {
+            if (customer.isActive()) {
+                customersForResponse.add(customerMapper.map(customer));
+            }
+        }
+        return customersForResponse;
     }
 
     @Override
@@ -125,15 +138,12 @@ public class CustomerService extends Base<Customer> implements ICustomer {
     }
 
     @Override
-    public void deleteCustomer(Integer id) {
-        Customer customerToDelete = customerRepository.findById(id).orElseThrow(
-                () -> new BusinessException(
-                        String.format("Customer with id: %s not found", id)
-                )
+    public void updateStatus(Integer id, CustomerUpdateStatus customerUpdateStatus) {
+        Customer customer = customerRepository.findById(id).orElseThrow(
+                () -> new BusinessException("Not found")
         );
-        customerRepository.delete(customerToDelete);
+        customer.setActive(customerUpdateStatus.isActive());
     }
-
 
     public void checkDuplicate(CustomerRequest customerRequest) {
         for (Customer customer : customerRepository.findAll()) {

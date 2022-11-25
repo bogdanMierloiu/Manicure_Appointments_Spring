@@ -10,7 +10,7 @@ import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-25T11:48:38+0200",
+    date = "2022-11-25T13:35:47+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -28,6 +28,9 @@ public class CustomerMapperImpl implements CustomerMapper {
         customer.firstName( customerRequest.getFirstName() );
         customer.lastName( customerRequest.getLastName() );
         customer.phoneNumber( customerRequest.getPhoneNumber() );
+        customer.birthDate( customerRequest.getBirthDate() );
+        customer.email( customerRequest.getEmail() );
+        customer.active( customerRequest.isActive() );
 
         return customer.build();
     }
@@ -44,6 +47,9 @@ public class CustomerMapperImpl implements CustomerMapper {
         customerResponse.setFirstName( customer.getFirstName() );
         customerResponse.setLastName( customer.getLastName() );
         customerResponse.setPhoneNumber( customer.getPhoneNumber() );
+        customerResponse.setBirthDate( customer.getBirthDate() );
+        customerResponse.setEmail( customer.getEmail() );
+        customerResponse.setActive( customer.isActive() );
 
         return customerResponse;
     }

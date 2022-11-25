@@ -34,6 +34,7 @@ C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclo
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\service\implementation\NailsServiceService.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\controller\NailsServiceController.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\appointment\RequestUpdateDate.java
+C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\customer\CustomerUpdateStatus.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\appointment\AppointmentResponseForCustomerDetail.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\service\implementation\ManicuristService.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\entity\Customer.java
