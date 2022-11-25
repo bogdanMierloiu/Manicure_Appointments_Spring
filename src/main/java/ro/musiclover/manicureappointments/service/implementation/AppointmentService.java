@@ -5,31 +5,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.musiclover.manicureappointments.entity.Appointment;
 import ro.musiclover.manicureappointments.entity.Customer;
-import ro.musiclover.manicureappointments.entity.Manicurist;
 import ro.musiclover.manicureappointments.entity.NailsService;
 import ro.musiclover.manicureappointments.exception.BusinessException;
 import ro.musiclover.manicureappointments.mapper.AppointmentMapper;
 import ro.musiclover.manicureappointments.mapper.ManicuristMapper;
 import ro.musiclover.manicureappointments.model.appointment.*;
-import ro.musiclover.manicureappointments.model.customer.CustomerDetailResponse;
-import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
-import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
-import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCustomerDetail;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
-import ro.musiclover.manicureappointments.repository.AppointmentRepository;
-import ro.musiclover.manicureappointments.repository.CustomerRepository;
-import ro.musiclover.manicureappointments.repository.ManicuristRepository;
-import ro.musiclover.manicureappointments.repository.NailsServiceRepository;
+import ro.musiclover.manicureappointments.repository.*;
 import ro.musiclover.manicureappointments.service.interfaces.IAppointment;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 @Transactional
@@ -41,6 +29,8 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
     private final ManicuristMapper manicuristMapper;
     private final CustomerRepository customerRepository;
     private final NailsServiceRepository nailsServiceRepository;
+
+
 
     @Override
     public AppointmentResponse createAppointment(AppointmentRequest appointmentRequest) {
@@ -86,7 +76,7 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
         customerResponse.setLastName(appointmentToSave.getCustomer().getLastName());
 
         List<NailsServiceResponse> serviceResponses = new ArrayList<>();
-        for (NailsService nailsService : nailsServices) {
+        for (NailsService nailsService: appointmentToSave.getNailsServices()){
             NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
             nailsServiceResponse.setId(nailsService.getId());
             nailsServiceResponse.setServiceName(nailsService.getServiceName());
@@ -109,11 +99,11 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
         );
     }
 
-    @Override
-    public List<AppointmentResponse> findByAppointmentDate(LocalDate date) {
-        List<AppointmentResponse> listByDate = appointmentRepository.findByAppointmentDate(date);
-        return listByDate;
-    }
+//    @Override
+//    public List<AppointmentResponse> findByAppointmentDate(LocalDate date) {
+//        List<AppointmentResponse> listByDate = appointmentRepository.findByAppointmentDate(date);
+//        return listByDate;
+//    }
 
     @Override
     public List<AppointmentResponse> findAll() {

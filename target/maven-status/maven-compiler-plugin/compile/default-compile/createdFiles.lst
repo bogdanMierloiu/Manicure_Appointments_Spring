@@ -19,6 +19,7 @@ ro\musiclover\manicureappointments\Application.class
 ro\musiclover\manicureappointments\model\appointment\AppointmentResponseForCustomerDetail.class
 ro\musiclover\manicureappointments\controller\ManicuristController.class
 ro\musiclover\manicureappointments\entity\Appointment$AppointmentBuilder.class
+ro\musiclover\manicureappointments\repository\MyRepository.class
 ro\musiclover\manicureappointments\service\implementation\CustomerService.class
 ro\musiclover\manicureappointments\mapper\AppointmentMapper.class
 ro\musiclover\manicureappointments\exception\CustomExceptionHandler.class

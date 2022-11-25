@@ -15,6 +15,8 @@ public interface ICustomer {
     List<CustomerResponse> getAllCustomers();
     CustomerDetailResponse findByIdWithDetails(Integer id);
 
+    List<CustomerDetailResponse>  findByFirstName(String firstName);
+
     CustomerResponse findCustomerById(Integer id);
 
     void updateCustomer(Integer id, CustomerRequest customerRequest);

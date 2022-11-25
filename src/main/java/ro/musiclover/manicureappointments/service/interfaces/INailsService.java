@@ -1,5 +1,6 @@
 package ro.musiclover.manicureappointments.service.interfaces;
 
+import ro.musiclover.manicureappointments.entity.NailsService;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
@@ -14,6 +15,8 @@ public interface INailsService {
     List<NailsServiceResponse> allServices();
 
     NailsServiceResponse findServiceByID(Integer id);
+
+    List<NailsServiceResponse> findByServiceName(String name);
 
     void updateServicePrice(Integer id, RequestUpdatePrice requestUpdatePrice);
 

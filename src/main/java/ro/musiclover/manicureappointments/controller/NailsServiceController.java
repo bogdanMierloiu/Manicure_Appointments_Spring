@@ -3,6 +3,7 @@ package ro.musiclover.manicureappointments.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ro.musiclover.manicureappointments.entity.NailsService;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
@@ -35,6 +36,10 @@ public class NailsServiceController {
         return nailsServiceService.findServiceByID(id);
     }
 
+    @GetMapping("search/{name}")
+    public List<NailsServiceResponse> findByServiceName(@PathVariable String name){
+        return nailsServiceService.findByServiceName(name);
+    }
     @PatchMapping("update-price/{id}")
     public void updateServicePrice(@PathVariable Integer id, @RequestBody @Valid RequestUpdatePrice requestUpdatePrice) {
         nailsServiceService.updateServicePrice(id, requestUpdatePrice);

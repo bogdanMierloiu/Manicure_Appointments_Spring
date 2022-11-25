@@ -14,7 +14,7 @@ public interface IAppointment {
 
     AppointmentResponse findById(Integer id);
 
-    List<AppointmentResponse> findByAppointmentDate(LocalDate date);
+//    List<AppointmentResponse> findByAppointmentDate(LocalDate date);
 
     List<AppointmentResponse> findAll();
 

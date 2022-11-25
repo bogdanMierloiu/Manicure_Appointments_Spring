@@ -14,12 +14,11 @@ import ro.musiclover.manicureappointments.model.customer.CustomerRequest;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCustomerDetail;
 import ro.musiclover.manicureappointments.repository.CustomerRepository;
+import ro.musiclover.manicureappointments.repository.MyRepository;
 import ro.musiclover.manicureappointments.service.interfaces.ICustomer;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +27,8 @@ public class CustomerService extends Base<Customer> implements ICustomer {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+
+    private final MyRepository myRepository;
 
 
     @Override
@@ -76,6 +77,38 @@ public class CustomerService extends Base<Customer> implements ICustomer {
             customerDetailResponse.getAppointments().add(appointmentResponse);
         }
         return customerDetailResponse;
+    }
+
+    @Override
+    public List<CustomerDetailResponse> findByFirstName(String firstName) {
+        if (firstName.isBlank()) {
+            throw new IllegalArgumentException("Invalid name");
+        }
+        List<Customer> customerListFromDB = myRepository.findByFirstName(firstName);
+        List<CustomerDetailResponse> customerDetailResponseList = new ArrayList<>();
+        for (Customer customer : customerListFromDB) {
+            CustomerDetailResponse customerDetailResponse = new CustomerDetailResponse();
+            customerDetailResponse.setFirstName(customer.getFirstName());
+            customerDetailResponse.setLastName(customer.getLastName());
+            customerDetailResponse.setAppointments(new ArrayList<>());    // aici este gol
+            for (Appointment appointment : customer.getAppointments()) {
+                AppointmentResponseForCustomerDetail appointmentResponseForCustomerDetail = new AppointmentResponseForCustomerDetail();
+                appointmentResponseForCustomerDetail.setAppointmentDate(appointment.getAppointmentDate());
+                appointmentResponseForCustomerDetail.setAppointmentTime(appointment.getAppointmentTime());
+                appointmentResponseForCustomerDetail.setNailsServices(new ArrayList<>());
+                for (NailsService nailsService : appointment.getNailsServices()) {
+                    NailsServiceForCustomerDetail nailsServiceForCustomerDetail = new NailsServiceForCustomerDetail();
+                    nailsServiceForCustomerDetail.setServiceName(nailsService.getServiceName());
+                    appointmentResponseForCustomerDetail.getNailsServices().add(nailsServiceForCustomerDetail);
+                    customerDetailResponse.getAppointments().add(appointmentResponseForCustomerDetail);
+                }
+            }
+            customerDetailResponseList.add(customerDetailResponse);
+        }
+        if (customerDetailResponseList.isEmpty()) {
+            throw new BusinessException("Not found");
+        }
+        return customerDetailResponseList;
     }
 
     @Override

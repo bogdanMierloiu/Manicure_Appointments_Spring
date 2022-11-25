@@ -39,6 +39,12 @@ public class CustomerController {
         return customerService.findByIdWithDetails(id);
     }
 
+    @GetMapping("find/name/{firstName}")
+    public List<CustomerDetailResponse> findByName(@PathVariable String firstName) {
+        return customerService.findByFirstName(firstName);
+    }
+
+
     @PatchMapping("update/{id}")
     public void updateCustomerById(@PathVariable Integer id, @RequestBody @Valid CustomerRequest customerRequest) {
         customerService.updateCustomer(id, customerRequest);

@@ -31,10 +31,10 @@ public class AppointmentController {
     }
 
 
-    @GetMapping("find/date/{date}")
-    public List<AppointmentResponse> findByDate(@PathVariable LocalDate date){
-        return appointmentService.findByAppointmentDate(date);
-    }
+//    @GetMapping("find/date/{date}")
+//    public List<AppointmentResponse> findByDate(@PathVariable LocalDate date){
+//        return appointmentService.findByAppointmentDate(date);
+//    }
     @GetMapping("list")
     public List<AppointmentResponse> findAll() {
         return appointmentService.findAll();

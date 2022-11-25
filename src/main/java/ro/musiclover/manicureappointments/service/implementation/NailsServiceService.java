@@ -10,9 +10,11 @@ import ro.musiclover.manicureappointments.model.nails_services.NailsServiceReque
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePrice;
+import ro.musiclover.manicureappointments.repository.MyRepository;
 import ro.musiclover.manicureappointments.repository.NailsServiceRepository;
 import ro.musiclover.manicureappointments.service.interfaces.INailsService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +24,8 @@ public class NailsServiceService extends Base<NailsService> implements INailsSer
 
     private final NailsServiceRepository nailsServiceRepository;
     private final NailsServiceMapper nailsServiceMapper;
+
+    private final MyRepository myRepository;
 
     @Override
     public NailsServiceResponse createService(NailsServiceRequest nailsServiceRequest) {
@@ -42,6 +46,24 @@ public class NailsServiceService extends Base<NailsService> implements INailsSer
                 () -> new BusinessException(String.format("The service with id: %s not exist", id))
         );
         return nailsServiceMapper.map(nailsService);
+    }
+
+    @Override
+    public List<NailsServiceResponse> findByServiceName(String name) {
+        List<NailsService> serviceListFromDB = myRepository.findByServiceName(name);
+        return createListOfServiceForResponseFromDB(serviceListFromDB);
+    }
+
+    static List<NailsServiceResponse> createListOfServiceForResponseFromDB(List<NailsService> serviceListFromDB) {
+        List<NailsServiceResponse> serviceListForResponse = new ArrayList<>();
+        for (NailsService nailsService : serviceListFromDB) {
+            NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
+            nailsServiceResponse.setId(nailsService.getId());
+            nailsServiceResponse.setServiceName(nailsService.getServiceName());
+            nailsServiceResponse.setPrice(nailsService.getPrice());
+            serviceListForResponse.add(nailsServiceResponse);
+        }
+        return serviceListForResponse;
     }
 
     @Override
