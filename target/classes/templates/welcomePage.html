@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Manicure Appointments</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<h1>Welcome to your Manicure Appointments application!</h1>
+<form th:action="@{/manicurist}">
+    <button>Manicurists</button>
+</form>
+<form th:action="@{/customer}">
+    <button>Customers</button>
+</form>
+<form th:action="@{/appointment}">
+    <button>Appointments</button>
+</form>
+<form th:action="@{/nails-service}">
+    <button>Nails Services</button>
+</form>
+
+</body>
+</html>

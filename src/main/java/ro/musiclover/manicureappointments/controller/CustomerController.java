@@ -24,7 +24,6 @@ public class CustomerController {
     public CustomerResponse createCustomer(@RequestBody @Valid CustomerRequest customerRequest) {
         return customerService.createCustomer(customerRequest);
     }
-
     @GetMapping("list")
     public List<CustomerResponse> getAllCustomers() {
         return customerService.getAllCustomers();
