@@ -1,10 +1,16 @@
 package ro.musiclover.manicureappointments.model.customer;
-import lombok.Data;
+
+import lombok.*;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
-import java.time.LocalDate;
+import java.util.Date;
+
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerRequest {
 
     private Integer id;
@@ -19,7 +25,7 @@ public class CustomerRequest {
     private String phoneNumber;
 
     @Past
-    private LocalDate birthDate;
+    private Date birthDate;
 
     @NotBlank
     private String email;

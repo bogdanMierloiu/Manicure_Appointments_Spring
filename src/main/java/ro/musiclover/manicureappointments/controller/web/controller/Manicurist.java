@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ro.musiclover.manicureappointments.model.manicurist.CreateManicuristRequest;
-import ro.musiclover.manicureappointments.model.manicurist.DeleteRequest;
+import ro.musiclover.manicureappointments.model.DeleteRequest;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristRequest;
 import ro.musiclover.manicureappointments.service.implementation.ManicuristService;
 
@@ -29,7 +29,7 @@ public class Manicurist {
     }
 
     @PostMapping("manicurist/delete")
-    public String deleteItem(@ModelAttribute(value = "deleteRequest") DeleteRequest request, Model model) {
+    public String deleteManicurist(@ModelAttribute(value = "deleteRequest") DeleteRequest request, Model model) {
         manicuristService.deleteManicurist(request.getId());
         model.addAttribute("manicurists", manicuristService.allManicurists());
         return "allManicuristsPage";

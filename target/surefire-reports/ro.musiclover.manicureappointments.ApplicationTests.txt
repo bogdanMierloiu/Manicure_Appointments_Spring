@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ro.musiclover.manicureappointments.ApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.399 s - in ro.musiclover.manicureappointments.ApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.693 s - in ro.musiclover.manicureappointments.ApplicationTests

@@ -1,4 +1,5 @@
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\exception\CustomExceptionHandler.java
+C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\controller\web\controller\NailsService.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\repository\AppointmentRepository.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\service\interfaces\ICustomer.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\service\interfaces\IBase.java
@@ -7,6 +8,7 @@ C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclo
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\repository\NailsServiceRepository.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\customer\CustomerResponse.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\service\interfaces\IAppointment.java
+C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\controller\web\controller\Appointment.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\nails_services\RequestUpdatePrice.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\service\interfaces\INailsService.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\appointment\RequestUpdateServices.java
@@ -15,11 +17,14 @@ C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclo
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\Application.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\appointment\AppointmentRequest.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\mapper\NailsServiceMapper.java
+C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\customer\CreateCustomerRequest.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\service\implementation\AppointmentService.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\appointment\RequestUpdateTime.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\manicurist\ManicuristRequest.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\repository\ManicuristRepository.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\nails_services\RequestUpdateName.java
+C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\DeleteRequest.java
+C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\manicurist\CreateManicuristRequest.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\service\implementation\Base.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\customer\CustomerResponseForAppointment.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\nails_services\NailsServiceRequest.java
@@ -27,8 +32,12 @@ C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclo
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\appointment\RequestUpdateCustomer.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\mapper\AppointmentMapper.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\customer\CustomerRequest.java
+C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\controller\web\controller\Manicurist.java
+C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\model\UpdateRequest.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\controller\AppointmentController.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\repository\MyRepository.java
+C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\controller\web\controller\Customer.java
+C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\controller\web\controller\WelcomeController.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\entity\Appointment.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\exception\BusinessException.java
 C:\Users\Andreea\Documents\Manicure_Appointments_Spring\src\main\java\ro\musiclover\manicureappointments\service\implementation\NailsServiceService.java

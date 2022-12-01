@@ -1,4 +1,4 @@
-package ro.musiclover.manicureappointments.model.manicurist;
+package ro.musiclover.manicureappointments.model;
 
 import lombok.Data;
 

@@ -1,12 +1,11 @@
 package ro.musiclover.manicureappointments.entity;
 
 import lombok.*;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
-import java.time.LocalDate;
+
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,7 +31,7 @@ public class Customer {
     private String phoneNumber;
 
     @Past
-    private LocalDate birthDate;
+    private Date birthDate;
 
     @NotBlank
     private String email;

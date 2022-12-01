@@ -35,9 +35,10 @@
         </form>
     </li>
 </ul>
-<h1>
-    Hello Customers
-</h1>
+<h2> Choose an option </h2>
+<form th:action="@{/customer/allCustomers}">
+    <button type="submit" class="btn btn-primary btn-lg"> View all customers</button>
+</form>
 
 </body>
 </html>
