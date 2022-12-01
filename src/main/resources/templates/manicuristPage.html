@@ -3,10 +3,42 @@
 <head>
     <title>Manicurists</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
+<ul class="nav nav-pills nav-justified">
+    <li class="nav-item">
+        <form th:action="@{/welcome}">
+            <button class="nav-link active" aria-current="page">Home</button>
+        </form>
+    </li>
+    <li class="nav-item">
+        <form th:action="@{/manicurist}">
+            <button class="nav-link active">Manicurists</button>
+        </form>
+    </li>
+    <li class="nav-item">
+        <form th:action="@{/customer}">
+            <button class="nav-link active">Customers</button>
+        </form>
+    </li>
+    <li class="nav-item">
+        <form th:action="@{/appointment}">
+            <button class="nav-link active">Appointments</button>
+        </form>
+    </li>
+    <li class="nav-item">
+        <form th:action="@{/nails-service}">
+            <button class="nav-link active">Nails Services</button>
+        </form>
+    </li>
+</ul>
+<h2>Choose an option </h2>
 
-<h1> Hello Manicurists</h1>
+<form th:action="@{/manicurist/allManicurists}">
+    <button type="submit" class="btn btn-primary btn-lg">View all manicurists</button>
+</form>
 
 </body>
 </html>
