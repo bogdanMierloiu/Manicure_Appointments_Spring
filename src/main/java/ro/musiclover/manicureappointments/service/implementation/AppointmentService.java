@@ -52,7 +52,7 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
         List<NailsService> nailsServices = new ArrayList<>();
         for (Integer id : appointmentRequest.getNailsServicesIds()) {
             NailsService nailsService = nailsServiceRepository.findById(id).orElseThrow(
-                    () -> new BusinessException("NailsService not found")
+                    () -> new BusinessException("NailsServiceWebController not found")
             );
             nailsServices.add(nailsService);
         }

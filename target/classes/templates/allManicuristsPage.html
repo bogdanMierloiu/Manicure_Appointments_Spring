@@ -46,6 +46,7 @@
         <th>Phone number</th>
         <th>Hire Date</th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -61,6 +62,13 @@
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
         </td>
+        <td>
+            <form th:action="@{/manicurist/goToUpdateManicuristPage}">
+                <input type="hidden" name="id" th:value="${manicurist.id}">
+                <button type="submit" class="btn btn-info"> Update </button>
+            </form>
+        </td>
+
     </tr>
     </tbody>
 </table>
