@@ -8,6 +8,7 @@ import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCu
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Set;
 @Data
 public class AppointmentResponseForCustomerDetail {
 
-    private LocalDate appointmentDate;
+    private Date appointmentDate;
 
     private LocalTime appointmentTime;
 

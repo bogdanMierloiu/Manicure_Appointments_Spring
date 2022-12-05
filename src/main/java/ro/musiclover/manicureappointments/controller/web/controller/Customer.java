@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ro.musiclover.manicureappointments.model.UpdateRequest;
-import ro.musiclover.manicureappointments.model.customer.CreateCustomerRequest;
-import ro.musiclover.manicureappointments.model.customer.CustomerRequest;
-import ro.musiclover.manicureappointments.model.customer.CustomerUpdateStatus;
+import ro.musiclover.manicureappointments.model.appointment.AppointmentResponseForCustomerDetail;
+import ro.musiclover.manicureappointments.model.customer.*;
 import ro.musiclover.manicureappointments.service.implementation.CustomerService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -43,6 +45,7 @@ public class Customer {
     public String goToCreateCustomerPage() {
         return "customerCreatePage";
     }
+
     @PostMapping("customer/create-new-customer")
     public String createCustomer(@ModelAttribute(value = "createCustomerRequest") CreateCustomerRequest request,
                                  Model model) {
@@ -57,6 +60,12 @@ public class Customer {
         customerService.createCustomer(customerRequest);
         model.addAttribute("customers", customerService.getAllCustomers());
         return "allCustomersPage";
+    }
+
+    @GetMapping("/customer/findByFirstName")
+    public String findByFirstName(@ModelAttribute(value = "name") FindByNameRequest request, Model model) {
+        model.addAttribute("customers", customerService.findByFirstName(request.getFirstName()));
+        return "resultCustomerPage";
     }
 
 }

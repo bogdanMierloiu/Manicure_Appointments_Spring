@@ -35,9 +35,10 @@
         </form>
     </li>
 </ul>
-<h1>
-    Hello Appointmens
-</h1>
+
+<form th:action="@{/appointment/allAppointments}">
+    <button type="submit" class="btn btn-primary btn-lg">View all appointments</button>
+</form>
 
 </body>
 </html>

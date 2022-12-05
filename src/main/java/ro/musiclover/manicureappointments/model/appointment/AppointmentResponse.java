@@ -3,7 +3,8 @@ import lombok.Data;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
-import java.time.LocalDate;
+
+import java.sql.Date;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public class AppointmentResponse {
 
     private Integer id;
-    private LocalDate appointmentDate;
+    private Date appointmentDate;
     private LocalTime appointmentTime;
     private ManicuristResponseForAppointment manicurist;
     private CustomerResponseForAppointment customer;

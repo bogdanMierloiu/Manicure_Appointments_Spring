@@ -5,7 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class Appointment {
 
     @NotNull
     @Future (message = "Please check the date")
-    private LocalDate appointmentDate;
+    private Date appointmentDate;
 
     @NotNull
     private LocalTime appointmentTime;

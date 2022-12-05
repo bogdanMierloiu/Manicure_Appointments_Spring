@@ -1,21 +1,12 @@
 package ro.musiclover.manicureappointments.model.appointment;
-
 import lombok.Data;
-
 import javax.validation.constraints.Future;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.Date;
 
 @Data
-public class RequestUpdateDate {
+public class FindByDateRequest {
 
-    private Integer id;
-
-    @NotNull
     @Future(message = "Please check the date")
     private Date appointmentDate;
-
 
 }

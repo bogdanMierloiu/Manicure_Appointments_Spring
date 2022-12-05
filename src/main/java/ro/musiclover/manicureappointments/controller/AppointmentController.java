@@ -8,7 +8,6 @@ import ro.musiclover.manicureappointments.service.implementation.AppointmentServ
 
 import javax.validation.Valid;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -31,10 +30,10 @@ public class AppointmentController {
     }
 
 
-//    @GetMapping("find/date/{date}")
-//    public List<AppointmentResponse> findByDate(@PathVariable LocalDate date){
-//        return appointmentService.findByAppointmentDate(date);
-//    }
+    @GetMapping("find/date/{date}")
+    public List<AppointmentResponse> findByDate(@PathVariable Date date){
+        return appointmentService.findByAppointmentDate(date);
+    }
     @GetMapping("list")
     public List<AppointmentResponse> findAll() {
         return appointmentService.findAll();

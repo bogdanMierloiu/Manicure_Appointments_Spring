@@ -38,8 +38,34 @@
 
 <h1>Welcome to your Manicure Appointments application!</h1>
 
+<form th:action="@{/appointment/allAppointments}">
+    <button type="submit" class="btn btn-primary btn-lg">View all appointments</button>
+</form>
+
+<form th:action="@{/appointment/goToCreateAppointmentPage}">
+    <button type="submit" class="btn btn-success"> Add new appointment</button>
+</form>
+
+<form th:action="@{/appointment/findByDate}" th:object="${dateRequest}">
+    <input type="date" name="dateRequest">
+    <button type="submit" class="btn btn-success"> Search appointment by date </button>
+</form>
+
+
+<form th:action="@{/customer/allCustomers}">
+    <button type="submit" class="btn btn-primary btn-lg"> View all customers</button>
+</form>
+
 <form th:action="@{/customer/goToCreateCustomerPage}">
     <button type="submit" class="btn btn-success"> Add new customer</button>
+</form>
+<form th:action="@{/customer/findByFirstName}">
+    <input type="text" name="firstName" placeholder="First name">
+    <button type="submit" class="btn btn-success"> Find Customer by first name</button>
+</form>
+
+<form th:action="@{/nails-service/goToCreateServicePage}">
+    <button type="submit" class="btn btn-success"> Add new service</button>
 </form>
 
 

@@ -16,13 +16,14 @@ import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRespo
 import ro.musiclover.manicureappointments.repository.*;
 import ro.musiclover.manicureappointments.service.interfaces.IAppointment;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AppointmentService extends Base<Appointment> implements IAppointment {
+public class AppointmentService extends Base<ro.musiclover.manicureappointments.entity.Appointment> implements IAppointment {
     private final AppointmentRepository appointmentRepository;
     private final AppointmentMapper appointmentMapper;
     private final ManicuristRepository manicuristRepository;
@@ -35,7 +36,7 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
     @Override
     public AppointmentResponse createAppointment(AppointmentRequest appointmentRequest) {
         for (Appointment appointment : appointmentRepository.findAll()) {
-            if (appointment.getAppointmentDate().isEqual(appointmentRequest.getAppointmentDate()) &&
+            if (appointment.getAppointmentDate().equals(appointmentRequest.getAppointmentDate()) &&
                     appointment.getAppointmentTime().equals(appointmentRequest.getAppointmentTime())) {
                 throw new BusinessException("You already have an appointment at this date and time");
             }
@@ -94,44 +95,41 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
     @Override
     public AppointmentResponse findById(Integer id) {
         return appointmentMapper.map(appointmentRepository.findById(id).orElseThrow(
-                        () -> new BusinessException("Appointment not found")
+                        () -> new BusinessException("AppointmentResponse not found")
                 )
         );
     }
-
-//    @Override
-//    public List<AppointmentResponse> findByAppointmentDate(LocalDate date) {
-//        List<AppointmentResponse> listByDate = appointmentRepository.findByAppointmentDate(date);
-//        return listByDate;
-//    }
+    @Override
+    public List<AppointmentResponse> findByAppointmentDate(Date date) {
+        List<AppointmentResponse> listByDate = appointmentMapper.map(appointmentRepository.findByAppointmentDate(date));
+        return listByDate;
+    }
 
     @Override
     public List<AppointmentResponse> findAll() {
         return appointmentMapper.map(appointmentRepository.findAll());
 
-
     }
-
     @Override
     public void updateAppointmentDate(Integer id, RequestUpdateDate requestUpdateDate) {
-        Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
-                () -> new BusinessException("Appointment not found")
+        ro.musiclover.manicureappointments.entity.Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
+                () -> new BusinessException("AppointmentResponse not found")
         );
         appointmentToUpdate.setAppointmentDate(requestUpdateDate.getAppointmentDate());
     }
 
     @Override
     public void updateAppointmentTime(Integer id, RequestUpdateTime requestUpdateTime) {
-        Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
-                () -> new BusinessException("Appointment not found")
+        ro.musiclover.manicureappointments.entity.Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
+                () -> new BusinessException("AppointmentResponse not found")
         );
         appointmentToUpdate.setAppointmentTime(requestUpdateTime.getAppointmentTime());
     }
 
     @Override
     public void updateNailsServices(Integer id, RequestUpdateServices requestUpdateServices) {
-        Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
-                () -> new BusinessException("Appointment not found")
+        ro.musiclover.manicureappointments.entity.Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
+                () -> new BusinessException("AppointmentResponse not found")
         );
 
         List<NailsService> nailsServices = new ArrayList<>();
@@ -146,19 +144,19 @@ public class AppointmentService extends Base<Appointment> implements IAppointmen
 
     @Override
     public void updateCustomer(Integer id, RequestUpdateCustomer requestUpdateCustomer) {
-        Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
-                () -> new BusinessException("Appointment not found")
+        ro.musiclover.manicureappointments.entity.Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
+                () -> new BusinessException("AppointmentResponse not found")
         );
         Customer customer = customerRepository.findById(requestUpdateCustomer.getCustomerId()).orElseThrow(
-                () -> new BusinessException("Appointment not found")
+                () -> new BusinessException("AppointmentResponse not found")
         );
         appointmentToUpdate.setCustomer(customer);
     }
 
     @Override
     public void delete(Integer id) {
-        Appointment appointmentToDelete = appointmentRepository.findById(id).orElseThrow(
-                () -> new BusinessException("Appointment not found")
+        ro.musiclover.manicureappointments.entity.Appointment appointmentToDelete = appointmentRepository.findById(id).orElseThrow(
+                () -> new BusinessException("AppointmentResponse not found")
         );
         appointmentRepository.delete(appointmentToDelete);
     }
