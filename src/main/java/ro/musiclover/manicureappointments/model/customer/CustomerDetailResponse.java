@@ -11,4 +11,4 @@ public class CustomerDetailResponse {
     private String lastName;
     private List<AppointmentResponseForCustomerDetail> appointments;
 
-}
+    }

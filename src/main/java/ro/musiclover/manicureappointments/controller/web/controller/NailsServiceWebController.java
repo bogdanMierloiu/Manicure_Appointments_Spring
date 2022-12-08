@@ -11,6 +11,7 @@ import ro.musiclover.manicureappointments.model.UpdateRequest;
 import ro.musiclover.manicureappointments.model.nails_services.CreateNailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
+import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePrice;
 import ro.musiclover.manicureappointments.service.implementation.NailsServiceService;
 
 @RequiredArgsConstructor
@@ -38,8 +39,15 @@ public class NailsServiceWebController {
     }
 
     @PostMapping("nails-service/update-name")
-    public String updateServiceName(@ModelAttribute(value = "updateRequest") RequestUpdateName request, Model model) {
+    public String updateServiceName(@ModelAttribute(value = "updateNameRequest") RequestUpdateName request, Model model) {
         nailsService.updateServiceName(request.getId(), request);
+        model.addAttribute("services", nailsService.allServices());
+        return "allNailsServicesPage";
+    }
+
+    @PostMapping("nails-service/update-price")
+    public String updateServicePrice(@ModelAttribute(value = "updatePriceRequest") RequestUpdatePrice request, Model model) {
+        nailsService.updateServicePrice(request.getId(), request);
         model.addAttribute("services", nailsService.allServices());
         return "allNailsServicesPage";
     }

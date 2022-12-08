@@ -2,7 +2,7 @@ package ro.musiclover.manicureappointments.service.interfaces;
 
 import ro.musiclover.manicureappointments.model.appointment.*;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public interface IAppointment {

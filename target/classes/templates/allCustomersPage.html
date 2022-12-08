@@ -39,8 +39,11 @@
     <button type="submit" class="btn btn-success"> Add new customer</button>
 </form>
 <form th:action="@{/customer/findByFirstName}">
-    <input type="text" name="firstName" placeholder="First name">
     <button type="submit" class="btn btn-success"> Find by name</button>
+    <input type="text" name="firstName" placeholder="First name">
+</form>
+<form th:action="@{/customer/allActiveCustomers}">
+    <button type="submit" class="btn btn-success"> View all active customers </button>
 </form>
 
 <table class="table table-dark">
@@ -59,27 +62,59 @@
     <tbody>
     <tr th:each="customer: ${customers}">
         <td><span th:text="${customer.id}">Id</span></td>
-        <td><span th:text="${customer.firstName}">First Name</span></td>
-        <td><span th:text="${customer.lastName}">Last Name</span></td>
-        <td><span th:text="${customer.phoneNumber}">Phone Number</span></td>
-        <td><span th:text="${customer.birthDate}">Birth Date</span></td>
-        <td><span th:text="${customer.email}">Email</span></td>
-        <td>
+        <td><span th:text="${customer.firstName}">First Name</span>
+            <form th:action="@{/customer/update-firstname}" method="post">
+                <input type="hidden" name="id" th:value="${customer.id}">
+                <input type="text" name="firstName">
+                <button type="submit" class="btn btn-primary btn-sm">Change</button>
+            </form>
+        </td>
+        <td><span th:text="${customer.lastName}">Last Name</span>
+            <form th:action="@{/customer/update-lastname}" method="post">
+                <input type="hidden" name="id" th:value="${customer.id}">
+                <input type="text" name="lastName">
+                <button type="submit" class="btn btn-primary btn-sm">Change</button>
+            </form>
+        </td>
+        <td><span th:text="${customer.phoneNumber}">Phone Number</span>
+            <form th:action="@{/customer/update-phoneNumber}" method="post">
+                <input type="hidden" name="id" th:value="${customer.id}">
+                <input type="text" name="phoneNumber">
+                <button type="submit" class="btn btn-primary btn-sm">Change</button>
+            </form>
+        </td>
+        <td><span th:text="${customer.birthDate}">Birth Date</span>
+            <form th:action="@{/customer/update-birthdate}" method="post">
+                <input type="hidden" name="id" th:value="${customer.id}">
+                <input type="date" name="birthDate">
+                <button type="submit" class="btn btn-primary btn-sm">Change</button>
+            </form>
+        </td>
+        <td><span th:text="${customer.email}">Email</span>
+            <form th:action="@{/customer/update-email}" method="post">
+                <input type="hidden" name="id" th:value="${customer.id}">
+                <input type="text" name="email">
+                <button type="submit" class="btn btn-primary btn-sm">Change</button>
+            </form>
+        </td>
+        <td><span th:if="${customer.active}"> Active </span>
+            <span th:unless="${customer.active}"> Not active </span>
             <div class="form-check form-switch">
-                <form th:action="@{customer/delete}" th:object="${deleteRequest}" method="post">
-                    <!--                    <input type="hidden" name="id" th:value="${customer.id}">-->
-                    <input name="id" th:value="${customer.id}" class="form-check-input" type="checkbox" role="switch"
-                           id="flexSwitchCheckChecked" checked>
-                    <label class="form-check-label" for="flexSwitchCheckChecked">Update</label>
+                <form th:action="@{customer/update-status}" method="post">
+                    <input type="hidden" name="id" th:value="${customer.id}">
+                    <input type="checkbox"
+                           th:checked="${customer.active}"
+                           name="active"
+                           class="form-check-input">
                 </form>
             </div>
         </td>
-        <!--        <td>-->
-        <!--            <form th:action="@{customer/delete}" th:object="${deleteRequest}" method="post">-->
-        <!--                <input type="hidden" name="id" th:value="${customer.id}">-->
-        <!--                <button type="submit" class="btn btn-danger"> Update</button>-->
-        <!--            </form>-->
-        <!--        </td>-->
+        <td>
+            <form th:action="@{/customer/findByFirstName}">
+                <input type="hidden" name="firstName" th:value="${customer.firstName}">
+                <button type="submit" class="btn btn-primary btn-sm"> View Appointments</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

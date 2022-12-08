@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
-import java.util.Date;
+import java.sql.Date;
 
 
 @Data
@@ -30,5 +30,5 @@ public class CustomerRequest {
     @NotBlank
     private String email;
 
-    private boolean active;
+    private Boolean active;
 }

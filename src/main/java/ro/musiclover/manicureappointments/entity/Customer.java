@@ -5,7 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -36,7 +36,7 @@ public class Customer {
     @NotBlank
     private String email;
 
-    private boolean active;
+    private Boolean active;
 
 
     @OneToMany(cascade = {CascadeType.ALL},

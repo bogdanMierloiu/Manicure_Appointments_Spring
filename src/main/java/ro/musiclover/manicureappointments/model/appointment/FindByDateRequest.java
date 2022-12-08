@@ -1,7 +1,7 @@
 package ro.musiclover.manicureappointments.model.appointment;
 import lombok.Data;
 import javax.validation.constraints.Future;
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 public class FindByDateRequest {

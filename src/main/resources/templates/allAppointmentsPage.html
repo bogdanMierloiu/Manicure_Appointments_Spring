@@ -38,31 +38,64 @@
 <form th:action="@{/appointment/goToCreateAppointmentPage}">
     <button type="submit" class="btn btn-success"> Add new appointment</button>
 </form>
-<form th:action="@{/appointment/findByDate}" th:object="${dateRequest}">
-    <input type="date" name="dateRequest">
-    <button type="submit" class="btn btn-success"> Search </button>
+<form th:action="@{/appointment/findByDate}">
+    <button type="submit" class="btn btn-success"> Search</button>
+    <input type="date" name="appointmentDate">
 </form>
 
 <table class="table table-dark">
     <thead>
     <tr>
-        <th>Id</th>
         <th>Appointment date</th>
         <th>Appointment time</th>
         <th>Manicurist</th>
         <th>Customer</th>
         <th>Services</th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="appointment: ${appointments}">
-        <td><span th:text="${appointment.id}">Id</span></td>
-        <td><span th:text="${appointment.appointmentDate}">Appointment date</span></td>
-        <td><span th:text="${appointment.appointmentTime}">Appointment time</span></td>
-        <td><span th:text="${appointment.manicurist.getFirstName() + appointment.manicurist.getLastName()}">Manicurist</span></td>
-        <td><span th:text="${appointment.customer.getFirstName() + appointment.customer.getLastName()}">Customer</span></td>
-        <td><span th:text="${appointment.nailsServices}">Services</span></td>
+        <td><span th:text="${appointment.appointmentDate}">Appointment date</span>
+            <form th:action="@{/appointment/update-date}" method="post">
+                <button type="submit" class="btn btn-primary btn-sm">Change date</button>
+                <input type="hidden" name="id" th:value="${appointment.id}">
+                <input type="date" name="appointmentDate">
+            </form>
+        </td>
+        <td><span th:text="${appointment.appointmentTime}">Appointment time</span>
+            <form th:action="@{/appointment/update-time}" method="post">
+                <button type="submit" class="btn btn-primary btn-sm">Change time</button>
+                <input type="hidden" name="id" th:value="${appointment.id}">
+                <input type="time" name="appointmentTime">
+            </form>
+        </td>
+        <td><span th:text="${appointment.manicurist.getFirstName() + ' ' + appointment.manicurist.getLastName()}">Manicurist</span>
+        </td>
+        <td>
+            <span th:text="${appointment.customer.getFirstName() + ' ' + appointment.customer.getLastName()}">Customer</span>
+            <form th:action="@{/appointment/update-customer}" method="post">
+                <button type="submit" class="btn btn-primary btn-sm">Change customer</button>
+                <input type="hidden" name="id" th:value="${appointment.id}">
+                <select class="form-select" aria-label="Default select example" name="customerId">
+                    <option value="" selected> --</option>
+                    <option th:each="customer: ${allCustomers}"
+                            th:value="${customer.id}"
+                            th:text="${customer.firstName} + ' ' + ${customer.lastName}">
+                    </option>
+                </select>
+            </form>
+        </td>
+        <td th:each="service: ${appointment.nailsServices}">
+            <span th:text="${service.serviceName}">Services</span>
+        </td>
+        <td>
+            <form th:action="@{/appointment/goToUpdateServices}">
+                <input type="hidden" name="id" th:value="${appointment.id}">
+                <button type="submit" class="btn btn-primary btn-sm">Change services</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -52,14 +52,25 @@
     <tbody>
     <tr th:each="service: ${services}">
         <td><span th:text="${service.id}">Id</span></td>
-        <td><span th:text="${service.serviceName}">Service Name</span>
-            <form th:action="@{/nails-service/update-name}" th:object="${updateRequest}" method="post">
+
+        <td><span th:text="${service.serviceName}"></span>
+
+            <form th:action="@{/nails-service/update-name}" method="post">
                 <input type="hidden" name="id" th:value="${service.id}">
-                <input type="text" name="serviceName">
+                <input type="text" name="serviceName" placeholder="new name">
                 <button type="submit" class="btn btn-primary btn-sm">Update service name</button>
             </form>
         </td>
-        <td><span th:text="${service.price}">Price</span></td>
+
+        <td><span th:text="${service.price}"></span>
+
+            <form th:action="@{/nails-service/update-price}" method="post">
+                <input type="hidden" name="id" th:value="${service.id}">
+                <input type="number" name="price" placeholder="new price">
+                <button type="submit" class="btn btn-primary btn-sm">Update service price</button>
+            </form>
+        </td>
+
         <td>
             <form th:action="@{/nails-service/delete}" th:object="${deleteRequest}" method="post">
                 <input type="hidden" name="id" th:value="${service.id}">

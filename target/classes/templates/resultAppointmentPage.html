@@ -43,11 +43,12 @@
     <thead>
     <tr>
         <th>Id</th>
-        <th>Date</th>
+        <th>Date(YYYY-MM-DD)</th>
         <th>Time</th>
         <th>Manicurist</th>
         <th>Customer</th>
         <th>Services</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -56,9 +57,9 @@
         <td><span th:text="${appointment.id}">Id</span></td>
         <td><span th:text="${appointment.appointmentDate}">Date</span></td>
         <td><span th:text="${appointment.appointmentTime}">Time</span></td>
-        <td><span th:text="${appointment.manicurist}">Manicurist</span></td>
-        <td><span th:text="${appointment.customer}">Customer</span></td>
-        <td><span th:text="${appointment.nailsServices}">Services</span></td>
+        <td><span th:text="${appointment.manicurist.firstName} + ' ' + ${appointment.manicurist.lastName}">Manicurist</span></td>
+        <td><span th:text="${appointment.customer.firstName} + ' ' + ${appointment.customer.lastName}">Customer</span></td>
+        <td th:each="service: ${appointment.nailsServices}"><span th:text="${service.serviceName}">Services</span></td>
     </tr>
     </tbody>
 </table>

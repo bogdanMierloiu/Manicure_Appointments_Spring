@@ -40,6 +40,14 @@
 <form th:action="@{/customer/allCustomers}">
     <button type="submit" class="btn btn-primary btn-lg"> View all customers</button>
 </form>
+<form th:action="@{/customer/goToCreateCustomerPage}">
+    <button type="submit" class="btn btn-primary btn-lg"> Add new customer</button>
+</form>
+
+<form th:action="@{/customer/findByFirstName}">
+    <button type="submit" class="btn btn-primary btn-lg"> Find Customer by first name</button>
+    <input type="text" name="firstName" placeholder="First name">
+</form>
 
 </body>
 </html>

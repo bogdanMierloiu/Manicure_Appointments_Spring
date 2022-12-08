@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ro.musiclover.manicureappointments.model.UpdateRequest;
 import ro.musiclover.manicureappointments.model.manicurist.CreateManicuristRequest;
 import ro.musiclover.manicureappointments.model.DeleteRequest;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristRequest;
@@ -14,7 +15,7 @@ import ro.musiclover.manicureappointments.service.implementation.ManicuristServi
 
 @RequiredArgsConstructor
 @Controller
-public class Manicurist {
+public class ManicuristWebController {
 
     private final ManicuristService manicuristService;
 
@@ -37,7 +38,7 @@ public class Manicurist {
     }
 
     @GetMapping("manicurist/goToUpdateManicuristPage")
-    public String goToUpdateManicuristPage(@ModelAttribute(value = "deleteRequest") DeleteRequest request, Model model){
+    public String goToUpdateManicuristPage(@ModelAttribute(value = "deleteRequest") UpdateRequest request, Model model){
         model.addAttribute("manicuristId", request.getId());
         return "updateManicuristPage";
     }

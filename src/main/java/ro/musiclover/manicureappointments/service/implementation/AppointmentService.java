@@ -8,7 +8,6 @@ import ro.musiclover.manicureappointments.entity.Customer;
 import ro.musiclover.manicureappointments.entity.NailsService;
 import ro.musiclover.manicureappointments.exception.BusinessException;
 import ro.musiclover.manicureappointments.mapper.AppointmentMapper;
-import ro.musiclover.manicureappointments.mapper.ManicuristMapper;
 import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
@@ -16,9 +15,11 @@ import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRespo
 import ro.musiclover.manicureappointments.repository.*;
 import ro.musiclover.manicureappointments.service.interfaces.IAppointment;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -27,10 +28,8 @@ public class AppointmentService extends Base<ro.musiclover.manicureappointments.
     private final AppointmentRepository appointmentRepository;
     private final AppointmentMapper appointmentMapper;
     private final ManicuristRepository manicuristRepository;
-    private final ManicuristMapper manicuristMapper;
     private final CustomerRepository customerRepository;
     private final NailsServiceRepository nailsServiceRepository;
-
 
 
     @Override
@@ -45,10 +44,10 @@ public class AppointmentService extends Base<ro.musiclover.manicureappointments.
         Appointment appointmentToSave = appointmentMapper.map(appointmentRequest);
 
         appointmentToSave.setManicurist(manicuristRepository.findById(appointmentRequest.getManicuristId()).orElseThrow(
-                () -> new BusinessException("Manicurist not found")));
+                () -> new BusinessException("ManicuristWebController not found")));
 
         appointmentToSave.setCustomer(customerRepository.findById(appointmentRequest.getCustomerId()).orElseThrow(
-                () -> new BusinessException("Customer not found")));
+                () -> new BusinessException("CustomerWebController not found")));
 
         List<NailsService> nailsServices = new ArrayList<>();
         for (Integer id : appointmentRequest.getNailsServicesIds()) {
@@ -77,7 +76,7 @@ public class AppointmentService extends Base<ro.musiclover.manicureappointments.
         customerResponse.setLastName(appointmentToSave.getCustomer().getLastName());
 
         List<NailsServiceResponse> serviceResponses = new ArrayList<>();
-        for (NailsService nailsService: appointmentToSave.getNailsServices()){
+        for (NailsService nailsService : appointmentToSave.getNailsServices()) {
             NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
             nailsServiceResponse.setId(nailsService.getId());
             nailsServiceResponse.setServiceName(nailsService.getServiceName());
@@ -99,6 +98,7 @@ public class AppointmentService extends Base<ro.musiclover.manicureappointments.
                 )
         );
     }
+
     @Override
     public List<AppointmentResponse> findByAppointmentDate(Date date) {
         List<AppointmentResponse> listByDate = appointmentMapper.map(appointmentRepository.findByAppointmentDate(date));
@@ -107,9 +107,10 @@ public class AppointmentService extends Base<ro.musiclover.manicureappointments.
 
     @Override
     public List<AppointmentResponse> findAll() {
-        return appointmentMapper.map(appointmentRepository.findAll());
+        return appointmentMapper.map(appointmentRepository.findAllByOrderByAppointmentDateDesc());
 
     }
+
     @Override
     public void updateAppointmentDate(Integer id, RequestUpdateDate requestUpdateDate) {
         ro.musiclover.manicureappointments.entity.Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
@@ -128,18 +129,18 @@ public class AppointmentService extends Base<ro.musiclover.manicureappointments.
 
     @Override
     public void updateNailsServices(Integer id, RequestUpdateServices requestUpdateServices) {
-        ro.musiclover.manicureappointments.entity.Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
+        Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
                 () -> new BusinessException("AppointmentResponse not found")
         );
 
-        List<NailsService> nailsServices = new ArrayList<>();
+        Set<NailsService> nailsServices = new HashSet<>();
         for (Integer serviceId : requestUpdateServices.getNailsServicesIds()) {
             NailsService nailsService = nailsServiceRepository.findById(serviceId).orElseThrow(
                     () -> new BusinessException("Service not found")
             );
             nailsServices.add(nailsService);
         }
-        appointmentToUpdate.getNailsServices().addAll(nailsServices);
+        appointmentToUpdate.setNailsServices(nailsServices);
     }
 
     @Override

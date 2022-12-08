@@ -11,6 +11,6 @@ public class CustomerResponse {
     private String phoneNumber;
     private Date birthDate;
     private String email;
-    private boolean active;
+    private Boolean active;
 
 }

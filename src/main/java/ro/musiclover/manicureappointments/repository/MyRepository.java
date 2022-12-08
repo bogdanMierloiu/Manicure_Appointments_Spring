@@ -14,13 +14,14 @@ import java.util.List;
 public class MyRepository {
     private final EntityManager entityManager;
 
-    public List<Customer> findByFirstName(String name){
-        return entityManager.createQuery("select t from Customer t where t.firstName=:name", Customer.class)
+    public List<Customer> findByFirstName(String name) {
+        return entityManager.createQuery(
+                "select t from Customer t where t.firstName=:name", Customer.class)
                 .setParameter("name", name)
                 .getResultList();
     }
 
-    public List<NailsService> findByServiceName(String name){
+    public List<NailsService> findByServiceName(String name) {
         return entityManager.createQuery("select t from NailsService t where t.serviceName=:name", NailsService.class)
                 .setParameter("name", name)
                 .getResultList();

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-public class AppointmentResponseForCustomerDetail {
+public class AppointmentResponseForCustomerDetail implements Comparable<AppointmentResponseForCustomerDetail>{
 
     private Date appointmentDate;
 
@@ -24,4 +24,8 @@ public class AppointmentResponseForCustomerDetail {
     private List<NailsServiceForCustomerDetail> nailsServices;
 
 
+    @Override
+    public int compareTo(AppointmentResponseForCustomerDetail o) {
+        return getAppointmentDate().compareTo(o.appointmentDate);
+    }
 }

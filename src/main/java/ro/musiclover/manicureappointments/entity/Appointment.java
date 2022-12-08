@@ -18,14 +18,14 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
-    @Future (message = "Please check the date")
+    @Future(message = "Please check the date")
     private Date appointmentDate;
 
     @NotNull
@@ -44,4 +44,8 @@ public class Appointment {
     @Builder.Default
     private Set<NailsService> nailsServices = new HashSet<>();
 
+    @Override
+    public int compareTo(Appointment appointment) {
+        return getAppointmentDate().compareTo(appointment.getAppointmentDate());
+    }
 }

@@ -40,5 +40,15 @@
     <button type="submit" class="btn btn-primary btn-lg">View all appointments</button>
 </form>
 
+<form th:action="@{/appointment/goToCreateAppointmentPage}">
+    <button type="submit" class="btn btn-primary btn-lg"> Add new appointment</button>
+</form>
+<form th:action="@{/appointment/findByDate}">
+    <button type="submit" class="btn btn-primary btn-lg"> Search</button>
+    <input type="date" name="appointmentDate">
+</form>
+
+
+
 </body>
 </html>

@@ -34,8 +34,7 @@
         </form>
     </li>
 </ul>
-<form action="#" th:action="@{/appointment/create-new-appointment}" th:object="${createAppointmentRequest}"
-      method="post">
+<form action="#" th:action="@{/appointment/create-new-appointment}" method="post">
     <table class="table table-dark">
         <tr>
             <td> Date:</td>
@@ -48,12 +47,11 @@
         <tr>
             <td> Manicurist:</td>
             <td>
-                <select class="form-select" aria-label="Default select example"
-                        th:field="*{manicurist.id}">
+                <select class="form-select" aria-label="Default select example" name="manicuristId">
                     <option value=""> --</option>
                     <option th:each="manicurist: ${manicurists}"
                             th:value="${manicurist.id}"
-                            th:text="${manicurist.firstName}">
+                            th:text="${manicurist.firstName} + ' ' + ${manicurist.lastName}">
                     </option>
                 </select>
             </td>
@@ -61,22 +59,22 @@
         <tr>
             <td> Customer:</td>
             <td>
-                <select class="form-select" aria-label="Default select example"
-                        th:field="${customers}">
-                    <option value=""> --</option>
-                    <option th:each="customer: ${customers}" th:value="${customer.id}"
-                            th:text="${customer.firstName}">
+                <select class="form-select" aria-label="Default select example" name="customerId">
+                    <option value="" selected> --</option>
+                    <option th:each="customer: ${customers}"
+                            th:value="${customer.id}"
+                            th:text="${customer.firstName} + ' ' + ${customer.lastName}">
                     </option>
                 </select>
             </td>
         </tr>
         <tr>
-            <td> Services</td>
+            <td> Services (press CTRL + click -> for multiple choice)</td>
             <td>
-                <select class="form-select" aria-label="Default select example"
-                        th:field="${services}">
-                    <option value=""> --</option>
-                    <option th:each="service: ${services}" th:value="${service.id}"
+                <select class="form-select" multiple aria-label="multiple select example" name="nailsServicesIds">
+                    <option value="" selected> -- </option>
+                    <option th:each="service: ${services}"
+                            th:value="${service.id}"
                             th:text="${service.serviceName}">
                     </option>
                 </select>

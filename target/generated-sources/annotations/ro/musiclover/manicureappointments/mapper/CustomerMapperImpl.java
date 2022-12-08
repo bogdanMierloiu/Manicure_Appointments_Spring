@@ -1,6 +1,5 @@
 package ro.musiclover.manicureappointments.mapper;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -11,7 +10,7 @@ import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-04T20:57:53+0200",
+    date = "2022-12-08T12:05:17+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -31,7 +30,7 @@ public class CustomerMapperImpl implements CustomerMapper {
         customer.phoneNumber( customerRequest.getPhoneNumber() );
         customer.birthDate( customerRequest.getBirthDate() );
         customer.email( customerRequest.getEmail() );
-        customer.active( customerRequest.isActive() );
+        customer.active( customerRequest.getActive() );
 
         return customer.build();
     }
@@ -48,11 +47,9 @@ public class CustomerMapperImpl implements CustomerMapper {
         customerResponse.setFirstName( customer.getFirstName() );
         customerResponse.setLastName( customer.getLastName() );
         customerResponse.setPhoneNumber( customer.getPhoneNumber() );
-        if ( customer.getBirthDate() != null ) {
-            customerResponse.setBirthDate( new Date( customer.getBirthDate().getTime() ) );
-        }
+        customerResponse.setBirthDate( customer.getBirthDate() );
         customerResponse.setEmail( customer.getEmail() );
-        customerResponse.setActive( customer.isActive() );
+        customerResponse.setActive( customer.getActive() );
 
         return customerResponse;
     }
