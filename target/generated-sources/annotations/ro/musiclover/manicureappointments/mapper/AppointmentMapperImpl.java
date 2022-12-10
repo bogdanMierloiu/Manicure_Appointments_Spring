@@ -3,22 +3,19 @@ package ro.musiclover.manicureappointments.mapper;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 import ro.musiclover.manicureappointments.entity.Appointment;
 import ro.musiclover.manicureappointments.entity.Customer;
 import ro.musiclover.manicureappointments.entity.Manicurist;
-import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.model.appointment.AppointmentRequest;
 import ro.musiclover.manicureappointments.model.appointment.AppointmentResponse;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
-import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-10T12:53:20+0200",
+    date = "2022-12-10T16:18:39+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -54,12 +51,6 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         appointmentResponse.setAppointmentTime( appointment.getAppointmentTime() );
         appointmentResponse.setManicurist( manicuristToManicuristResponseForAppointment( appointment.getManicurist() ) );
         appointmentResponse.setCustomer( customerToCustomerResponseForAppointment( appointment.getCustomer() ) );
-        if ( appointmentResponse.getNailsServices() != null ) {
-            List<NailsServiceResponse> list = nailsServiceSetToNailsServiceResponseList( appointment.getNailsCares() );
-            if ( list != null ) {
-                appointmentResponse.getNailsServices().addAll( list );
-            }
-        }
 
         return appointmentResponse;
     }
@@ -103,32 +94,5 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         customerResponseForAppointment.setLastName( customer.getLastName() );
 
         return customerResponseForAppointment;
-    }
-
-    protected NailsServiceResponse nailsServiceToNailsServiceResponse(NailsCare nailsCare) {
-        if ( nailsCare == null ) {
-            return null;
-        }
-
-        NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
-
-        nailsServiceResponse.setId( nailsCare.getId() );
-        nailsServiceResponse.setServiceName( nailsCare.getServiceName() );
-        nailsServiceResponse.setPrice( nailsCare.getPrice() );
-
-        return nailsServiceResponse;
-    }
-
-    protected List<NailsServiceResponse> nailsServiceSetToNailsServiceResponseList(Set<NailsCare> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        List<NailsServiceResponse> list = new ArrayList<NailsServiceResponse>( set.size() );
-        for ( NailsCare nailsCare : set ) {
-            list.add( nailsServiceToNailsServiceResponse(nailsCare) );
-        }
-
-        return list;
     }
 }

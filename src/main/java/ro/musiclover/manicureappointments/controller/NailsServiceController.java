@@ -7,7 +7,7 @@ import ro.musiclover.manicureappointments.model.nails_services.NailsServiceReque
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePrice;
-import ro.musiclover.manicureappointments.service.implementation.NailsServiceService;
+import ro.musiclover.manicureappointments.service.implementation.NailsCareService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -18,40 +18,40 @@ import java.util.List;
 @RequiredArgsConstructor
 @Validated
 public class NailsServiceController {
-    private final NailsServiceService nailsServiceService;
+    private final NailsCareService nailsCareService;
 
     @PostMapping("create")
     public NailsServiceResponse createNailsService(@RequestBody @Valid NailsServiceRequest nailsServiceRequest) {
-        return nailsServiceService.createService(nailsServiceRequest);
+        return nailsCareService.createService(nailsServiceRequest);
     }
 
     @GetMapping("list")
     public List<NailsServiceResponse> showAllServices() {
-        return nailsServiceService.allServices();
+        return nailsCareService.allServices();
     }
 
     @GetMapping("find/{id}")
     public NailsServiceResponse findById(@PathVariable Integer id) {
-        return nailsServiceService.findServiceByID(id);
+        return nailsCareService.findServiceByID(id);
     }
 
     @GetMapping("search/{name}")
     public List<NailsServiceResponse> findByServiceName(@PathVariable String name){
-        return nailsServiceService.findByServiceName(name);
+        return nailsCareService.findByServiceName(name);
     }
     @PatchMapping("update-price/{id}")
     public void updateServicePrice(@PathVariable Integer id, @RequestBody @Valid RequestUpdatePrice requestUpdatePrice) {
-        nailsServiceService.updateServicePrice(id, requestUpdatePrice);
+        nailsCareService.updateServicePrice(id, requestUpdatePrice);
     }
 
     @PatchMapping("update-name/{id}")
     public void updateServiceName(@PathVariable Integer id, @RequestBody @Valid RequestUpdateName requestUpdateName) {
-        nailsServiceService.updateServiceName(id, requestUpdateName);
+        nailsCareService.updateServiceName(id, requestUpdateName);
     }
 
     @DeleteMapping("delete/{id}")
     public void deleteService(@PathVariable Integer id) {
-        nailsServiceService.deleteService(id);
+        nailsCareService.deleteService(id);
     }
 
 

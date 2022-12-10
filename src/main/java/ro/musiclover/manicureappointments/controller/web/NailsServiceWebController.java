@@ -7,18 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ro.musiclover.manicureappointments.model.DeleteRequest;
-import ro.musiclover.manicureappointments.model.UpdateRequest;
 import ro.musiclover.manicureappointments.model.nails_services.CreateNailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePrice;
-import ro.musiclover.manicureappointments.service.implementation.NailsServiceService;
+import ro.musiclover.manicureappointments.service.implementation.NailsCareService;
 
 @RequiredArgsConstructor
 @Controller
 public class NailsServiceWebController {
 
-    private final NailsServiceService nailsService;
+    private final NailsCareService nailsService;
 
     @GetMapping("/nails-service")
     public String goToNailsServicesPage() {

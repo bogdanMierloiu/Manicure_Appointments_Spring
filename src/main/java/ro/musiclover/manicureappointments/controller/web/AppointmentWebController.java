@@ -10,15 +10,11 @@ import ro.musiclover.manicureappointments.mapper.CustomerMapper;
 import ro.musiclover.manicureappointments.mapper.ManicuristMapper;
 import ro.musiclover.manicureappointments.model.UpdateRequest;
 import ro.musiclover.manicureappointments.model.appointment.*;
-import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
-import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
-import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
 import ro.musiclover.manicureappointments.service.implementation.AppointmentService;
 import ro.musiclover.manicureappointments.service.implementation.CustomerService;
 import ro.musiclover.manicureappointments.service.implementation.ManicuristService;
-import ro.musiclover.manicureappointments.service.implementation.NailsServiceService;
+import ro.musiclover.manicureappointments.service.implementation.NailsCareService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -26,7 +22,7 @@ import java.util.List;
 public class AppointmentWebController {
 
     private final AppointmentService appointmentService;
-    private final NailsServiceService nailsService;
+    private final NailsCareService nailsService;
 
     private final ManicuristService manicuristService;
     private final CustomerService customerService;

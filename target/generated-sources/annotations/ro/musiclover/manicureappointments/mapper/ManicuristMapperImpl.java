@@ -10,7 +10,7 @@ import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-10T12:53:20+0200",
+    date = "2022-12-10T16:18:39+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component

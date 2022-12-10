@@ -12,7 +12,7 @@ import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePric
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-10T12:53:19+0200",
+    date = "2022-12-10T16:18:39+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -24,13 +24,13 @@ public class NailsServiceMapperImpl implements NailsServiceMapper {
             return null;
         }
 
-        NailsCare.NailsServiceBuilder nailsService = NailsCare.builder();
+        NailsCare.NailsCareBuilder nailsCare = NailsCare.builder();
 
-        nailsService.id( nailsServiceRequest.getId() );
-        nailsService.serviceName( nailsServiceRequest.getServiceName() );
-        nailsService.price( nailsServiceRequest.getPrice() );
+        nailsCare.id( nailsServiceRequest.getId() );
+        nailsCare.serviceName( nailsServiceRequest.getServiceName() );
+        nailsCare.price( nailsServiceRequest.getPrice() );
 
-        return nailsService.build();
+        return nailsCare.build();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class NailsServiceMapperImpl implements NailsServiceMapper {
 
         List<NailsServiceResponse> list = new ArrayList<NailsServiceResponse>( all.size() );
         for ( NailsCare nailsCare : all ) {
-            list.add( map(nailsCare) );
+            list.add( map( nailsCare ) );
         }
 
         return list;
@@ -68,12 +68,12 @@ public class NailsServiceMapperImpl implements NailsServiceMapper {
             return null;
         }
 
-        NailsCare.NailsServiceBuilder nailsService = NailsCare.builder();
+        NailsCare.NailsCareBuilder nailsCare = NailsCare.builder();
 
-        nailsService.id( requestUpdateName.getId() );
-        nailsService.serviceName( requestUpdateName.getServiceName() );
+        nailsCare.id( requestUpdateName.getId() );
+        nailsCare.serviceName( requestUpdateName.getServiceName() );
 
-        return nailsService.build();
+        return nailsCare.build();
     }
 
     @Override
@@ -82,11 +82,11 @@ public class NailsServiceMapperImpl implements NailsServiceMapper {
             return null;
         }
 
-        NailsCare.NailsServiceBuilder nailsService = NailsCare.builder();
+        NailsCare.NailsCareBuilder nailsCare = NailsCare.builder();
 
-        nailsService.id( requestUpdatePrice.getId() );
-        nailsService.price( requestUpdatePrice.getPrice() );
+        nailsCare.id( requestUpdatePrice.getId() );
+        nailsCare.price( requestUpdatePrice.getPrice() );
 
-        return nailsService.build();
+        return nailsCare.build();
     }
 }

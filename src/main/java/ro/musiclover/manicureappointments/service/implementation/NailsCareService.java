@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class NailsServiceService {
+public class NailsCareService {
 
     private final NailsServiceRepository nailsServiceRepository;
     private final NailsServiceMapper nailsServiceMapper;
