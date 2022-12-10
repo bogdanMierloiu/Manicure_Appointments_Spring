@@ -12,7 +12,6 @@ import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRespo
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePrice;
 import ro.musiclover.manicureappointments.repository.MyRepository;
 import ro.musiclover.manicureappointments.repository.NailsServiceRepository;
-import ro.musiclover.manicureappointments.service.interfaces.INailsService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +19,13 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class NailsServiceService extends Base<NailsService> implements INailsService {
+public class NailsServiceService {
 
     private final NailsServiceRepository nailsServiceRepository;
     private final NailsServiceMapper nailsServiceMapper;
-
     private final MyRepository myRepository;
 
-    @Override
+
     public NailsServiceResponse createService(NailsServiceRequest nailsServiceRequest) {
         checkDuplicate(nailsServiceRequest);
         NailsService nailsServiceToCreate = nailsServiceMapper.map(nailsServiceRequest);
@@ -35,12 +33,12 @@ public class NailsServiceService extends Base<NailsService> implements INailsSer
         return nailsServiceMapper.map(nailsServiceToResponse);
     }
 
-    @Override
+
     public List<NailsServiceResponse> allServices() {
         return nailsServiceMapper.map(nailsServiceRepository.findAll());
     }
 
-    @Override
+
     public NailsServiceResponse findServiceByID(Integer id) {
         NailsService nailsService = nailsServiceRepository.findById(id).orElseThrow(
                 () -> new BusinessException(String.format("The service with id: %s not exist", id))
@@ -48,7 +46,7 @@ public class NailsServiceService extends Base<NailsService> implements INailsSer
         return nailsServiceMapper.map(nailsService);
     }
 
-    @Override
+
     public List<NailsServiceResponse> findByServiceName(String name) {
         List<NailsService> serviceListFromDB = myRepository.findByServiceName(name);
         return createListOfServiceForResponseFromDB(serviceListFromDB);
@@ -66,7 +64,7 @@ public class NailsServiceService extends Base<NailsService> implements INailsSer
         return serviceListForResponse;
     }
 
-    @Override
+
     public void updateServicePrice(Integer id, RequestUpdatePrice requestUpdatePrice) {
         NailsService nailsServiceToUpdate = nailsServiceRepository.findById(id).orElseThrow(
                 () -> new BusinessException(String.format("The service with id: %s not exist", id))
@@ -74,7 +72,7 @@ public class NailsServiceService extends Base<NailsService> implements INailsSer
         nailsServiceToUpdate.setPrice(requestUpdatePrice.getPrice());
     }
 
-    @Override
+
     public void updateServiceName(Integer id, RequestUpdateName requestUpdateName) {
         NailsService nailsServiceToUpdate = nailsServiceRepository.findById(id).orElseThrow(
                 () -> new BusinessException(String.format("The service with id: %s not exist", id))
@@ -82,7 +80,6 @@ public class NailsServiceService extends Base<NailsService> implements INailsSer
         nailsServiceToUpdate.setServiceName(requestUpdateName.getServiceName());
     }
 
-    @Override
     public void deleteService(Integer id) {
         NailsService nailsServiceToDelete = nailsServiceRepository.findById(id).orElseThrow(
                 () -> new BusinessException(String.format("The service with id: %s not exist", id))

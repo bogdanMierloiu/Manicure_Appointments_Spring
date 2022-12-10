@@ -9,19 +9,18 @@ import ro.musiclover.manicureappointments.mapper.ManicuristMapper;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristRequest;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
 import ro.musiclover.manicureappointments.repository.ManicuristRepository;
-import ro.musiclover.manicureappointments.service.interfaces.IManicurist;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ManicuristService extends Base<Manicurist> implements IManicurist {
+public class ManicuristService {
 
     private final ManicuristRepository manicuristRepository;
     private final ManicuristMapper manicuristMapper;
 
-    @Override
+
     public ManicuristResponse createManicurist(ManicuristRequest manicuristRequest) {
         checkDuplicate(manicuristRequest);
         validatePhoneNumber(manicuristRequest.getPhoneNumber());
@@ -29,12 +28,12 @@ public class ManicuristService extends Base<Manicurist> implements IManicurist {
         return manicuristMapper.map(manicuristRepository.save(manicurist));
     }
 
-    @Override
+
     public List<ManicuristResponse> allManicurists() {
         return manicuristMapper.map(manicuristRepository.findAll());
     }
 
-    @Override
+
     public ManicuristResponse findManicuristById(Integer id) {
         Manicurist manicurist = manicuristRepository.findById(id).orElseThrow(
                 () -> new BusinessException(
@@ -43,7 +42,7 @@ public class ManicuristService extends Base<Manicurist> implements IManicurist {
         return manicuristMapper.map(manicurist);
     }
 
-    @Override
+
     public void updateManicurist(Integer id, ManicuristRequest manicuristRequest) {
         checkDuplicate(manicuristRequest);
         validatePhoneNumber(manicuristRequest.getPhoneNumber());
@@ -58,7 +57,7 @@ public class ManicuristService extends Base<Manicurist> implements IManicurist {
         manicuristToUpdate.setHireDate(manicuristRequest.getHireDate());
     }
 
-    @Override
+
     public void deleteManicurist(Integer id) {
         Manicurist manicuristToDelete = manicuristRepository.findById(id).orElseThrow(
                 () -> new BusinessException(
@@ -74,6 +73,14 @@ public class ManicuristService extends Base<Manicurist> implements IManicurist {
                     && manicurist.getLastName().equals(manicuristRequest.getLastName())) {
                 throw new BusinessException("This manicurist already exist");
             }
+        }
+    }
+
+    public void validatePhoneNumber(String string) {
+        if (string.isBlank() ||
+                !string.matches("[0-9]+") ||
+                string.length() < 10) {
+            throw new BusinessException("Invalid phone number. Try again -> only with digits and minimum 10");
         }
     }
 }

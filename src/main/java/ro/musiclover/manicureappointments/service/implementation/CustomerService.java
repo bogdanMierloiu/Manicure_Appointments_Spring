@@ -13,7 +13,6 @@ import ro.musiclover.manicureappointments.model.customer.*;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCustomerDetail;
 import ro.musiclover.manicureappointments.repository.CustomerRepository;
 import ro.musiclover.manicureappointments.repository.MyRepository;
-import ro.musiclover.manicureappointments.service.interfaces.ICustomer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class CustomerService extends Base<Customer> implements ICustomer {
+public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
@@ -29,7 +28,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
     private final MyRepository myRepository;
 
 
-    @Override
+
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
         checkDuplicate(customerRequest);
         validatePhoneNumber(customerRequest.getPhoneNumber());
@@ -37,12 +36,12 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         return customerMapper.map(customerRepository.save(customer));
     }
 
-    @Override
+
     public List<CustomerResponse> getAllCustomers() {
         return customerMapper.map(customerRepository.findAll());
     }
 
-    @Override
+
     public List<CustomerResponse> getAllActiveCustomers() {
         List<Customer> customersFromDb = customerRepository.findAll();
         List<CustomerResponse> customersForResponse = new ArrayList<>();
@@ -54,7 +53,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         return customersForResponse;
     }
 
-    @Override
+
     public CustomerResponse findCustomerById(Integer id) {
         Customer customer = customerRepository.findById(id).orElseThrow(
                 () -> new BusinessException(
@@ -63,7 +62,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         return customerMapper.map(customer);
     }
 
-    @Override
+
     public CustomerDetailResponse findByIdWithDetails(Integer id) {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new BusinessException(
                 "CustomerWebController not found"));
@@ -89,7 +88,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         return customerDetailResponse;
     }
 
-    @Override
+
     public List<CustomerDetailResponse> findByFirstName(String firstName) {
         if (firstName.isBlank()) {
             throw new IllegalArgumentException("Invalid name");
@@ -121,7 +120,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         return customerDetailResponseList;
     }
 
-    @Override
+
     public void updateCustomer(Integer id, CustomerRequest customerRequest) {
         validatePhoneNumber(customerRequest.getPhoneNumber());
         Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
@@ -134,7 +133,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         customerToUpdate.setPhoneNumber(customerRequest.getPhoneNumber());
     }
 
-    @Override
+
     public void updateStatus(Integer id, CustomerUpdateStatus customerUpdateStatus) {
         Customer customer = customerRepository.findById(id).orElseThrow(
                 () -> new BusinessException("Not found")
@@ -142,7 +141,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         customer.setActive(customerUpdateStatus.getActive());
     }
 
-    @Override
+
     public void updateFirstName(Integer id, RequestUpdateFirstNameCustomer request) {
         Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
                 () -> new BusinessException(
@@ -152,7 +151,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         customerToUpdate.setFirstName(request.getFirstName());
     }
 
-    @Override
+
     public void updateLastName(Integer id, RequestUpdateLastNameCustomer request) {
         Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
                 () -> new BusinessException(
@@ -162,7 +161,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         customerToUpdate.setLastName(request.getLastName());
     }
 
-    @Override
+
     public void updatePhoneNumber(Integer id, RequestUpdatePhoneNumberCustomer request) {
         validatePhoneNumber(request.getPhoneNumber());
         Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
@@ -173,7 +172,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         customerToUpdate.setPhoneNumber(request.getPhoneNumber());
     }
 
-    @Override
+
     public void updateBirthDate(Integer id, RequestUpdateBirthDateCustomer request) {
         Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
                 () -> new BusinessException(
@@ -183,7 +182,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         customerToUpdate.setBirthDate(request.getBirthDate());
     }
 
-    @Override
+
     public void updateEmail(Integer id, RequestUpdateEmailCustomer request) {
         Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
                 () -> new BusinessException(
@@ -193,7 +192,7 @@ public class CustomerService extends Base<Customer> implements ICustomer {
         customerToUpdate.setEmail(request.getEmail());
     }
 
-    @Override
+
     public void deleteById(Integer id) {
         Customer customerToDelete = customerRepository.findById(id).orElseThrow(() ->
                 new BusinessException("Not found"));
@@ -206,6 +205,14 @@ public class CustomerService extends Base<Customer> implements ICustomer {
                     customer.getLastName().equals(customerRequest.getLastName())) {
                 throw new BusinessException("This CustomerWebController already exist");
             }
+        }
+    }
+
+    public void validatePhoneNumber(String string) {
+        if (string.isBlank() ||
+                !string.matches("[0-9]+") ||
+                string.length() < 10) {
+            throw new BusinessException("Invalid phone number. Try again -> only with digits and minimum 10");
         }
     }
 
