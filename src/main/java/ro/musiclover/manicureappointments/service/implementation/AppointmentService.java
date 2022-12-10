@@ -31,7 +31,6 @@ public class AppointmentService extends Base<ro.musiclover.manicureappointments.
     private final CustomerRepository customerRepository;
     private final NailsServiceRepository nailsServiceRepository;
 
-
     @Override
     public AppointmentResponse createAppointment(AppointmentRequest appointmentRequest) {
         for (Appointment appointment : appointmentRepository.findAll()) {
@@ -44,10 +43,10 @@ public class AppointmentService extends Base<ro.musiclover.manicureappointments.
         Appointment appointmentToSave = appointmentMapper.map(appointmentRequest);
 
         appointmentToSave.setManicurist(manicuristRepository.findById(appointmentRequest.getManicuristId()).orElseThrow(
-                () -> new BusinessException("ManicuristWebController not found")));
+                () -> new BusinessException("Manicurist not found")));
 
         appointmentToSave.setCustomer(customerRepository.findById(appointmentRequest.getCustomerId()).orElseThrow(
-                () -> new BusinessException("CustomerWebController not found")));
+                () -> new BusinessException("Customer not found")));
 
         List<NailsService> nailsServices = new ArrayList<>();
         for (Integer id : appointmentRequest.getNailsServicesIds()) {

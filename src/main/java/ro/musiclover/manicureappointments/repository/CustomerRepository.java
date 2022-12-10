@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-    @Query("select t from Customer t where t.firstName = :firstName")
+//    @Query("select t from Customer t where t.firstName = :firstName")
     List<Customer> findByFirstName(@Param("firstName") String firstName);
 
 //    List<Customer> findByFirstName(String name);

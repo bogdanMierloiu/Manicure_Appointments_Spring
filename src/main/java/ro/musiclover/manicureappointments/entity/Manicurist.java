@@ -33,6 +33,6 @@ public class Manicurist {
     @Past(message = "Hire date must be less than today")
     private Date hireDate;
 
-    @OneToMany(mappedBy = "manicurist")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "manicurist")
     private List<Appointment> appointments;
 }

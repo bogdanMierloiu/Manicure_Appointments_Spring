@@ -16,7 +16,6 @@ import ro.musiclover.manicureappointments.repository.MyRepository;
 import ro.musiclover.manicureappointments.service.interfaces.ICustomer;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -192,6 +191,13 @@ public class CustomerService extends Base<Customer> implements ICustomer {
                 )
         );
         customerToUpdate.setEmail(request.getEmail());
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        Customer customerToDelete = customerRepository.findById(id).orElseThrow(() ->
+                new BusinessException("Not found"));
+        customerRepository.deleteById(customerToDelete.getId());
     }
 
     public void checkDuplicate(CustomerRequest customerRequest) {

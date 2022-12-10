@@ -21,7 +21,6 @@ public class ManicuristService extends Base<Manicurist> implements IManicurist {
     private final ManicuristRepository manicuristRepository;
     private final ManicuristMapper manicuristMapper;
 
-
     @Override
     public ManicuristResponse createManicurist(ManicuristRequest manicuristRequest) {
         checkDuplicate(manicuristRequest);
@@ -33,7 +32,6 @@ public class ManicuristService extends Base<Manicurist> implements IManicurist {
     @Override
     public List<ManicuristResponse> allManicurists() {
         return manicuristMapper.map(manicuristRepository.findAll());
-
     }
 
     @Override
@@ -78,6 +76,4 @@ public class ManicuristService extends Base<Manicurist> implements IManicurist {
             }
         }
     }
-
-
 }

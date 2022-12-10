@@ -1,4 +1,4 @@
-package ro.musiclover.manicureappointments.controller.web.controller;
+package ro.musiclover.manicureappointments.controller.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
