@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -42,7 +41,7 @@ public class Appointment implements Comparable<Appointment> {
             joinColumns = {@JoinColumn(name = "appointment_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "service_id", referencedColumnName = "id")})
     @Builder.Default
-    private Set<NailsService> nailsServices = new HashSet<>();
+    private Set<NailsCare> nailsCares = new HashSet<>();
 
     @Override
     public int compareTo(Appointment appointment) {

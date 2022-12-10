@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.musiclover.manicureappointments.entity.Appointment;
 import ro.musiclover.manicureappointments.entity.Customer;
-import ro.musiclover.manicureappointments.entity.NailsService;
+import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.exception.BusinessException;
 import ro.musiclover.manicureappointments.mapper.AppointmentMapper;
 import ro.musiclover.manicureappointments.model.appointment.*;
@@ -46,14 +46,14 @@ public class AppointmentService {
         appointmentToSave.setCustomer(customerRepository.findById(appointmentRequest.getCustomerId()).orElseThrow(
                 () -> new BusinessException("Customer not found")));
 
-        List<NailsService> nailsServices = new ArrayList<>();
+        List<NailsCare> nailsCares = new ArrayList<>();
         for (Integer id : appointmentRequest.getNailsServicesIds()) {
-            NailsService nailsService = nailsServiceRepository.findById(id).orElseThrow(
+            NailsCare nailsCare = nailsServiceRepository.findById(id).orElseThrow(
                     () -> new BusinessException("NailsServiceWebController not found")
             );
-            nailsServices.add(nailsService);
+            nailsCares.add(nailsCare);
         }
-        appointmentToSave.getNailsServices().addAll(nailsServices);
+        appointmentToSave.getNailsCares().addAll(nailsCares);
 
         appointmentRepository.save(appointmentToSave);
 
@@ -73,11 +73,11 @@ public class AppointmentService {
         customerResponse.setLastName(appointmentToSave.getCustomer().getLastName());
 
         List<NailsServiceResponse> serviceResponses = new ArrayList<>();
-        for (NailsService nailsService : appointmentToSave.getNailsServices()) {
+        for (NailsCare nailsCare : appointmentToSave.getNailsCares()) {
             NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
-            nailsServiceResponse.setId(nailsService.getId());
-            nailsServiceResponse.setServiceName(nailsService.getServiceName());
-            nailsServiceResponse.setPrice(nailsService.getPrice());
+            nailsServiceResponse.setId(nailsCare.getId());
+            nailsServiceResponse.setServiceName(nailsCare.getServiceName());
+            nailsServiceResponse.setPrice(nailsCare.getPrice());
             serviceResponses.add(nailsServiceResponse);
         }
 
@@ -130,14 +130,14 @@ public class AppointmentService {
                 () -> new BusinessException("AppointmentResponse not found")
         );
 
-        Set<NailsService> nailsServices = new HashSet<>();
+        Set<NailsCare> nailsCares = new HashSet<>();
         for (Integer serviceId : requestUpdateServices.getNailsServicesIds()) {
-            NailsService nailsService = nailsServiceRepository.findById(serviceId).orElseThrow(
+            NailsCare nailsCare = nailsServiceRepository.findById(serviceId).orElseThrow(
                     () -> new BusinessException("Service not found")
             );
-            nailsServices.add(nailsService);
+            nailsCares.add(nailsCare);
         }
-        appointmentToUpdate.setNailsServices(nailsServices);
+        appointmentToUpdate.setNailsCares(nailsCares);
     }
 
     public void updateCustomer(Integer id, RequestUpdateCustomer requestUpdateCustomer) {

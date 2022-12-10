@@ -59,7 +59,7 @@
         <td><span th:text="${appointment.appointmentTime}">Time</span></td>
         <td><span th:text="${appointment.manicurist.firstName} + ' ' + ${appointment.manicurist.lastName}">Manicurist</span></td>
         <td><span th:text="${appointment.customer.firstName} + ' ' + ${appointment.customer.lastName}">Customer</span></td>
-        <td th:each="service: ${appointment.nailsServices}"><span th:text="${service.serviceName}">Services</span></td>
+        <td th:each="service: ${appointment.nailsCares}"><span th:text="${service.serviceName}">Services</span></td>
     </tr>
     </tbody>
 </table>

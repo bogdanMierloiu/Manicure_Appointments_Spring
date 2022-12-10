@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
-import ro.musiclover.manicureappointments.entity.NailsService;
+import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
@@ -19,12 +19,12 @@ import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePric
 public class NailsServiceMapperImpl implements NailsServiceMapper {
 
     @Override
-    public NailsService map(NailsServiceRequest nailsServiceRequest) {
+    public NailsCare map(NailsServiceRequest nailsServiceRequest) {
         if ( nailsServiceRequest == null ) {
             return null;
         }
 
-        NailsService.NailsServiceBuilder nailsService = NailsService.builder();
+        NailsCare.NailsServiceBuilder nailsService = NailsCare.builder();
 
         nailsService.id( nailsServiceRequest.getId() );
         nailsService.serviceName( nailsServiceRequest.getServiceName() );
@@ -34,41 +34,41 @@ public class NailsServiceMapperImpl implements NailsServiceMapper {
     }
 
     @Override
-    public NailsServiceResponse map(NailsService nailsService) {
-        if ( nailsService == null ) {
+    public NailsServiceResponse map(NailsCare nailsCare) {
+        if ( nailsCare == null ) {
             return null;
         }
 
         NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
 
-        nailsServiceResponse.setId( nailsService.getId() );
-        nailsServiceResponse.setServiceName( nailsService.getServiceName() );
-        nailsServiceResponse.setPrice( nailsService.getPrice() );
+        nailsServiceResponse.setId( nailsCare.getId() );
+        nailsServiceResponse.setServiceName( nailsCare.getServiceName() );
+        nailsServiceResponse.setPrice( nailsCare.getPrice() );
 
         return nailsServiceResponse;
     }
 
     @Override
-    public List<NailsServiceResponse> map(List<NailsService> all) {
+    public List<NailsServiceResponse> map(List<NailsCare> all) {
         if ( all == null ) {
             return null;
         }
 
         List<NailsServiceResponse> list = new ArrayList<NailsServiceResponse>( all.size() );
-        for ( NailsService nailsService : all ) {
-            list.add( map( nailsService ) );
+        for ( NailsCare nailsCare : all ) {
+            list.add( map(nailsCare) );
         }
 
         return list;
     }
 
     @Override
-    public NailsService map(RequestUpdateName requestUpdateName) {
+    public NailsCare map(RequestUpdateName requestUpdateName) {
         if ( requestUpdateName == null ) {
             return null;
         }
 
-        NailsService.NailsServiceBuilder nailsService = NailsService.builder();
+        NailsCare.NailsServiceBuilder nailsService = NailsCare.builder();
 
         nailsService.id( requestUpdateName.getId() );
         nailsService.serviceName( requestUpdateName.getServiceName() );
@@ -77,12 +77,12 @@ public class NailsServiceMapperImpl implements NailsServiceMapper {
     }
 
     @Override
-    public NailsService map(RequestUpdatePrice requestUpdatePrice) {
+    public NailsCare map(RequestUpdatePrice requestUpdatePrice) {
         if ( requestUpdatePrice == null ) {
             return null;
         }
 
-        NailsService.NailsServiceBuilder nailsService = NailsService.builder();
+        NailsCare.NailsServiceBuilder nailsService = NailsCare.builder();
 
         nailsService.id( requestUpdatePrice.getId() );
         nailsService.price( requestUpdatePrice.getPrice() );

@@ -3,7 +3,7 @@ package ro.musiclover.manicureappointments.repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import ro.musiclover.manicureappointments.entity.Customer;
-import ro.musiclover.manicureappointments.entity.NailsService;
+import ro.musiclover.manicureappointments.entity.NailsCare;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -21,8 +21,8 @@ public class MyRepository {
                 .getResultList();
     }
 
-    public List<NailsService> findByServiceName(String name) {
-        return entityManager.createQuery("select t from NailsService t where t.serviceName=:name", NailsService.class)
+    public List<NailsCare> findByServiceName(String name) {
+        return entityManager.createQuery("select t from NailsCare t where t.serviceName=:name", NailsCare.class)
                 .setParameter("name", name)
                 .getResultList();
     }

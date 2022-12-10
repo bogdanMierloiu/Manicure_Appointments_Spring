@@ -2,7 +2,7 @@ package ro.musiclover.manicureappointments.mapper;
 
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.ComponentScan;
-import ro.musiclover.manicureappointments.entity.NailsService;
+import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
@@ -14,14 +14,14 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface NailsServiceMapper {
 
-    NailsService map(NailsServiceRequest nailsServiceRequest);
+    NailsCare map(NailsServiceRequest nailsServiceRequest);
 
-    NailsServiceResponse map(NailsService nailsService);
+    NailsServiceResponse map(NailsCare nailsCare);
 
-    List<NailsServiceResponse> map(List<NailsService> all);
+    List<NailsServiceResponse> map(List<NailsCare> all);
 
-    NailsService map(RequestUpdateName requestUpdateName);
+    NailsCare map(RequestUpdateName requestUpdateName);
 
-    NailsService map(RequestUpdatePrice requestUpdatePrice);
+    NailsCare map(RequestUpdatePrice requestUpdatePrice);
 
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.musiclover.manicureappointments.entity.Appointment;
 import ro.musiclover.manicureappointments.entity.Customer;
-import ro.musiclover.manicureappointments.entity.NailsService;
+import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.exception.BusinessException;
 import ro.musiclover.manicureappointments.mapper.CustomerMapper;
 import ro.musiclover.manicureappointments.model.appointment.AppointmentResponseForCustomerDetail;
@@ -78,9 +78,9 @@ public class CustomerService {
             appointmentResponse.setAppointmentDate(appointment.getAppointmentDate());
             appointmentResponse.setAppointmentTime(appointment.getAppointmentTime());
             appointmentResponse.setNailsServices(new ArrayList<>());
-            for (NailsService nailsService : appointment.getNailsServices()) {
+            for (NailsCare nailsCare : appointment.getNailsCares()) {
                 NailsServiceForCustomerDetail nailsServiceForCustomerDetail = new NailsServiceForCustomerDetail();
-                nailsServiceForCustomerDetail.setServiceName(nailsService.getServiceName());
+                nailsServiceForCustomerDetail.setServiceName(nailsCare.getServiceName());
                 appointmentResponse.getNailsServices().add(nailsServiceForCustomerDetail);
             }
             customerDetailResponse.getAppointments().add(appointmentResponse);
@@ -105,9 +105,9 @@ public class CustomerService {
                 appointmentResponseForCustomerDetail.setAppointmentDate(appointment.getAppointmentDate());
                 appointmentResponseForCustomerDetail.setAppointmentTime(appointment.getAppointmentTime());
                 appointmentResponseForCustomerDetail.setNailsServices(new ArrayList<>());
-                for (NailsService nailsService : appointment.getNailsServices()) {
+                for (NailsCare nailsCare : appointment.getNailsCares()) {
                     NailsServiceForCustomerDetail nailsServiceForCustomerDetail = new NailsServiceForCustomerDetail();
-                    nailsServiceForCustomerDetail.setServiceName(nailsService.getServiceName());
+                    nailsServiceForCustomerDetail.setServiceName(nailsCare.getServiceName());
                     appointmentResponseForCustomerDetail.getNailsServices().add(nailsServiceForCustomerDetail);
                 }
                 customerDetailResponse.getAppointments().add(appointmentResponseForCustomerDetail);

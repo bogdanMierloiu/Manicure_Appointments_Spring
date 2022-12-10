@@ -3,7 +3,7 @@ package ro.musiclover.manicureappointments.service.implementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ro.musiclover.manicureappointments.entity.NailsService;
+import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.exception.BusinessException;
 import ro.musiclover.manicureappointments.mapper.NailsServiceMapper;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
@@ -28,9 +28,9 @@ public class NailsServiceService {
 
     public NailsServiceResponse createService(NailsServiceRequest nailsServiceRequest) {
         checkDuplicate(nailsServiceRequest);
-        NailsService nailsServiceToCreate = nailsServiceMapper.map(nailsServiceRequest);
-        NailsService nailsServiceToResponse = nailsServiceRepository.save(nailsServiceToCreate);
-        return nailsServiceMapper.map(nailsServiceToResponse);
+        NailsCare nailsCareToCreate = nailsServiceMapper.map(nailsServiceRequest);
+        NailsCare nailsCareToResponse = nailsServiceRepository.save(nailsCareToCreate);
+        return nailsServiceMapper.map(nailsCareToResponse);
     }
 
 
@@ -40,25 +40,25 @@ public class NailsServiceService {
 
 
     public NailsServiceResponse findServiceByID(Integer id) {
-        NailsService nailsService = nailsServiceRepository.findById(id).orElseThrow(
+        NailsCare nailsCare = nailsServiceRepository.findById(id).orElseThrow(
                 () -> new BusinessException(String.format("The service with id: %s not exist", id))
         );
-        return nailsServiceMapper.map(nailsService);
+        return nailsServiceMapper.map(nailsCare);
     }
 
 
     public List<NailsServiceResponse> findByServiceName(String name) {
-        List<NailsService> serviceListFromDB = myRepository.findByServiceName(name);
+        List<NailsCare> serviceListFromDB = myRepository.findByServiceName(name);
         return createListOfServiceForResponseFromDB(serviceListFromDB);
     }
 
-    static List<NailsServiceResponse> createListOfServiceForResponseFromDB(List<NailsService> serviceListFromDB) {
+    static List<NailsServiceResponse> createListOfServiceForResponseFromDB(List<NailsCare> serviceListFromDB) {
         List<NailsServiceResponse> serviceListForResponse = new ArrayList<>();
-        for (NailsService nailsService : serviceListFromDB) {
+        for (NailsCare nailsCare : serviceListFromDB) {
             NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
-            nailsServiceResponse.setId(nailsService.getId());
-            nailsServiceResponse.setServiceName(nailsService.getServiceName());
-            nailsServiceResponse.setPrice(nailsService.getPrice());
+            nailsServiceResponse.setId(nailsCare.getId());
+            nailsServiceResponse.setServiceName(nailsCare.getServiceName());
+            nailsServiceResponse.setPrice(nailsCare.getPrice());
             serviceListForResponse.add(nailsServiceResponse);
         }
         return serviceListForResponse;
@@ -66,30 +66,30 @@ public class NailsServiceService {
 
 
     public void updateServicePrice(Integer id, RequestUpdatePrice requestUpdatePrice) {
-        NailsService nailsServiceToUpdate = nailsServiceRepository.findById(id).orElseThrow(
+        NailsCare nailsCareToUpdate = nailsServiceRepository.findById(id).orElseThrow(
                 () -> new BusinessException(String.format("The service with id: %s not exist", id))
         );
-        nailsServiceToUpdate.setPrice(requestUpdatePrice.getPrice());
+        nailsCareToUpdate.setPrice(requestUpdatePrice.getPrice());
     }
 
 
     public void updateServiceName(Integer id, RequestUpdateName requestUpdateName) {
-        NailsService nailsServiceToUpdate = nailsServiceRepository.findById(id).orElseThrow(
+        NailsCare nailsCareToUpdate = nailsServiceRepository.findById(id).orElseThrow(
                 () -> new BusinessException(String.format("The service with id: %s not exist", id))
         );
-        nailsServiceToUpdate.setServiceName(requestUpdateName.getServiceName());
+        nailsCareToUpdate.setServiceName(requestUpdateName.getServiceName());
     }
 
     public void deleteService(Integer id) {
-        NailsService nailsServiceToDelete = nailsServiceRepository.findById(id).orElseThrow(
+        NailsCare nailsCareToDelete = nailsServiceRepository.findById(id).orElseThrow(
                 () -> new BusinessException(String.format("The service with id: %s not exist", id))
         );
-        nailsServiceRepository.delete(nailsServiceToDelete);
+        nailsServiceRepository.delete(nailsCareToDelete);
     }
 
     public void checkDuplicate(NailsServiceRequest nailsServiceRequest) {
-        for (NailsService nailsService : nailsServiceRepository.findAll()) {
-            if (nailsService.getServiceName().equals(nailsServiceRequest.getServiceName())) {
+        for (NailsCare nailsCare : nailsServiceRepository.findAll()) {
+            if (nailsCare.getServiceName().equals(nailsServiceRequest.getServiceName())) {
                 throw new BusinessException("This service already exist");
             }
         }

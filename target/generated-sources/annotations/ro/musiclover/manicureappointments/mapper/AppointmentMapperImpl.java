@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import ro.musiclover.manicureappointments.entity.Appointment;
 import ro.musiclover.manicureappointments.entity.Customer;
 import ro.musiclover.manicureappointments.entity.Manicurist;
-import ro.musiclover.manicureappointments.entity.NailsService;
+import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.model.appointment.AppointmentRequest;
 import ro.musiclover.manicureappointments.model.appointment.AppointmentResponse;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
@@ -55,7 +55,7 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         appointmentResponse.setManicurist( manicuristToManicuristResponseForAppointment( appointment.getManicurist() ) );
         appointmentResponse.setCustomer( customerToCustomerResponseForAppointment( appointment.getCustomer() ) );
         if ( appointmentResponse.getNailsServices() != null ) {
-            List<NailsServiceResponse> list = nailsServiceSetToNailsServiceResponseList( appointment.getNailsServices() );
+            List<NailsServiceResponse> list = nailsServiceSetToNailsServiceResponseList( appointment.getNailsCares() );
             if ( list != null ) {
                 appointmentResponse.getNailsServices().addAll( list );
             }
@@ -105,28 +105,28 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         return customerResponseForAppointment;
     }
 
-    protected NailsServiceResponse nailsServiceToNailsServiceResponse(NailsService nailsService) {
-        if ( nailsService == null ) {
+    protected NailsServiceResponse nailsServiceToNailsServiceResponse(NailsCare nailsCare) {
+        if ( nailsCare == null ) {
             return null;
         }
 
         NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
 
-        nailsServiceResponse.setId( nailsService.getId() );
-        nailsServiceResponse.setServiceName( nailsService.getServiceName() );
-        nailsServiceResponse.setPrice( nailsService.getPrice() );
+        nailsServiceResponse.setId( nailsCare.getId() );
+        nailsServiceResponse.setServiceName( nailsCare.getServiceName() );
+        nailsServiceResponse.setPrice( nailsCare.getPrice() );
 
         return nailsServiceResponse;
     }
 
-    protected List<NailsServiceResponse> nailsServiceSetToNailsServiceResponseList(Set<NailsService> set) {
+    protected List<NailsServiceResponse> nailsServiceSetToNailsServiceResponseList(Set<NailsCare> set) {
         if ( set == null ) {
             return null;
         }
 
         List<NailsServiceResponse> list = new ArrayList<NailsServiceResponse>( set.size() );
-        for ( NailsService nailsService : set ) {
-            list.add( nailsServiceToNailsServiceResponse( nailsService ) );
+        for ( NailsCare nailsCare : set ) {
+            list.add( nailsServiceToNailsServiceResponse(nailsCare) );
         }
 
         return list;

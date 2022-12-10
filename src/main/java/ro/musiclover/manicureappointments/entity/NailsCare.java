@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class NailsService {
+public class NailsCare {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,6 @@ public class NailsService {
     @Positive
     private Integer price;
 
-    @ManyToMany(mappedBy = "nailsServices")
+    @ManyToMany(mappedBy = "nailsCares")
     private List<Appointment> appointments = new ArrayList<>();
 }
