@@ -6,14 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ro.musiclover.manicureappointments.entity.Appointment;
-import ro.musiclover.manicureappointments.model.appointment.AppointmentResponseForCustomerDetail;
+import ro.musiclover.manicureappointments.model.IdRequest;
 import ro.musiclover.manicureappointments.model.customer.*;
-import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCustomerDetail;
 import ro.musiclover.manicureappointments.service.implementation.CustomerService;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -37,6 +33,13 @@ public class CustomerWebController {
     public String goToAllActiveCustomers(Model model) {
         model.addAttribute("customers", customerService.getAllActiveCustomers());
         return "allCustomersPage";
+    }
+
+    @GetMapping("/customer/details")
+    public String viewDetails(@ModelAttribute(value = "id") IdRequest request, Model model) {
+        CustomerResponse customerResponse = customerService.findCustomerById(request.getId());
+        model.addAttribute("customer", customerResponse);
+        return "customerDetailsPage";
     }
 
 
@@ -66,6 +69,13 @@ public class CustomerWebController {
         List<CustomerDetailResponse> customersResult = customerService.findByFirstName(request.getFirstName());
         model.addAttribute("customers", customersResult);
         return "resultCustomerPage";
+    }
+
+    @PostMapping("/customer/deleteById")
+    public String deleteById(@ModelAttribute(value = "deleteRequest") IdRequest request, Model model) {
+        customerService.deleteById(request.getId());
+        model.addAttribute("customers", customerService.getAllCustomers());
+        return "allCustomersPage";
     }
 
     @PostMapping("/customer/update-firstname")

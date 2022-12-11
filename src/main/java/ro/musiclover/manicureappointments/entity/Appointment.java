@@ -17,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Appointment implements Comparable<Appointment> {
+public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,8 +43,5 @@ public class Appointment implements Comparable<Appointment> {
     @Builder.Default
     private Set<NailsCare> nailsCares = new HashSet<>();
 
-    @Override
-    public int compareTo(Appointment appointment) {
-        return getAppointmentDate().compareTo(appointment.getAppointmentDate());
-    }
+
 }

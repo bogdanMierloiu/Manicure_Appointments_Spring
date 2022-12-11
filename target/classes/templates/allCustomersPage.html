@@ -57,6 +57,7 @@
         <th>Email</th>
         <th>Status</th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -110,9 +111,21 @@
             </div>
         </td>
         <td>
-            <form th:action="@{/customer/findByFirstName}">
+            <form th:action="@{/customer/findByFirstName}" >
                 <input type="hidden" name="firstName" th:value="${customer.firstName}">
                 <button type="submit" class="btn btn-primary btn-sm"> View Appointments</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/customer/details}" >
+                <input type="hidden" name="id" th:value="${customer.id}">
+                <button type="submit" class="btn btn-primary btn-sm"> View Details</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/customer/deleteById}" th:object="${deleteRequest}" method="post">
+                <input type="hidden" name="id" th:value="${customer.id}">
+                <button type="submit" class="btn btn-danger"> Delete </button>
             </form>
         </td>
     </tr>

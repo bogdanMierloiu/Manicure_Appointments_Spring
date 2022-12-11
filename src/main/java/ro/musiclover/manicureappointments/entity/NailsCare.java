@@ -24,7 +24,6 @@ public class NailsCare {
 
     @NotBlank
     private String serviceName;
-
     @NotNull
     @Positive
     private Integer price;

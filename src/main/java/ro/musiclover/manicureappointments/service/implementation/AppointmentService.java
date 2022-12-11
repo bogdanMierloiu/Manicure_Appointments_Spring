@@ -8,11 +8,13 @@ import ro.musiclover.manicureappointments.entity.Customer;
 import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.exception.BusinessException;
 import ro.musiclover.manicureappointments.mapper.AppointmentMapper;
+import ro.musiclover.manicureappointments.model.EmailDetails;
 import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
-import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
+import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse;
 import ro.musiclover.manicureappointments.repository.*;
+import ro.musiclover.manicureappointments.service.interfaces.EmailService;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -28,7 +30,9 @@ public class AppointmentService {
     private final AppointmentMapper appointmentMapper;
     private final ManicuristRepository manicuristRepository;
     private final CustomerRepository customerRepository;
-    private final NailsServiceRepository nailsServiceRepository;
+    private final NailsCareRepository nailsCareRepository;
+
+    private final EmailService emailService;
 
     public AppointmentResponse createAppointment(AppointmentRequest appointmentRequest) {
         for (Appointment appointment : appointmentRepository.findAll()) {
@@ -43,12 +47,13 @@ public class AppointmentService {
         appointmentToSave.setManicurist(manicuristRepository.findById(appointmentRequest.getManicuristId()).orElseThrow(
                 () -> new BusinessException("Manicurist not found")));
 
-        appointmentToSave.setCustomer(customerRepository.findById(appointmentRequest.getCustomerId()).orElseThrow(
-                () -> new BusinessException("Customer not found")));
+        Customer customer = customerRepository.findById(appointmentRequest.getCustomerId()).orElseThrow(
+                () -> new BusinessException("Customer not found"));
+        appointmentToSave.setCustomer(customer);
 
         List<NailsCare> nailsCares = new ArrayList<>();
         for (Integer id : appointmentRequest.getNailsServicesIds()) {
-            NailsCare nailsCare = nailsServiceRepository.findById(id).orElseThrow(
+            NailsCare nailsCare = nailsCareRepository.findById(id).orElseThrow(
                     () -> new BusinessException("NailsServiceWebController not found")
             );
             nailsCares.add(nailsCare);
@@ -72,19 +77,24 @@ public class AppointmentService {
         customerResponse.setFirstName(appointmentToSave.getCustomer().getFirstName());
         customerResponse.setLastName(appointmentToSave.getCustomer().getLastName());
 
-        List<NailsServiceResponse> serviceResponses = new ArrayList<>();
+        List<NailsCare> serviceResponses = new ArrayList<>();
         for (NailsCare nailsCare : appointmentToSave.getNailsCares()) {
-            NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
-            nailsServiceResponse.setId(nailsCare.getId());
-            nailsServiceResponse.setServiceName(nailsCare.getServiceName());
-            nailsServiceResponse.setPrice(nailsCare.getPrice());
-            serviceResponses.add(nailsServiceResponse);
+            NailsCare nailsCareResponse = new NailsCare();
+            nailsCareResponse.setId(nailsCare.getId());
+            nailsCareResponse.setServiceName(nailsCare.getServiceName());
+            nailsCareResponse.setPrice(nailsCare.getPrice());
+            serviceResponses.add(nailsCareResponse);
         }
 
         appointmentForResponse.setManicurist(manicuristResponse);
         appointmentForResponse.setCustomer(customerResponse);
-        appointmentForResponse.getNailsServices().addAll(serviceResponses);
+        appointmentForResponse.getNailsCares().addAll(serviceResponses);
 
+        EmailDetails emailDetails = new EmailDetails();
+        emailDetails.setRecipient(customer.getEmail());
+        emailDetails.setSubject("Appointment confirmed");
+        emailDetails.setMsgBody("Your appointment is confirmed at: " + appointmentToSave.getAppointmentDate());
+        emailService.sendSimpleMail(emailDetails);
         return appointmentForResponse;
     }
 
@@ -132,7 +142,7 @@ public class AppointmentService {
 
         Set<NailsCare> nailsCares = new HashSet<>();
         for (Integer serviceId : requestUpdateServices.getNailsServicesIds()) {
-            NailsCare nailsCare = nailsServiceRepository.findById(serviceId).orElseThrow(
+            NailsCare nailsCare = nailsCareRepository.findById(serviceId).orElseThrow(
                     () -> new BusinessException("Service not found")
             );
             nailsCares.add(nailsCare);

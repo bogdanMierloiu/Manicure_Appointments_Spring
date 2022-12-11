@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
-import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
+import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePrice;
 
 import java.util.List;
@@ -16,9 +16,9 @@ public interface NailsServiceMapper {
 
     NailsCare map(NailsServiceRequest nailsServiceRequest);
 
-    NailsServiceResponse map(NailsCare nailsCare);
+    NailsCareResponse map(NailsCare nailsCare);
 
-    List<NailsServiceResponse> map(List<NailsCare> all);
+    List<NailsCareResponse> map(List<NailsCare> all);
 
     NailsCare map(RequestUpdateName requestUpdateName);
 

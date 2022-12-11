@@ -1,7 +1,6 @@
 ro\musiclover\manicureappointments\mapper\ManicuristMapperImpl.class
 ro\musiclover\manicureappointments\model\customer\CustomerResponse.class
 ro\musiclover\manicureappointments\model\customer\RequestUpdatePhoneNumberCustomer.class
-ro\musiclover\manicureappointments\model\nails_services\NailsServiceResponse.class
 ro\musiclover\manicureappointments\model\manicurist\ManicuristRequest.class
 ro\musiclover\manicureappointments\controller\web\WelcomeController.class
 ro\musiclover\manicureappointments\mapper\CustomerMapper.class
@@ -17,9 +16,11 @@ ro\musiclover\manicureappointments\model\appointment\AppointmentResponseForCusto
 ro\musiclover\manicureappointments\controller\ManicuristController.class
 ro\musiclover\manicureappointments\entity\Appointment$AppointmentBuilder.class
 ro\musiclover\manicureappointments\repository\MyRepository.class
+ro\musiclover\manicureappointments\repository\NailsCareRepository.class
 ro\musiclover\manicureappointments\model\customer\FindByNameRequest.class
 ro\musiclover\manicureappointments\mapper\NailsServiceMapperImpl.class
 ro\musiclover\manicureappointments\model\nails_services\RequestUpdateName.class
+ro\musiclover\manicureappointments\model\nails_services\NailsCareResponse.class
 ro\musiclover\manicureappointments\model\customer\CustomerUpdateStatus.class
 ro\musiclover\manicureappointments\model\customer\RequestUpdateEmailCustomer$RequestUpdateEmailCustomerBuilder.class
 ro\musiclover\manicureappointments\repository\CustomerRepository.class
@@ -41,12 +42,10 @@ ro\musiclover\manicureappointments\repository\AppointmentRepository.class
 ro\musiclover\manicureappointments\controller\AppointmentController.class
 ro\musiclover\manicureappointments\controller\EmailController.class
 ro\musiclover\manicureappointments\model\customer\RequestUpdateLastNameCustomer$RequestUpdateLastNameCustomerBuilder.class
-ro\musiclover\manicureappointments\repository\NailsServiceRepository.class
 ro\musiclover\manicureappointments\entity\NailsCare$NailsCareBuilder.class
 ro\musiclover\manicureappointments\model\appointment\FindByDateRequest.class
 ro\musiclover\manicureappointments\controller\NailsServiceController.class
 ro\musiclover\manicureappointments\model\customer\RequestUpdateFirstNameCustomer.class
-ro\musiclover\manicureappointments\service\implementation\NailsServiceService.class
 ro\musiclover\manicureappointments\model\appointment\AppointmentResponse.class
 ro\musiclover\manicureappointments\model\customer\RequestUpdatePhoneNumberCustomer$RequestUpdatePhoneNumberCustomerBuilder.class
 ro\musiclover\manicureappointments\model\nails_services\NailsServiceForCustomerDetail.class
@@ -85,3 +84,4 @@ ro\musiclover\manicureappointments\model\nails_services\NailsServiceRequest$Nail
 ro\musiclover\manicureappointments\controller\CustomerController.class
 ro\musiclover\manicureappointments\exception\BusinessException.class
 ro\musiclover\manicureappointments\model\appointment\AppointmentRequest.class
+ro\musiclover\manicureappointments\service\implementation\NailsCareService.class

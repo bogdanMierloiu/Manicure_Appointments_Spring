@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ro.musiclover.manicureappointments.model.DeleteRequest;
+import ro.musiclover.manicureappointments.model.IdRequest;
 import ro.musiclover.manicureappointments.model.nails_services.CreateNailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
@@ -31,7 +31,7 @@ public class NailsServiceWebController {
     }
 
     @PostMapping("/nails-service/delete")
-    public String deleteService(@ModelAttribute(value = "deleteRequest") DeleteRequest request, Model model) {
+    public String deleteService(@ModelAttribute(value = "deleteRequest") IdRequest request, Model model) {
         nailsService.deleteService(request.getId());
         model.addAttribute("services", nailsService.allServices());
         return "allNailsServicesPage";

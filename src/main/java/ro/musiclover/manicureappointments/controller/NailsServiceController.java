@@ -3,9 +3,9 @@ package ro.musiclover.manicureappointments.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
-import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePrice;
 import ro.musiclover.manicureappointments.service.implementation.NailsCareService;
 
@@ -21,22 +21,22 @@ public class NailsServiceController {
     private final NailsCareService nailsCareService;
 
     @PostMapping("create")
-    public NailsServiceResponse createNailsService(@RequestBody @Valid NailsServiceRequest nailsServiceRequest) {
+    public NailsCareResponse createNailsService(@RequestBody @Valid NailsServiceRequest nailsServiceRequest) {
         return nailsCareService.createService(nailsServiceRequest);
     }
 
     @GetMapping("list")
-    public List<NailsServiceResponse> showAllServices() {
+    public List<NailsCareResponse> showAllServices() {
         return nailsCareService.allServices();
     }
 
     @GetMapping("find/{id}")
-    public NailsServiceResponse findById(@PathVariable Integer id) {
+    public NailsCareResponse findById(@PathVariable Integer id) {
         return nailsCareService.findServiceByID(id);
     }
 
     @GetMapping("search/{name}")
-    public List<NailsServiceResponse> findByServiceName(@PathVariable String name){
+    public List<NailsCareResponse> findByServiceName(@PathVariable String name){
         return nailsCareService.findByServiceName(name);
     }
     @PatchMapping("update-price/{id}")

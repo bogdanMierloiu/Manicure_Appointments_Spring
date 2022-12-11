@@ -38,8 +38,7 @@ public class AppointmentWebController {
 
     @GetMapping("/appointment/allAppointments")
     public String allAppointments(Model model) {
-        List<AppointmentResponse> allAppointments = appointmentService.findAll();
-        model.addAttribute("appointments", allAppointments);
+        model.addAttribute("appointments", appointmentService.findAll());
         model.addAttribute("allCustomers", customerService.getAllCustomers());
         model.addAttribute("allServices", nailsService.allServices());
         return "allAppointmentsPage";

@@ -3,11 +3,13 @@ package ro.musiclover.manicureappointments.mapper;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 import ro.musiclover.manicureappointments.entity.Appointment;
 import ro.musiclover.manicureappointments.entity.Customer;
 import ro.musiclover.manicureappointments.entity.Manicurist;
+import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.model.appointment.AppointmentRequest;
 import ro.musiclover.manicureappointments.model.appointment.AppointmentResponse;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
@@ -15,7 +17,7 @@ import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseFor
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-10T16:18:39+0200",
+    date = "2022-12-11T10:41:52+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -51,6 +53,12 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         appointmentResponse.setAppointmentTime( appointment.getAppointmentTime() );
         appointmentResponse.setManicurist( manicuristToManicuristResponseForAppointment( appointment.getManicurist() ) );
         appointmentResponse.setCustomer( customerToCustomerResponseForAppointment( appointment.getCustomer() ) );
+        if ( appointmentResponse.getNailsCares() != null ) {
+            Set<NailsCare> set = appointment.getNailsCares();
+            if ( set != null ) {
+                appointmentResponse.getNailsCares().addAll( set );
+            }
+        }
 
         return appointmentResponse;
     }

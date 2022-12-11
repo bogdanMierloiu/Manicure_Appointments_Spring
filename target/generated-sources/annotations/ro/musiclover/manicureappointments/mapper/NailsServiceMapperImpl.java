@@ -5,14 +5,14 @@ import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 import ro.musiclover.manicureappointments.entity.NailsCare;
+import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
-import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePrice;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-10T16:18:39+0200",
+    date = "2022-12-11T09:59:34+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -34,27 +34,27 @@ public class NailsServiceMapperImpl implements NailsServiceMapper {
     }
 
     @Override
-    public NailsServiceResponse map(NailsCare nailsCare) {
+    public NailsCareResponse map(NailsCare nailsCare) {
         if ( nailsCare == null ) {
             return null;
         }
 
-        NailsServiceResponse nailsServiceResponse = new NailsServiceResponse();
+        NailsCareResponse nailsCareResponse = new NailsCareResponse();
 
-        nailsServiceResponse.setId( nailsCare.getId() );
-        nailsServiceResponse.setServiceName( nailsCare.getServiceName() );
-        nailsServiceResponse.setPrice( nailsCare.getPrice() );
+        nailsCareResponse.setId( nailsCare.getId() );
+        nailsCareResponse.setServiceName( nailsCare.getServiceName() );
+        nailsCareResponse.setPrice( nailsCare.getPrice() );
 
-        return nailsServiceResponse;
+        return nailsCareResponse;
     }
 
     @Override
-    public List<NailsServiceResponse> map(List<NailsCare> all) {
+    public List<NailsCareResponse> map(List<NailsCare> all) {
         if ( all == null ) {
             return null;
         }
 
-        List<NailsServiceResponse> list = new ArrayList<NailsServiceResponse>( all.size() );
+        List<NailsCareResponse> list = new ArrayList<NailsCareResponse>( all.size() );
         for ( NailsCare nailsCare : all ) {
             list.add( map( nailsCare ) );
         }

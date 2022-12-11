@@ -1,13 +1,15 @@
 package ro.musiclover.manicureappointments.model.appointment;
 import lombok.Data;
+import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
-import ro.musiclover.manicureappointments.model.nails_services.NailsServiceResponse;
+import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse;
 
 import java.sql.Date;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 public class AppointmentResponse {
@@ -17,7 +19,8 @@ public class AppointmentResponse {
     private LocalTime appointmentTime;
     private ManicuristResponseForAppointment manicurist;
     private CustomerResponseForAppointment customer;
-    private final List<NailsServiceResponse> nailsServices = new ArrayList<>();
+    private final Set<NailsCare> nailsCares = new HashSet<>();
+
 
 
 }

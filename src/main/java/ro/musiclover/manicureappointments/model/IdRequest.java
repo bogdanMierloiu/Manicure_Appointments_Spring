@@ -3,6 +3,6 @@ package ro.musiclover.manicureappointments.model;
 import lombok.Data;
 
 @Data
-public class DeleteRequest {
+public class IdRequest {
     private Integer id;
 }
