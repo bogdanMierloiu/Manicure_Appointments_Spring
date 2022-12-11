@@ -1,0 +1,15 @@
+INSERT INTO nails_care(service_name, price) VALUES ("manichiură clasică", 80);
+INSERT INTO nails_care(service_name, price) VALUES ("manichiură semipermanentă clasică", 110);
+INSERT INTO nails_care(service_name, price) VALUES ("manichiura semipermanentă cu apex", 140);
+INSERT INTO nails_care(service_name, price) VALUES ("întreținere clasică gel", 150);
+INSERT INTO nails_care(service_name, price) VALUES ("întreținere cu schimbarea arhitecturii", 190);
+INSERT INTO nails_care(service_name, price) VALUES ("construcție", 210);
+INSERT INTO nails_care(service_name, price) VALUES ("demontare și curățare", 60);
+INSERT INTO nails_care(service_name, price) VALUES ("pedichiură clasică și tălpi kart", 125);
+INSERT INTO nails_care(service_name, price) VALUES ("pedichiură semipermanentă", 155);
+INSERT INTO nails_care(service_name, price) VALUES ("pedichiură kart", 180);
+INSERT INTO nails_care(service_name, price) VALUES ("pedichiură semi + tălpi problematice", 350);
+INSERT INTO nails_care(service_name, price) VALUES ("tălpi problematice kart", 155);
+INSERT INTO nails_care(service_name, price) VALUES ("onicoliză decupare", 60);
+INSERT INTO nails_care(service_name, price) VALUES ("onicoliză decupare și protezare", 80);
+INSERT INTO nails_care(service_name, price) VALUES ("onicomicoză curățare", 100);

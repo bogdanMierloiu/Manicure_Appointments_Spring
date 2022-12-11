@@ -1,12 +1,11 @@
 package ro.musiclover.manicureappointments.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.Accessors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristRequest;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponse;
-import ro.musiclover.manicureappointments.service.implementation.ManicuristService;
+import ro.musiclover.manicureappointments.service.ManicuristService;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.validation.Valid;

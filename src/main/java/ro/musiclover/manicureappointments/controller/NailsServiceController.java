@@ -7,7 +7,7 @@ import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePrice;
-import ro.musiclover.manicureappointments.service.implementation.NailsCareService;
+import ro.musiclover.manicureappointments.service.NailsCareService;
 
 import javax.validation.Valid;
 import java.util.List;

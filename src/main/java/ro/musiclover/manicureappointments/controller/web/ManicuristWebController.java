@@ -11,7 +11,7 @@ import ro.musiclover.manicureappointments.model.manicurist.CreateManicuristReque
 import ro.musiclover.manicureappointments.model.IdRequest;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristRequest;
 import ro.musiclover.manicureappointments.model.manicurist.UpdateManicuristRequest;
-import ro.musiclover.manicureappointments.service.implementation.ManicuristService;
+import ro.musiclover.manicureappointments.service.ManicuristService;
 
 @RequiredArgsConstructor
 @Controller

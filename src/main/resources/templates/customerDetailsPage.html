@@ -36,7 +36,7 @@
     </li>
 </ul>
 
-<h2 class="text-success" th:bgcolor="green" th:object="${customer}">
+<h2 class="text-success" th:bgcolor="black" th:object="${customer}">
     <span th:text="${customer.firstName} + ' ' + ${customer.lastName}"></span>
 </h2>
 
@@ -46,8 +46,10 @@
         <th>Phone number</th>
         <th>Birth date</th>
         <th>Email</th>
+        <th>Status</th>
     </tr>
     </thead>
+
     <tbody th:object="${customer}">
     <tr>
         <td><span th:text="${customer.phoneNumber}"></span>
@@ -57,6 +59,7 @@
                 <button type="submit" class="btn btn-primary btn-sm">Change</button>
             </form>
         </td>
+
         <td><span th:text="${customer.birthDate}"></span>
             <form th:action="@{/customer/update-birthdate}" method="post">
                 <input type="hidden" name="id" th:value="${customer.id}">
@@ -70,6 +73,23 @@
                 <input type="text" name="email">
                 <button type="submit" class="btn btn-primary btn-sm">Change</button>
             </form>
+        </td>
+
+        <td><span th:if="${customer.active}"> ACTIVE </span>
+            <span th:unless="${customer.active}"> NOT ACTIVE </span>
+
+            <div class="form-check form-switch">
+                <form th:action="@{/customer/update-status}" method="post">
+                    <button type="submit" class="btn btn-primary btn-sm">Change</button>
+                    <input type="hidden" name="id" th:value="${customer.id}">
+                    <select class="form-select" aria-label="Default select example" name="active">
+                        <option> - status - </option>
+                        <option th:value="true"> Active </option>
+                        <option th:value="false"> Not Active </option>
+                    </select>
+                </form>
+            </div>
+
         </td>
     </tr>
     </tbody>

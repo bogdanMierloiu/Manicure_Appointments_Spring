@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ro.musiclover.manicureappointments.model.appointment.*;
-import ro.musiclover.manicureappointments.service.implementation.AppointmentService;
+import ro.musiclover.manicureappointments.service.AppointmentService;
 
 import javax.validation.Valid;
 import java.sql.Date;

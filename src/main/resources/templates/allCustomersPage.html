@@ -52,11 +52,8 @@
         <th>Id</th>
         <th>First Name</th>
         <th>Last name</th>
-        <th>Phone number</th>
-        <th>Birth Date</th>
-        <th>Email</th>
-        <th>Status</th>
-        <th></th>
+        <th>Appointments</th>
+        <th>Details</th>
         <th></th>
     </tr>
     </thead>
@@ -76,39 +73,6 @@
                 <input type="text" name="lastName">
                 <button type="submit" class="btn btn-primary btn-sm">Change</button>
             </form>
-        </td>
-        <td><span th:text="${customer.phoneNumber}">Phone Number</span>
-            <form th:action="@{/customer/update-phoneNumber}" method="post">
-                <input type="hidden" name="id" th:value="${customer.id}">
-                <input type="text" name="phoneNumber">
-                <button type="submit" class="btn btn-primary btn-sm">Change</button>
-            </form>
-        </td>
-        <td><span th:text="${customer.birthDate}">Birth Date</span>
-            <form th:action="@{/customer/update-birthdate}" method="post">
-                <input type="hidden" name="id" th:value="${customer.id}">
-                <input type="date" name="birthDate">
-                <button type="submit" class="btn btn-primary btn-sm">Change</button>
-            </form>
-        </td>
-        <td><span th:text="${customer.email}">Email</span>
-            <form th:action="@{/customer/update-email}" method="post">
-                <input type="hidden" name="id" th:value="${customer.id}">
-                <input type="text" name="email">
-                <button type="submit" class="btn btn-primary btn-sm">Change</button>
-            </form>
-        </td>
-        <td><span th:if="${customer.active}"> Active </span>
-            <span th:unless="${customer.active}"> Not active </span>
-            <div class="form-check form-switch">
-                <form th:action="@{customer/update-status}" method="post">
-                    <input type="hidden" name="id" th:value="${customer.id}">
-                    <input type="checkbox"
-                           th:checked="${customer.active}"
-                           name="active"
-                           class="form-check-input">
-                </form>
-            </div>
         </td>
         <td>
             <form th:action="@{/customer/findByFirstName}" >

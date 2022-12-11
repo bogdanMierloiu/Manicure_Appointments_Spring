@@ -7,7 +7,7 @@ import ro.musiclover.manicureappointments.model.customer.CustomerDetailResponse;
 import ro.musiclover.manicureappointments.model.customer.CustomerRequest;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
 import ro.musiclover.manicureappointments.model.customer.CustomerUpdateStatus;
-import ro.musiclover.manicureappointments.service.implementation.CustomerService;
+import ro.musiclover.manicureappointments.service.CustomerService;
 
 import javax.validation.Valid;
 import java.util.List;

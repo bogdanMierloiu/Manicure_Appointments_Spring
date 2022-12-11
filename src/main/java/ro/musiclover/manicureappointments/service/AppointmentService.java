@@ -1,4 +1,4 @@
-package ro.musiclover.manicureappointments.service.implementation;
+package ro.musiclover.manicureappointments.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,9 +12,9 @@ import ro.musiclover.manicureappointments.model.EmailDetails;
 import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
-import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse;
+
 import ro.musiclover.manicureappointments.repository.*;
-import ro.musiclover.manicureappointments.service.interfaces.EmailService;
+
 
 import java.sql.Date;
 import java.util.ArrayList;

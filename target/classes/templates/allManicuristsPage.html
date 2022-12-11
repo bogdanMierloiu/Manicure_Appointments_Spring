@@ -62,15 +62,15 @@
         <td><span th:text="${manicurist.phoneNumber}"> Phone Number </span></td>
         <td><span th:text="${manicurist.hireDate}"> Hire Date </span></td>
         <td>
-            <form th:action="@{/manicurist/delete}" th:object="${deleteRequest}" method="post">
-                <input type="hidden" name="id" th:value="${manicurist.id}">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-        </td>
-        <td>
             <form th:action="@{/manicurist/goToUpdateManicuristPage}">
                 <input type="hidden" name="id" th:value="${manicurist.id}">
                 <button type="submit" class="btn btn-info">Update</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/manicurist/delete}" th:object="${deleteRequest}" method="post">
+                <input type="hidden" name="id" th:value="${manicurist.id}">
+                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
         </td>
 

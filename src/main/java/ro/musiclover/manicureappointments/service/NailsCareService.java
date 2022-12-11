@@ -1,4 +1,4 @@
-package ro.musiclover.manicureappointments.service.implementation;
+package ro.musiclover.manicureappointments.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

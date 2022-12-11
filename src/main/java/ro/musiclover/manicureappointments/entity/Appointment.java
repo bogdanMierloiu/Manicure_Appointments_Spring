@@ -1,6 +1,7 @@
 package ro.musiclover.manicureappointments.entity;
 
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -11,6 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Audited
 @Getter
 @Setter
 @Builder

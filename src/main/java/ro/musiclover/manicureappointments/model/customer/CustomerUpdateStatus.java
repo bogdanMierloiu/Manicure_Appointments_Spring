@@ -6,6 +6,6 @@ import lombok.Data;
 public class CustomerUpdateStatus {
 
     private Integer id;
-    private Boolean active;
+    private String active;
 
 }
