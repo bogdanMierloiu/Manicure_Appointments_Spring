@@ -1,0 +1,32 @@
+body {
+    /*background-image: url("");*/
+
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+}
+
+img {
+    /*float: right;*/
+}
+
+.column {
+    /*float: left;*/
+    width: 33.33%;
+    padding: 5px;
+}
+
+/*.row:after{*/
+/*    content: "";*/
+/*    clear: both;*/
+/*    display: table;*/
+/*}*/
+.row {
+    display: flex;
+}
