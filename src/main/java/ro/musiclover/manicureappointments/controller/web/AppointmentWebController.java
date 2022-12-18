@@ -6,8 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ro.musiclover.manicureappointments.mapper.CustomerMapper;
-import ro.musiclover.manicureappointments.mapper.ManicuristMapper;
 import ro.musiclover.manicureappointments.model.UpdateRequest;
 import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.service.AppointmentService;
@@ -64,7 +62,10 @@ public class AppointmentWebController {
 
     @GetMapping("/appointment/findByDate")
     public String findByDate(@ModelAttribute(value = "dateRequest") FindByDateRequest request, Model model) {
-        model.addAttribute("appointments", appointmentService.findByAppointmentDate(request.getAppointmentDateTime()));
+        DateRequest dateRequest = DateRequest.builder()
+                .date(request.getAppointmentDateTime())
+                .build();
+        model.addAttribute("appointments", appointmentService.findByAppointmentByDate(dateRequest));
         return "resultAppointmentPage";
     }
 
@@ -81,7 +82,7 @@ public class AppointmentWebController {
     @PostMapping("/appointment/update-date")
     public String updateDate(@ModelAttribute(value = "updateDateRequest") RequestUpdateDate request,
                              Model model) {
-        appointmentService.updateAppointmentDate(request.getId(), request);
+        appointmentService.updateAppointmentDateTime(request);
         model.addAttribute("appointments", appointmentService.findAll());
         return "allAppointmentsPage";
     }

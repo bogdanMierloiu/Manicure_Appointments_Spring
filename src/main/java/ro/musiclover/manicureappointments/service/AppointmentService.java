@@ -16,9 +16,7 @@ import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseFor
 import ro.musiclover.manicureappointments.repository.*;
 
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -107,9 +105,8 @@ public class AppointmentService {
         );
     }
 
-
-    public List<AppointmentResponse> findByAppointmentDate(LocalDateTime date) {
-        return appointmentMapper.map(appointmentRepository.findByAppointmentDateTime(date));
+    public List<AppointmentResponse> findByAppointmentByDate(DateRequest date) {
+        return appointmentMapper.map(appointmentRepository.findByAppointmentDateBetween(date.getDate().atStartOfDay(), date.getDate().plusDays(1).atStartOfDay()));
     }
 
 
@@ -118,21 +115,22 @@ public class AppointmentService {
     }
 
 
-    public void updateAppointmentDate(Integer id, RequestUpdateDate requestUpdateDate) {
-        ro.musiclover.manicureappointments.entity.Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
+    public void updateAppointmentDateTime(RequestUpdateDate requestUpdateDate) {
+        for (Appointment appointment : appointmentRepository.findAll()) {
+            if (appointment.getAppointmentDateTime().equals(requestUpdateDate.getAppointmentDateTime())) {
+                throw new BusinessException("You already have an appointment at this date and time");
+            }
+        }
+        Appointment appointmentToUpdate = appointmentRepository.findById(requestUpdateDate.getId()).orElseThrow(
                 () -> new BusinessException("AppointmentResponse not found")
         );
         appointmentToUpdate.setAppointmentDateTime(requestUpdateDate.getAppointmentDateTime());
+        EmailDetails emailDetails = new EmailDetails();
+        emailDetails.setRecipient(appointmentToUpdate.getCustomer().getEmail());
+        emailDetails.setSubject("Appointment date&time changed");
+        emailDetails.setMsgBody("Your appointment is changed at: " + appointmentToUpdate.getAppointmentDateTime());
+        emailService.sendSimpleMail(emailDetails);
     }
-
-
-//    public void updateAppointmentTime(Integer id, RequestUpdateTime requestUpdateTime) {
-//        ro.musiclover.manicureappointments.entity.Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
-//                () -> new BusinessException("AppointmentResponse not found")
-//        );
-//        appointmentToUpdate.setAppointmentDateTime(requestUpdateTime.getAppointmentTime());
-//    }
-
 
     public void updateNailsServices(Integer id, RequestUpdateServices requestUpdateServices) {
         Appointment appointmentToUpdate = appointmentRepository.findById(id).orElseThrow(
@@ -168,6 +166,17 @@ public class AppointmentService {
 
     public List<AppointmentResponse> listBetween(LocalDateTime dateFrom, LocalDateTime dateTo) {
         return appointmentMapper.map(appointmentRepository.findByAppointmentDateBetween(dateFrom, dateTo));
+    }
+
+    public Integer revenueForPeriod(LocalDateTime dateFrom, LocalDateTime dateTo) {
+        List<Appointment> appointments = appointmentRepository.findByAppointmentDateBetween(dateFrom, dateTo);
+        Integer total = 0;
+        for (Appointment appointment : appointments) {
+            for (NailsCare nailsCare : appointment.getNailsCares()) {
+                total += nailsCare.getPrice();
+            }
+        }
+        return total;
     }
 
 

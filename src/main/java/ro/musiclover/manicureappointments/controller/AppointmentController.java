@@ -1,6 +1,5 @@
 package ro.musiclover.manicureappointments.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -8,8 +7,6 @@ import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.service.AppointmentService;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,30 +29,25 @@ public class AppointmentController {
     }
 
 
-    @GetMapping("find/date/{date}")
-    public List<AppointmentResponse> findByDate(@PathVariable LocalDateTime date) {
-        return appointmentService.findByAppointmentDate(date);
+    @GetMapping("find/date")
+    public List<AppointmentResponse> findByDate(@RequestBody DateRequest date) {
+        return appointmentService.findByAppointmentByDate(date);
     }
 
     @GetMapping("/find/between")
-    public List<AppointmentResponse> findBetween(@RequestBody DateRequest dateRequest) {
-        return appointmentService.listBetween(dateRequest.getDateFrom(), dateRequest.getDateTo());
+    public List<AppointmentResponse> findBetween(@RequestBody DateBetweenRequest dateBetweenRequest) {
+        return appointmentService.listBetween(dateBetweenRequest.getDateFrom(), dateBetweenRequest.getDateTo());
     }
 
-    @GetMapping("list")
+    @GetMapping("/list")
     public List<AppointmentResponse> findAll() {
         return appointmentService.findAll();
     }
 
-    @PatchMapping("update/date/{id}")
-    public void updateDate(@PathVariable Integer id, @RequestBody @Valid RequestUpdateDate requestUpdateDate) {
-        appointmentService.updateAppointmentDate(id, requestUpdateDate);
+    @PatchMapping("update/date")
+    public void updateDateTime(@RequestBody @Valid RequestUpdateDate requestUpdateDate) {
+        appointmentService.updateAppointmentDateTime(requestUpdateDate);
     }
-
-//    @PatchMapping("update/time/{id}")
-//    public void updateTime(@PathVariable Integer id, @RequestBody @Valid RequestUpdateTime requestUpdateTime) {
-//        appointmentService.updateAppointmentTime(id, requestUpdateTime);
-//    }
 
     @PatchMapping("update/services/{id}")
     public void updateServices(@PathVariable Integer id, @RequestBody RequestUpdateServices requestUpdateServices) {
@@ -70,6 +62,11 @@ public class AppointmentController {
     @DeleteMapping("delete/{id}")
     public void delete(@PathVariable Integer id) {
         appointmentService.delete(id);
+    }
+
+    @GetMapping("revenue")
+    public Integer revenueForPeriod(@RequestBody DateBetweenRequest dateBetweenRequest) {
+        return appointmentService.revenueForPeriod(dateBetweenRequest.getDateFrom(), dateBetweenRequest.getDateTo());
     }
 
 }
