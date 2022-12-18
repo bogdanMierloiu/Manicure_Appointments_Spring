@@ -27,11 +27,9 @@ public class ManicuristService {
         return manicuristMapper.map(manicuristRepository.save(manicurist));
     }
 
-
     public List<ManicuristResponse> allManicurists() {
         return manicuristMapper.map(manicuristRepository.findAll());
     }
-
 
     public ManicuristResponse findManicuristById(Integer id) {
         Manicurist manicurist = manicuristRepository.findById(id).orElseThrow(
@@ -40,7 +38,6 @@ public class ManicuristService {
         );
         return manicuristMapper.map(manicurist);
     }
-
 
     public void updateManicurist(ManicuristRequest manicuristRequest) {
         checkDuplicate(manicuristRequest);
@@ -55,7 +52,6 @@ public class ManicuristService {
         manicuristToUpdate.setPhoneNumber(manicuristRequest.getPhoneNumber());
         manicuristToUpdate.setHireDate(manicuristRequest.getHireDate());
     }
-
 
     public void deleteManicurist(Integer id) {
         Manicurist manicuristToDelete = manicuristRepository.findById(id).orElseThrow(

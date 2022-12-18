@@ -1,6 +1,7 @@
 package ro.musiclover.manicureappointments.mapper;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.processing.Generated;
@@ -13,10 +14,11 @@ import ro.musiclover.manicureappointments.model.appointment.AppointmentRequest;
 import ro.musiclover.manicureappointments.model.appointment.AppointmentResponse;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
+import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-18T11:52:11+0200",
+    date = "2022-12-18T14:41:40+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -49,7 +51,7 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         appointmentResponse.setManicurist( manicuristToManicuristResponseForAppointment( appointment.getManicurist() ) );
         appointmentResponse.setCustomer( customerToCustomerResponseForAppointment( appointment.getCustomer() ) );
         if ( appointmentResponse.getNailsCares() != null ) {
-            Set<NailsCare> set = appointment.getNailsCares();
+            Set<NailsCareResponse> set = nailsCareSetToNailsCareResponseSet( appointment.getNailsCares() );
             if ( set != null ) {
                 appointmentResponse.getNailsCares().addAll( set );
             }
@@ -97,5 +99,32 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         customerResponseForAppointment.setLastName( customer.getLastName() );
 
         return customerResponseForAppointment;
+    }
+
+    protected NailsCareResponse nailsCareToNailsCareResponse(NailsCare nailsCare) {
+        if ( nailsCare == null ) {
+            return null;
+        }
+
+        NailsCareResponse nailsCareResponse = new NailsCareResponse();
+
+        nailsCareResponse.setId( nailsCare.getId() );
+        nailsCareResponse.setServiceName( nailsCare.getServiceName() );
+        nailsCareResponse.setPrice( nailsCare.getPrice() );
+
+        return nailsCareResponse;
+    }
+
+    protected Set<NailsCareResponse> nailsCareSetToNailsCareResponseSet(Set<NailsCare> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<NailsCareResponse> set1 = new LinkedHashSet<NailsCareResponse>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( NailsCare nailsCare : set ) {
+            set1.add( nailsCareToNailsCareResponse( nailsCare ) );
+        }
+
+        return set1;
     }
 }

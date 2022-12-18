@@ -13,6 +13,7 @@ import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
 
+import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse;
 import ro.musiclover.manicureappointments.repository.*;
 
 
@@ -50,7 +51,7 @@ public class AppointmentService {
                 () -> new BusinessException("Customer not found"));
         appointmentToSave.setCustomer(customer);
 
-        List<NailsCare> nailsCares = new ArrayList<>();
+        Set<NailsCare> nailsCares = new HashSet<>();
         for (Integer id : appointmentRequest.getNailsServicesIds()) {
             NailsCare nailsCare = nailsCareRepository.findById(id).orElseThrow(
                     () -> new BusinessException("NailsServiceWebController not found")
@@ -59,42 +60,13 @@ public class AppointmentService {
         }
         appointmentToSave.getNailsCares().addAll(nailsCares);
 
-        appointmentRepository.save(appointmentToSave);
-
-        AppointmentResponse appointmentForResponse = new AppointmentResponse();
-
-        appointmentForResponse.setId(appointmentToSave.getId());
-        appointmentForResponse.setAppointmentDateTime(appointmentToSave.getAppointmentDateTime());
-
-
-        ManicuristResponseForAppointment manicuristResponse = new ManicuristResponseForAppointment();
-        manicuristResponse.setFirstName(appointmentToSave.getManicurist().getFirstName());
-        manicuristResponse.setLastName(appointmentToSave.getManicurist().getLastName());
-
-        CustomerResponseForAppointment customerResponse = new CustomerResponseForAppointment();
-        customerResponse.setId(appointmentToSave.getCustomer().getId());
-        customerResponse.setFirstName(appointmentToSave.getCustomer().getFirstName());
-        customerResponse.setLastName(appointmentToSave.getCustomer().getLastName());
-
-        List<NailsCare> serviceResponses = new ArrayList<>();
-        for (NailsCare nailsCare : appointmentToSave.getNailsCares()) {
-            NailsCare nailsCareResponse = new NailsCare();
-            nailsCareResponse.setId(nailsCare.getId());
-            nailsCareResponse.setServiceName(nailsCare.getServiceName());
-            nailsCareResponse.setPrice(nailsCare.getPrice());
-            serviceResponses.add(nailsCareResponse);
-        }
-
-        appointmentForResponse.setManicurist(manicuristResponse);
-        appointmentForResponse.setCustomer(customerResponse);
-        appointmentForResponse.getNailsCares().addAll(serviceResponses);
-
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setRecipient(customer.getEmail());
         emailDetails.setSubject("Appointment confirmed");
         emailDetails.setMsgBody("Your appointment is confirmed at: " + appointmentToSave.getAppointmentDateTime());
-        emailService.sendSimpleMail(emailDetails);
-        return appointmentForResponse;
+//        emailService.sendSimpleMail(emailDetails);
+
+        return appointmentMapper.map(appointmentRepository.save(appointmentToSave));
     }
 
 
@@ -129,7 +101,7 @@ public class AppointmentService {
         emailDetails.setRecipient(appointmentToUpdate.getCustomer().getEmail());
         emailDetails.setSubject("Appointment date&time changed");
         emailDetails.setMsgBody("Your appointment is changed at: " + appointmentToUpdate.getAppointmentDateTime());
-        emailService.sendSimpleMail(emailDetails);
+//        emailService.sendSimpleMail(emailDetails);
     }
 
     public void updateNailsServices(Integer id, RequestUpdateServices requestUpdateServices) {

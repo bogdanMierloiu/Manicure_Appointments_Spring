@@ -1,7 +1,9 @@
 ro\musiclover\manicureappointments\mapper\ManicuristMapperImpl.class
 ro\musiclover\manicureappointments\model\customer\CustomerResponse.class
 ro\musiclover\manicureappointments\model\customer\RequestUpdatePhoneNumberCustomer.class
+ro\musiclover\manicureappointments\model\appointment\DateBetweenRequest.class
 ro\musiclover\manicureappointments\model\manicurist\ManicuristRequest.class
+ro\musiclover\manicureappointments\model\appointment\DateRequest$DateRequestBuilder.class
 ro\musiclover\manicureappointments\controller\web\WelcomeController.class
 ro\musiclover\manicureappointments\mapper\CustomerMapper.class
 ro\musiclover\manicureappointments\controller\web\AppointmentWebController.class
