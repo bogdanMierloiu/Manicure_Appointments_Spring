@@ -1,32 +1,96 @@
-body {
-    /*background-image: url("");*/
+* {
+    box-sizing: border-box;
+    font-family: "Times New Roman", sans-serif;
+}
 
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
+html, body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
     background-size: cover;
+    background: hotpink;
+    box-sizing: border-box;
+}
+
+ul {
+    padding: 2px;
+    margin: 5px;
 }
 
 h1 {
-    color: black;
-    text-align: center;
+    font-family: "Harlow Solid Italic", serif;
+    font-size: 3em;
+    letter-spacing: -2px;
+    padding-left: 10px;
+    margin: 1px;
+}
+h2 {
+    font-family: "Georgia", serif;
+    font-size: 2em;
+    margin: 5px;
 }
 
-img {
-    /*float: right;*/
+
+form {
+    width: 100%;
+    padding: 2px 2px;
+    margin: 1px 0;
+    box-sizing: border-box;
+}
+
+div {
+    padding: 1px;
+    margin: 5px;
 }
 
 .column {
-    /*float: left;*/
     width: 33.33%;
     padding: 5px;
 }
 
-/*.row:after{*/
-/*    content: "";*/
-/*    clear: both;*/
-/*    display: table;*/
-/*}*/
 .row {
     display: flex;
+}
+
+.button {
+    height: 10px;
+    width: 50px;
+    margin: 0 35px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    background: #111;
+    color: #fff;
+    font-size: 20px;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+button:first-child:hover {
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+    background-size: 500%;
+}
+
+button:last-child:hover {
+    background: linear-gradient(90deg, #fa7199, #f5ce62, #e43603, #fa7199);
+    background-size: 500%;
+}
+input::placeholder {
+    color: gray;
+}
+.inputs {
+    text-align: left;
+    margin-top: 30px;
+}
+
+.container {
+    position: relative;
+    width: 350px;
+    height: 500px;
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+    background: #ecf0f3;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
 }

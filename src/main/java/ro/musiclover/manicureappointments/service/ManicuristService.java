@@ -20,7 +20,6 @@ public class ManicuristService {
     private final ManicuristRepository manicuristRepository;
     private final ManicuristMapper manicuristMapper;
 
-
     public ManicuristResponse createManicurist(ManicuristRequest manicuristRequest) {
         checkDuplicate(manicuristRequest);
         validatePhoneNumber(manicuristRequest.getPhoneNumber());
@@ -43,12 +42,12 @@ public class ManicuristService {
     }
 
 
-    public void updateManicurist(Integer id, ManicuristRequest manicuristRequest) {
+    public void updateManicurist(ManicuristRequest manicuristRequest) {
         checkDuplicate(manicuristRequest);
         validatePhoneNumber(manicuristRequest.getPhoneNumber());
-        Manicurist manicuristToUpdate = manicuristRepository.findById(id).orElseThrow(
+        Manicurist manicuristToUpdate = manicuristRepository.findById(manicuristRequest.getId()).orElseThrow(
                 () -> new BusinessException(
-                        String.format("The manicurist with id: %s not exist", id)
+                        String.format("The manicurist with id: %s not exist", manicuristRequest.getId())
                 )
         );
         manicuristToUpdate.setFirstName(manicuristRequest.getFirstName());

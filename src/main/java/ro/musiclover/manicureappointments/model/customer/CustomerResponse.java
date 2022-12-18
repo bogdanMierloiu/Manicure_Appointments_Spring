@@ -1,6 +1,6 @@
 package ro.musiclover.manicureappointments.model.customer;
 import lombok.Data;
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 public class CustomerResponse {

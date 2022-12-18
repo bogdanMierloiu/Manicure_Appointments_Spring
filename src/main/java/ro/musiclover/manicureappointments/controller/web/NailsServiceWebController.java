@@ -39,14 +39,14 @@ public class NailsServiceWebController {
 
     @PostMapping("nails-service/update-name")
     public String updateServiceName(@ModelAttribute(value = "updateNameRequest") RequestUpdateName request, Model model) {
-        nailsService.updateServiceName(request.getId(), request);
+        nailsService.updateServiceName(request);
         model.addAttribute("services", nailsService.allServices());
         return "allNailsServicesPage";
     }
 
     @PostMapping("nails-service/update-price")
     public String updateServicePrice(@ModelAttribute(value = "updatePriceRequest") RequestUpdatePrice request, Model model) {
-        nailsService.updateServicePrice(request.getId(), request);
+        nailsService.updateServicePrice(request);
         model.addAttribute("services", nailsService.allServices());
         return "allNailsServicesPage";
     }

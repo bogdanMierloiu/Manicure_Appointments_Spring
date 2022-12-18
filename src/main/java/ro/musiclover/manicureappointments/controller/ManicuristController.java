@@ -35,9 +35,9 @@ public class ManicuristController {
         return manicuristService.findManicuristById(id);
     }
 
-    @PatchMapping("/update/{id}")
-    public void updateManicurist(@PathVariable Integer id, @RequestBody @Valid ManicuristRequest manicuristRequest) {
-        manicuristService.updateManicurist(id, manicuristRequest);
+    @PatchMapping("/update")
+    public void updateManicurist(@RequestBody @Valid ManicuristRequest manicuristRequest) {
+        manicuristService.updateManicurist(manicuristRequest);
     }
 
     @DeleteMapping("/delete/{id}")

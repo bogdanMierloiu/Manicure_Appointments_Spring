@@ -1,18 +1,14 @@
 package ro.musiclover.manicureappointments.model.appointment;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -21,18 +17,14 @@ import java.time.LocalTime;
 public class AppointmentRequest {
 
     private Integer id;
-
-    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @Future(message = "Please check the date")
-    private Date appointmentDate;
-
-    @NotNull
-    private LocalTime appointmentTime;
+    private LocalDateTime appointmentDateTime;
 
     private Integer manicuristId;
 
     private Integer customerId;
 
-    private int[] nailsServicesIds;
+    private List<Integer> nailsServicesIds;
 
 }

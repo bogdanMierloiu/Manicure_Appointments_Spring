@@ -7,8 +7,8 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link th:href="@{/css/index.css}" rel="stylesheet">
     <style>
-        body{
-            background-image: url(/images/background4.jpg);
+        body {
+            background-image: url(/images/background2.jpg);
         }
     </style>
 </head>
@@ -41,64 +41,34 @@
         </form>
     </li>
 </ul>
-<!--<div class="row">>-->
-<!--    <div class="column">-->
-<!--        <img th:src="@{/images/background1.jpg}" style="width: 25%" alt="No image found">-->
-<!--    </div>-->
-<!--    <div class="column">-->
-<!--        <img th:src="@{/images/background2.jpg}" style="width: 25%"  alt="No image found">-->
-<!--    </div>-->
-<!--    <div class="column">-->
-<!--        <img th:src="@{/images/background3.jpg}" style="width: 25%"  alt="No image found">-->
-<!--    </div>-->
-<!--    <div class="column">-->
-<!--        <img th:src="@{/images/background4.jpg}" style="width: 25%"  alt="No image found">-->
-<!--    </div>-->
-<!--    <div class="column">-->
-<!--        <img th:src="@{/images/background5.jpg}" style="width: 25%"alt="No image found">-->
-<!--    </div>-->
-<!--    <div class="column">-->
-<!--        <img th:src="@{/images/background6.jpg}" style="width: 25%" alt="No image found">-->
-<!--    </div>-->
-<!--    <div class="column">-->
-<!--        <img th:src="@{/images/background7.jpg}" style="width: 25%" alt="No image found">-->
-<!--    </div>-->
-<!--    <div class="column">-->
-<!--        <img th:src="@{/images/background8.jpg}" style="width: 25%" alt="No image found">-->
-<!--    </div>-->
-<!--</div>-->
+
 
 <h1>Welcome to your Appointments Management app</h1>
 
-<form th:action="@{/appointment/allAppointments}">
-    <button type="submit" class="btn btn-success">View all appointments</button>
-</form>
 
 <form th:action="@{/appointment/goToCreateAppointmentPage}">
-    <button type="submit" class="btn btn-success"> Add new appointment</button>
+    <div class="buttons">
+        <button type="submit" class="btn btn-success"> + Add new appointment</button>
+    </div>
 </form>
 
-<form th:action="@{/appointment/findByDate}">
-    <button type="submit" class="btn btn-success"> Search appointment by date</button>
-    <input type="date" name="appointmentDate">
+<form th:action="@{/appointment/allAppointments}">
+    <div class="buttons">
+        <button type="submit" class="btn btn-success">View all appointments</button>
+    </div>
+</form>
+
+
+<form th:action="@{/customer/goToCreateCustomerPage}">
+    <div class="buttons">
+        <button type="submit" class="btn btn-success"> + Add new customer</button>
+    </div>
 </form>
 
 <form th:action="@{/customer/allCustomers}">
-    <button type="submit" class="btn btn-success"> View all customers</button>
+    <div class="buttons">
+        <button type="submit" class="btn btn-success"> View all customers</button>
+    </div>
 </form>
-
-<form th:action="@{/customer/goToCreateCustomerPage}">
-    <button type="submit" class="btn btn-success"> Add new customer</button>
-</form>
-
-<form th:action="@{/customer/findByFirstName}">
-    <button type="submit" class="btn btn-success"> Find Customer by first name</button>
-    <input type="text" name="firstName" placeholder="First name">
-</form>
-
-<form th:action="@{/nails-service/goToCreateServicePage}">
-    <button type="submit" class="btn btn-success"> Add new service</button>
-</form>
-
 </body>
 </html>

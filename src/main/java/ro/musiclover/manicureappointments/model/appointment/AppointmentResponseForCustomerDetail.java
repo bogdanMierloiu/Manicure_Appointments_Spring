@@ -1,24 +1,21 @@
 package ro.musiclover.manicureappointments.model.appointment;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCustomerDetail;
 
-import java.sql.Date;
+import javax.validation.constraints.Future;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.time.LocalTime;
 import java.util.List;
 
 @Data
-public class AppointmentResponseForCustomerDetail implements Comparable<AppointmentResponseForCustomerDetail>{
+public class AppointmentResponseForCustomerDetail{
 
-    private Date appointmentDate;
-
-    private LocalTime appointmentTime;
+    private LocalDateTime appointmentDateTime;
 
     private List<NailsServiceForCustomerDetail> nailsServices;
 
 
-    @Override
-    public int compareTo(AppointmentResponseForCustomerDetail o) {
-        return getAppointmentDate().compareTo(o.appointmentDate);
-    }
 }

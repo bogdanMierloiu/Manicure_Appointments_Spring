@@ -1,5 +1,6 @@
 package ro.musiclover.manicureappointments.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +8,8 @@ import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.service.AppointmentService;
 
 import javax.validation.Valid;
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -31,9 +33,15 @@ public class AppointmentController {
 
 
     @GetMapping("find/date/{date}")
-    public List<AppointmentResponse> findByDate(@PathVariable Date date){
+    public List<AppointmentResponse> findByDate(@PathVariable LocalDateTime date) {
         return appointmentService.findByAppointmentDate(date);
     }
+
+    @GetMapping("/find/between")
+    public List<AppointmentResponse> findBetween(@RequestBody DateRequest dateRequest) {
+        return appointmentService.listBetween(dateRequest.getDateFrom(), dateRequest.getDateTo());
+    }
+
     @GetMapping("list")
     public List<AppointmentResponse> findAll() {
         return appointmentService.findAll();
@@ -44,10 +52,10 @@ public class AppointmentController {
         appointmentService.updateAppointmentDate(id, requestUpdateDate);
     }
 
-    @PatchMapping("update/time/{id}")
-    public void updateTime(@PathVariable Integer id, @RequestBody @Valid RequestUpdateTime requestUpdateTime) {
-        appointmentService.updateAppointmentTime(id, requestUpdateTime);
-    }
+//    @PatchMapping("update/time/{id}")
+//    public void updateTime(@PathVariable Integer id, @RequestBody @Valid RequestUpdateTime requestUpdateTime) {
+//        appointmentService.updateAppointmentTime(id, requestUpdateTime);
+//    }
 
     @PatchMapping("update/services/{id}")
     public void updateServices(@PathVariable Integer id, @RequestBody RequestUpdateServices requestUpdateServices) {

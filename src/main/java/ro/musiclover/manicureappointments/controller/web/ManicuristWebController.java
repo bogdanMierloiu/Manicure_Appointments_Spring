@@ -47,12 +47,13 @@ public class ManicuristWebController {
     public String updateManicurist(@ModelAttribute(value = "updateManicuristRequest") UpdateManicuristRequest request,
                                    Model model) {
         ManicuristRequest manicuristRequest = ManicuristRequest.builder()
+                .id(request.getId())
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .phoneNumber(request.getPhoneNumber())
                 .hireDate(request.getHireDate())
                 .build();
-        manicuristService.updateManicurist(request.getId(), manicuristRequest);
+        manicuristService.updateManicurist(manicuristRequest);
 
         model.addAttribute("manicurists", manicuristService.allManicurists());
         return "allManicuristsPage";

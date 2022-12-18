@@ -1,13 +1,14 @@
 package ro.musiclover.manicureappointments.entity;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.*;
 import org.hibernate.envers.Audited;
-
 import javax.persistence.*;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,19 +19,17 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+
 public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @NotNull
+//    @JsonDeserialize(using = LocalDateDeserializer.class)
+//    @JsonSerialize(using = LocalDateSerializer.class)
+//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Future(message = "Please check the date")
-    private Date appointmentDate;
-
-    @NotNull
-    private LocalTime appointmentTime;
+    private LocalDateTime appointmentDateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Manicurist manicurist;

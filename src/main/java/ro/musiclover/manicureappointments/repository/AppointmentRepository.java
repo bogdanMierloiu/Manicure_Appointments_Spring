@@ -4,16 +4,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ro.musiclover.manicureappointments.entity.Appointment;
-import ro.musiclover.manicureappointments.model.appointment.AppointmentResponse;
 
-import java.sql.Date;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
-public interface AppointmentRepository extends JpaRepository<ro.musiclover.manicureappointments.entity.Appointment, Integer> {
-//    @Query("select t from Appointment t where t.appointmentDate = :date")
-//    List<Appointment> findByAppointmentDate(@Param("date") Date date);
+public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
-    List<Appointment> findAllByOrderByAppointmentDateDesc();
+    List<Appointment> findAllByOrderByAppointmentDateTimeDesc();
 
-    List<Appointment> findByAppointmentDate(Date date);
+    List<Appointment> findByAppointmentDateTime(LocalDateTime date);
+
+    @Query("select t from Appointment t where t.appointmentDateTime BETWEEN :startDate AND :endDate")
+    List<Appointment> findByAppointmentDateBetween(
+            @Param("startDate") LocalDateTime dateFrom,
+            @Param("endDate") LocalDateTime dateTo);
 }

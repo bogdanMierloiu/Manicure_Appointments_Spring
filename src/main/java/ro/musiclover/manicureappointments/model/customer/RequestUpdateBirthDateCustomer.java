@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.validation.constraints.Past;
-import java.sql.Date;
+import java.util.Date;
 
 
 @Data

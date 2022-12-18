@@ -64,17 +64,19 @@ public class NailsCareService {
         return serviceListForResponse;
     }
 
-    public void updateServicePrice(Integer id, RequestUpdatePrice requestUpdatePrice) {
-        NailsCare nailsCareToUpdate = nailsCareRepository.findById(id).orElseThrow(
-                () -> new BusinessException(String.format("The service with id: %s not exist", id))
+    public void updateServicePrice(RequestUpdatePrice requestUpdatePrice) {
+        NailsCare nailsCareToUpdate = nailsCareRepository.findById(requestUpdatePrice.getId()).orElseThrow(
+                () -> new BusinessException(String.format(
+                        "The service with id: %s not exist", requestUpdatePrice.getId()))
         );
         nailsCareToUpdate.setPrice(requestUpdatePrice.getPrice());
     }
 
 
-    public void updateServiceName(Integer id, RequestUpdateName requestUpdateName) {
-        NailsCare nailsCareToUpdate = nailsCareRepository.findById(id).orElseThrow(
-                () -> new BusinessException(String.format("The service with id: %s not exist", id))
+    public void updateServiceName(RequestUpdateName requestUpdateName) {
+        NailsCare nailsCareToUpdate = nailsCareRepository.findById(requestUpdateName.getId()).orElseThrow(
+                () -> new BusinessException(String.format(
+                        "The service with id: %s not exist", requestUpdateName.getId()))
         );
         nailsCareToUpdate.setServiceName(requestUpdateName.getServiceName());
     }

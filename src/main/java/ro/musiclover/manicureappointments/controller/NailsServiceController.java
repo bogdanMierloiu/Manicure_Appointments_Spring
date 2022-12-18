@@ -39,14 +39,14 @@ public class NailsServiceController {
     public List<NailsCareResponse> findByServiceName(@PathVariable String name){
         return nailsCareService.findByServiceName(name);
     }
-    @PatchMapping("update-price/{id}")
-    public void updateServicePrice(@PathVariable Integer id, @RequestBody @Valid RequestUpdatePrice requestUpdatePrice) {
-        nailsCareService.updateServicePrice(id, requestUpdatePrice);
+    @PatchMapping("update-price")
+    public void updateServicePrice(@RequestBody @Valid RequestUpdatePrice requestUpdatePrice) {
+        nailsCareService.updateServicePrice(requestUpdatePrice);
     }
 
-    @PatchMapping("update-name/{id}")
-    public void updateServiceName(@PathVariable Integer id, @RequestBody @Valid RequestUpdateName requestUpdateName) {
-        nailsCareService.updateServiceName(id, requestUpdateName);
+    @PatchMapping("update-name")
+    public void updateServiceName(@RequestBody @Valid RequestUpdateName requestUpdateName) {
+        nailsCareService.updateServiceName(requestUpdateName);
     }
 
     @DeleteMapping("delete/{id}")

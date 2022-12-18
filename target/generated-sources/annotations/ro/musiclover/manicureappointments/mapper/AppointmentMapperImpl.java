@@ -1,6 +1,5 @@
 package ro.musiclover.manicureappointments.mapper;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +16,7 @@ import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseFor
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-12T01:36:50+0200",
+    date = "2022-12-18T11:52:11+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -32,10 +31,7 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         Appointment.AppointmentBuilder appointment = Appointment.builder();
 
         appointment.id( appointmentRequest.getId() );
-        if ( appointmentRequest.getAppointmentDate() != null ) {
-            appointment.appointmentDate( new Date( appointmentRequest.getAppointmentDate().getTime() ) );
-        }
-        appointment.appointmentTime( appointmentRequest.getAppointmentTime() );
+        appointment.appointmentDateTime( appointmentRequest.getAppointmentDateTime() );
 
         return appointment.build();
     }
@@ -48,9 +44,8 @@ public class AppointmentMapperImpl implements AppointmentMapper {
 
         AppointmentResponse appointmentResponse = new AppointmentResponse();
 
+        appointmentResponse.setAppointmentDateTime( appointment.getAppointmentDateTime() );
         appointmentResponse.setId( appointment.getId() );
-        appointmentResponse.setAppointmentDate( appointment.getAppointmentDate() );
-        appointmentResponse.setAppointmentTime( appointment.getAppointmentTime() );
         appointmentResponse.setManicurist( manicuristToManicuristResponseForAppointment( appointment.getManicurist() ) );
         appointmentResponse.setCustomer( customerToCustomerResponseForAppointment( appointment.getCustomer() ) );
         if ( appointmentResponse.getNailsCares() != null ) {

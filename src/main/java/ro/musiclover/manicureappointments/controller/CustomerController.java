@@ -55,7 +55,6 @@ public class CustomerController {
         customerService.updateCustomer(id, customerRequest);
     }
 
-
     @PatchMapping("update/status/{id}")
     public void updateStatus(@PathVariable Integer id, @RequestBody CustomerUpdateStatus customerUpdateStatus) {
         customerService.updateStatus(id, customerUpdateStatus);

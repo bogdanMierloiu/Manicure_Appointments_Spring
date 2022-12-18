@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+
 public class Customer {
 
     @Id

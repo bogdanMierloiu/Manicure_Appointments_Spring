@@ -75,8 +75,7 @@ public class CustomerService {
 
         for (Appointment appointment : customer.getAppointments()) {
             AppointmentResponseForCustomerDetail appointmentResponse = new AppointmentResponseForCustomerDetail();
-            appointmentResponse.setAppointmentDate(appointment.getAppointmentDate());
-            appointmentResponse.setAppointmentTime(appointment.getAppointmentTime());
+            appointmentResponse.setAppointmentDateTime(appointment.getAppointmentDateTime());
             appointmentResponse.setNailsServices(new ArrayList<>());
             for (NailsCare nailsCare : appointment.getNailsCares()) {
                 NailsServiceForCustomerDetail nailsServiceForCustomerDetail = new NailsServiceForCustomerDetail();
@@ -102,8 +101,7 @@ public class CustomerService {
             customerDetailResponse.setAppointments(new ArrayList<>());    // aici este gol
             for (Appointment appointment : customer.getAppointments()) {
                 AppointmentResponseForCustomerDetail appointmentResponseForCustomerDetail = new AppointmentResponseForCustomerDetail();
-                appointmentResponseForCustomerDetail.setAppointmentDate(appointment.getAppointmentDate());
-                appointmentResponseForCustomerDetail.setAppointmentTime(appointment.getAppointmentTime());
+                appointmentResponseForCustomerDetail.setAppointmentDateTime(appointment.getAppointmentDateTime());
                 appointmentResponseForCustomerDetail.setNailsServices(new ArrayList<>());
                 for (NailsCare nailsCare : appointment.getNailsCares()) {
                     NailsServiceForCustomerDetail nailsServiceForCustomerDetail = new NailsServiceForCustomerDetail();
