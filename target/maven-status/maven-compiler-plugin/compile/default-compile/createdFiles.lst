@@ -33,6 +33,7 @@ ro\musiclover\manicureappointments\model\nails_services\RequestUpdatePrice.class
 ro\musiclover\manicureappointments\service\ManicuristService.class
 ro\musiclover\manicureappointments\service\EmailService.class
 ro\musiclover\manicureappointments\controller\web\ManicuristWebController.class
+ro\musiclover\manicureappointments\controller\web\RevenueController.class
 ro\musiclover\manicureappointments\model\appointment\RequestUpdateServices$RequestUpdateServicesBuilder.class
 ro\musiclover\manicureappointments\model\appointment\RequestUpdateDate.class
 ro\musiclover\manicureappointments\mapper\ManicuristMapper.class
@@ -63,6 +64,7 @@ ro\musiclover\manicureappointments\model\customer\RequestUpdateBirthDateCustomer
 ro\musiclover\manicureappointments\controller\web\NailsServiceWebController.class
 ro\musiclover\manicureappointments\entity\Customer.class
 ro\musiclover\manicureappointments\service\AppointmentService.class
+ro\musiclover\manicureappointments\model\appointment\DateBetweenRequest$DateBetweenRequestBuilder.class
 ro\musiclover\manicureappointments\mapper\AppointmentMapper.class
 ro\musiclover\manicureappointments\model\appointment\RequestUpdateServicesForWeb.class
 ro\musiclover\manicureappointments\exception\CustomExceptionHandler.class
@@ -78,12 +80,14 @@ ro\musiclover\manicureappointments\entity\NailsCare.class
 ro\musiclover\manicureappointments\model\customer\CustomerRequest.class
 ro\musiclover\manicureappointments\mapper\NailsServiceMapper.class
 ro\musiclover\manicureappointments\model\customer\CustomerDetailResponse.class
+ro\musiclover\manicureappointments\model\appointment\DateBetweenRequestForWeb.class
 ro\musiclover\manicureappointments\mapper\CustomerMapperImpl.class
 ro\musiclover\manicureappointments\entity\Manicurist.class
 ro\musiclover\manicureappointments\model\customer\CreateCustomerRequest.class
 ro\musiclover\manicureappointments\entity\Customer$CustomerBuilder.class
 ro\musiclover\manicureappointments\model\appointment\RequestUpdateCustomer.class
 ro\musiclover\manicureappointments\model\manicurist\UpdateManicuristRequest.class
+ro\musiclover\manicureappointments\model\appointment\DateBetweenRequestForWeb$DateBetweenRequestForWebBuilder.class
 ro\musiclover\manicureappointments\model\nails_services\NailsServiceRequest.class
 ro\musiclover\manicureappointments\model\nails_services\NailsServiceRequest$NailsServiceRequestBuilder.class
 ro\musiclover\manicureappointments\model\appointment\DateRequest.class

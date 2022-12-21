@@ -40,21 +40,29 @@
 <h2> Choose an option </h2>
 
 <form th:action="@{/appointment/allAppointments}">
+    <div>
     <button type="submit" class="btn btn-primary btn-lg">View all appointments</button>
+    </div>
 </form>
 
 <form th:action="@{/appointment/goToCreateAppointmentPage}">
-    <button type="submit" class="btn btn-primary btn-lg"> Add new appointment</button>
+    <div>
+        <button type="submit" class="btn btn-primary btn-lg"> Add new appointment</button>
+    </div>
 </form>
 <form th:action="@{/appointment/findByDate}">
-    <button type="submit" class="btn btn-primary btn-lg"> Search</button>
-    <input type="date" name="appointmentDate">
+    <div>
+        <button type="submit" class="btn btn-success"> Search</button>
+        <input type="date" name="date">
+    </div>
 </form>
 
 <form th:action="@{/appointment/listBetween}">
-    <button type="submit" class="btn btn-success">Search</button>
-    <input type="date" name="appointmentDate">
-    <input type="date" name="appointmentDate">
+    <div>
+        <button type="submit" class="btn btn-success">Search</button>
+        <input type="date" name="dateFrom">
+        <input type="date" name="dateTo">
+    </div>
 </form>
 
 </body>

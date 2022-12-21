@@ -71,8 +71,6 @@ public class NailsCareService {
         );
         nailsCareToUpdate.setPrice(requestUpdatePrice.getPrice());
     }
-
-
     public void updateServiceName(RequestUpdateName requestUpdateName) {
         NailsCare nailsCareToUpdate = nailsCareRepository.findById(requestUpdateName.getId()).orElseThrow(
                 () -> new BusinessException(String.format(
@@ -80,14 +78,12 @@ public class NailsCareService {
         );
         nailsCareToUpdate.setServiceName(requestUpdateName.getServiceName());
     }
-
     public void deleteService(Integer id) {
         NailsCare nailsCareToDelete = nailsCareRepository.findById(id).orElseThrow(
                 () -> new BusinessException(String.format("The service with id: %s not exist", id))
         );
         nailsCareRepository.delete(nailsCareToDelete);
     }
-
     public void checkDuplicate(NailsServiceRequest nailsServiceRequest) {
         for (NailsCare nailsCare : nailsCareRepository.findAll()) {
             if (nailsCare.getServiceName().equals(nailsServiceRequest.getServiceName())) {

@@ -13,13 +13,19 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class DateRequest {
+@NoArgsConstructor
+public class DateBetweenRequestForWeb {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Future(message = "Please check the date")
-    private LocalDate date;
+    private LocalDate dateFrom;
+
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Future(message = "Please check the date")
+    private LocalDate dateTo;
+
 
 }

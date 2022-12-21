@@ -64,9 +64,14 @@ public class AppointmentController {
         appointmentService.delete(id);
     }
 
-    @GetMapping("revenue")
+    @GetMapping("revenue/period")
     public Integer revenueForPeriod(@RequestBody DateBetweenRequest dateBetweenRequest) {
-        return appointmentService.revenueForPeriod(dateBetweenRequest.getDateFrom(), dateBetweenRequest.getDateTo());
+        return appointmentService.revenueForPeriod(dateBetweenRequest);
+    }
+
+    @GetMapping("revenue/day")
+    public Integer revenueForDay(@RequestBody DateRequest dateRequest) {
+        return appointmentService.revenueForDay(dateRequest);
     }
 
 }

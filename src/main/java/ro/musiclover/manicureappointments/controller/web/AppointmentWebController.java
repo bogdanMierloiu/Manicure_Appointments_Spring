@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ro.musiclover.manicureappointments.model.IdRequest;
 import ro.musiclover.manicureappointments.model.UpdateRequest;
 import ro.musiclover.manicureappointments.model.appointment.*;
 import ro.musiclover.manicureappointments.service.AppointmentService;
@@ -35,7 +36,6 @@ public class AppointmentWebController {
         return "allAppointmentsPage";
     }
 
-
     @GetMapping("/appointment/goToCreateAppointmentPage")
     public String goToCreateAppointmentPage(Model model) {
         model.addAttribute("manicurists", manicuristService.allManicurists());
@@ -63,21 +63,19 @@ public class AppointmentWebController {
     @GetMapping("/appointment/findByDate")
     public String findByDate(@ModelAttribute(value = "dateRequest") FindByDateRequest request, Model model) {
         DateRequest dateRequest = DateRequest.builder()
-                .date(request.getAppointmentDateTime())
+                .date(request.getDate())
                 .build();
         model.addAttribute("appointments", appointmentService.findByAppointmentByDate(dateRequest));
         return "resultAppointmentPage";
     }
 
-//    @GetMapping("/appointment/listBetween")
-//    public String listBetween(@ModelAttribute(value = "dateFrom") FindByDateRequest dateFrom,
-//                              @ModelAttribute(value = "dateTo") FindByDateRequest dateTo,
-//                              Model model) {
-//        model.addAttribute("appointmentsBetween", appointmentService.listBetween(
-//                dateFrom.getAppointmentDate(),
-//                dateTo.getAppointmentDate()));
-//        return "appointmentBetweenPage";
-//    }
+    @GetMapping("/appointment/listBetween")
+    public String listBetween(@ModelAttribute(value = "dateRequest") DateBetweenRequestForWeb request,
+                              Model model) {
+        model.addAttribute("appointmentsBetween", appointmentService.listBetween(
+                request.getDateFrom().atStartOfDay(), request.getDateTo().plusDays(1).atStartOfDay()));
+        return "appointmentBetweenPage";
+    }
 
     @PostMapping("/appointment/update-date")
     public String updateDate(@ModelAttribute(value = "updateDateRequest") RequestUpdateDate request,
@@ -86,14 +84,6 @@ public class AppointmentWebController {
         model.addAttribute("appointments", appointmentService.findAll());
         return "allAppointmentsPage";
     }
-
-//    @PostMapping("/appointment/update-time")
-//    public String updateTime(@ModelAttribute(value = "updateTimeRequest") RequestUpdateTime request,
-//                             Model model) {
-//        appointmentService.updateAppointmentTime(request.getId(), request);
-//        model.addAttribute("appointments", appointmentService.findAll());
-//        return "allAppointmentsPage";
-//    }
 
     @PostMapping("/appointment/update-customer")
     public String updateCustomer(@ModelAttribute(value = "updateCustomerRequest") RequestUpdateCustomer request,
@@ -119,5 +109,12 @@ public class AppointmentWebController {
         model.addAttribute("appointmentId", request.getId());
         model.addAttribute("servicesFromDB", nailsService.allServices());
         return "updateServicesPage";
+    }
+
+    @GetMapping("/appointment/delete")
+    public String delete(@ModelAttribute(value = "deleteRequest") IdRequest request, Model model) {
+        appointmentService.delete(request.getId());
+        model.addAttribute("appointments", appointmentService.findAll());
+        return "allAppointmentsPage";
     }
 }

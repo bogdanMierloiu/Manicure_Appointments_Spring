@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -25,7 +26,7 @@ public class CustomerRequest {
     private String phoneNumber;
 
     @Past
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @NotBlank
     private String email;

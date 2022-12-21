@@ -140,8 +140,21 @@ public class AppointmentService {
         return appointmentMapper.map(appointmentRepository.findByAppointmentDateBetween(dateFrom, dateTo));
     }
 
-    public Integer revenueForPeriod(LocalDateTime dateFrom, LocalDateTime dateTo) {
-        List<Appointment> appointments = appointmentRepository.findByAppointmentDateBetween(dateFrom, dateTo);
+    public Integer revenueForPeriod(DateBetweenRequest dateBetweenRequest) {
+        List<Appointment> appointments = appointmentRepository.findByAppointmentDateBetween(
+                dateBetweenRequest.getDateFrom(), dateBetweenRequest.getDateTo());
+        Integer total = 0;
+        for (Appointment appointment : appointments) {
+            for (NailsCare nailsCare : appointment.getNailsCares()) {
+                total += nailsCare.getPrice();
+            }
+        }
+        return total;
+    }
+
+    public Integer revenueForDay(DateRequest date) {
+        List<Appointment> appointments = appointmentRepository.findByAppointmentDateBetween(
+                date.getDate().atStartOfDay(), date.getDate().plusDays(1).atStartOfDay());
         Integer total = 0;
         for (Appointment appointment : appointments) {
             for (NailsCare nailsCare : appointment.getNailsCares()) {
