@@ -56,7 +56,7 @@
         <td><span th:text="${customer.phoneNumber}"></span>
             <form th:action="@{/customer/update-phoneNumber}" method="post">
                 <input type="hidden" name="id" th:value="${customer.id}">
-                <input type="text" name="phoneNumber">
+                <input type="text" name="phoneNumber" required>
                 <button type="submit" class="btn btn-primary btn-sm">Change</button>
             </form>
         </td>
@@ -64,14 +64,14 @@
         <td><span th:text="${customer.birthDate}"></span>
             <form th:action="@{/customer/update-birthdate}" method="post">
                 <input type="hidden" name="id" th:value="${customer.id}">
-                <input type="date" name="birthDate">
+                <input type="date" name="birthDate" required>
                 <button type="submit" class="btn btn-primary btn-sm">Change</button>
             </form>
         </td>
         <td><span th:text="${customer.email}"></span>
             <form th:action="@{/customer/update-email}" method="post">
                 <input type="hidden" name="id" th:value="${customer.id}">
-                <input type="text" name="email">
+                <input type="text" name="email" required>
                 <button type="submit" class="btn btn-primary btn-sm">Change</button>
             </form>
         </td>
@@ -83,7 +83,7 @@
                 <form th:action="@{/customer/update-status}" method="post">
                     <button type="submit" class="btn btn-primary btn-sm">Change</button>
                     <input type="hidden" name="id" th:value="${customer.id}">
-                    <select class="form-select" aria-label="Default select example" name="active">
+                    <select class="form-select" aria-label="Default select example" name="active" required>
                         <option> - status - </option>
                         <option th:value="true"> Active </option>
                         <option th:value="false"> Not Active </option>

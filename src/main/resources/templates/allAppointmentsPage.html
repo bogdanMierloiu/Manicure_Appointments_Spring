@@ -44,14 +44,14 @@
 <form th:action="@{/appointment/findByDate}">
     <div>
         <button type="submit" class="btn btn-success"> Search</button>
-        <input type="date" name="date">
+        <input type="date" name="date" required>
     </div>
 </form>
 <form th:action="@{/appointment/listBetween}">
     <div>
         <button type="submit" class="btn btn-success">Search</button>
-        <input type="date" name="dateFrom">
-        <input type="date" name="dateTo">
+        <input type="date" name="dateFrom" required>
+        <input type="date" name="dateTo" required>
     </div>
 </form>
 <div>
@@ -74,7 +74,7 @@
                 <form th:action="@{/appointment/update-date}" method="post">
                     <button type="submit" class="btn btn-primary btn-sm">Change date&time</button>
                     <input type="hidden" name="id" th:value="${appointment.id}">
-                    <input type="datetime-local" name="appointmentDateTime">
+                    <input type="datetime-local" name="appointmentDateTime" required>
                 </form>
 
             </td>
@@ -85,7 +85,7 @@
                 <form th:action="@{/appointment/update-customer}" method="post">
                     <button type="submit" class="btn btn-primary btn-sm">Change customer</button>
                     <input type="hidden" name="id" th:value="${appointment.id}">
-                    <select class="form-select" aria-label="Default select example" name="customerId">
+                    <select class="form-select" aria-label="Default select example" name="customerId" required>
                         <option value="" selected> --</option>
                         <option th:each="customer: ${allCustomers}"
                                 th:value="${customer.id}"

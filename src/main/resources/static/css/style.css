@@ -4,19 +4,12 @@
 }
 
 html, body {
-    margin: 0;
-    width: 100vw;
-    height: 100vh;
     background-size: cover;
+    height: 100%;
     background: bisque;
 }
-
-ul {
-    background-size: cover;
-    padding: 2px;
-    margin: 2px;
-
-
+ul{
+    margin: 5px;
 }
 
 h1 {

@@ -44,9 +44,9 @@
 
 <form th:action="@{/revenue/forPeriod}">
     <div class="buttons">
-        <input type="date" name="dateFrom">
-        <input type="date" name="dateTo">
-        <button type="submit" class="btn btn-success"> Search </button>
+        <input type="date" name="dateFrom" required>
+        <input type="date" name="dateTo" required>
+        <button type="submit" class="btn btn-success"> Calculate </button>
     </div>
     <div>
     <input th:value="${result}">
@@ -55,8 +55,8 @@
 
 <form th:action="@{/revenue/forDay}">
     <div class="buttons">
-        <input type="date" name="date">
-        <button type="submit" class="btn btn-success"> Search </button>
+        <input type="date" name="date" required>
+        <button type="submit" class="btn btn-success"> Calculate </button>
     </div>
     <div>
     <input th:value="${resultForDay}" >

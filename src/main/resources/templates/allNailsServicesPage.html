@@ -58,7 +58,7 @@
 
             <form th:action="@{/nails-service/update-name}" method="post">
                 <input type="hidden" name="id" th:value="${service.id}">
-                <input type="text" name="serviceName" placeholder="new name">
+                <input type="text" name="serviceName" placeholder="new name" required>
                 <button type="submit" class="btn btn-primary btn-sm">Update service name</button>
             </form>
         </td>
@@ -67,7 +67,7 @@
 
             <form th:action="@{/nails-service/update-price}" method="post">
                 <input type="hidden" name="id" th:value="${service.id}">
-                <input type="number" name="price" placeholder="new price">
+                <input type="number" name="price" placeholder="new price" required>
                 <button type="submit" class="btn btn-primary btn-sm">Update service price</button>
             </form>
         </td>
