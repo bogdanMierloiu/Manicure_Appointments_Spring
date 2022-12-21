@@ -5,7 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link th:href="@{/css/index.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+        body {
+            background-image: url(/images/background5.jpg);
+        }
+    </style>
 </head>
 <body>
 
@@ -36,16 +41,19 @@
         </form>
     </li>
 </ul>
-<h2> Choose an option </h2>
+
 
 <form th:action="@{nails-service/allServices}">
-    <button type="submit" class="btn btn-primary btn-lg"> View all Nails Services</button>
+    <div>
+        <button type="submit" class="btn btn-success"> View all Nails Services</button>
+    </div>
 </form>
 
 <form th:action="@{/nails-service/goToCreateServicePage}">
-    <button type="submit" class="btn btn-primary btn-lg"> Add new service</button>
+    <div>
+        <button type="submit" class="btn btn-success"> Add new service</button>
+    </div>
 </form>
-
 
 
 </body>

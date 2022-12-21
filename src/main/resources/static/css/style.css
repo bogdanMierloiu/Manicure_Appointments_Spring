@@ -1,6 +1,22 @@
+* {
+    box-sizing: border-box;
+    font-family: "Times New Roman", sans-serif;
+}
+
+html, body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background: bisque;
+}
+
 ul {
+    background-size: cover;
     padding: 2px;
-    margin: 5px;
+    margin: 2px;
+
+
 }
 
 h1 {
@@ -10,6 +26,7 @@ h1 {
     padding-left: 10px;
     margin: 1px;
 }
+
 h2 {
     font-family: "Georgia", serif;
     font-size: 2em;
@@ -60,21 +77,15 @@ button:last-child:hover {
     background: linear-gradient(90deg, #fa7199, #f5ce62, #e43603, #fa7199);
     background-size: 500%;
 }
+
 input::placeholder {
     color: gray;
+    scale: inherit;
 }
+
 .inputs {
     text-align: left;
     padding: 1px;
     margin: 5px;
-}
-.container {
-    position: relative;
-    width: 350px;
-    height: 500px;
-    border-radius: 20px;
-    padding: 40px;
-    box-sizing: border-box;
-    background: #ecf0f3;
-    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    scale: inherit;
 }
