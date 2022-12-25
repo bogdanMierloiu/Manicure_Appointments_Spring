@@ -28,7 +28,6 @@ public class CustomerService {
     private final MyRepository myRepository;
 
 
-
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
         checkDuplicate(customerRequest);
         validatePhoneNumber(customerRequest.getPhoneNumber());
@@ -67,24 +66,7 @@ public class CustomerService {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new BusinessException(
                 "CustomerWebController not found"));
 
-        CustomerDetailResponse customerDetailResponse = new CustomerDetailResponse();
-
-        customerDetailResponse.setFirstName(customer.getFirstName());
-        customerDetailResponse.setLastName(customer.getLastName());
-        customerDetailResponse.setAppointments(new ArrayList<>());
-
-        for (Appointment appointment : customer.getAppointments()) {
-            AppointmentResponseForCustomerDetail appointmentResponse = new AppointmentResponseForCustomerDetail();
-            appointmentResponse.setAppointmentDateTime(appointment.getAppointmentDateTime());
-            appointmentResponse.setNailsServices(new ArrayList<>());
-            for (NailsCare nailsCare : appointment.getNailsCares()) {
-                NailsServiceForCustomerDetail nailsServiceForCustomerDetail = new NailsServiceForCustomerDetail();
-                nailsServiceForCustomerDetail.setServiceName(nailsCare.getServiceName());
-                appointmentResponse.getNailsServices().add(nailsServiceForCustomerDetail);
-            }
-            customerDetailResponse.getAppointments().add(appointmentResponse);
-        }
-        return customerDetailResponse;
+        return createCustomerDetailsResponse(customer);
     }
 
 
@@ -95,27 +77,32 @@ public class CustomerService {
         List<Customer> customerListFromDB = customerRepository.findByFirstName(firstName);
         List<CustomerDetailResponse> customerDetailResponseList = new ArrayList<>();
         for (Customer customer : customerListFromDB) {
-            CustomerDetailResponse customerDetailResponse = new CustomerDetailResponse();
-            customerDetailResponse.setFirstName(customer.getFirstName());
-            customerDetailResponse.setLastName(customer.getLastName());
-            customerDetailResponse.setAppointments(new ArrayList<>());    // aici este gol
-            for (Appointment appointment : customer.getAppointments()) {
-                AppointmentResponseForCustomerDetail appointmentResponseForCustomerDetail = new AppointmentResponseForCustomerDetail();
-                appointmentResponseForCustomerDetail.setAppointmentDateTime(appointment.getAppointmentDateTime());
-                appointmentResponseForCustomerDetail.setNailsServices(new ArrayList<>());
-                for (NailsCare nailsCare : appointment.getNailsCares()) {
-                    NailsServiceForCustomerDetail nailsServiceForCustomerDetail = new NailsServiceForCustomerDetail();
-                    nailsServiceForCustomerDetail.setServiceName(nailsCare.getServiceName());
-                    appointmentResponseForCustomerDetail.getNailsServices().add(nailsServiceForCustomerDetail);
-                }
-                customerDetailResponse.getAppointments().add(appointmentResponseForCustomerDetail);
-            }
+            CustomerDetailResponse customerDetailResponse = createCustomerDetailsResponse(customer);
             customerDetailResponseList.add(customerDetailResponse);
         }
         if (customerDetailResponseList.isEmpty()) {
             throw new BusinessException("Not found");
         }
         return customerDetailResponseList;
+    }
+
+    private CustomerDetailResponse createCustomerDetailsResponse(Customer customer) {
+        CustomerDetailResponse customerDetailResponse = new CustomerDetailResponse();
+        customerDetailResponse.setFirstName(customer.getFirstName());
+        customerDetailResponse.setLastName(customer.getLastName());
+        customerDetailResponse.setAppointments(new ArrayList<>());    // aici este gol
+        for (Appointment appointment : customer.getAppointments()) {
+            AppointmentResponseForCustomerDetail appointmentResponseForCustomerDetail = new AppointmentResponseForCustomerDetail();
+            appointmentResponseForCustomerDetail.setAppointmentDateTime(appointment.getAppointmentDateTime());
+            appointmentResponseForCustomerDetail.setNailsServices(new ArrayList<>());
+            for (NailsCare nailsCare : appointment.getNailsCares()) {
+                NailsServiceForCustomerDetail nailsServiceForCustomerDetail = new NailsServiceForCustomerDetail();
+                nailsServiceForCustomerDetail.setServiceName(nailsCare.getServiceName());
+                appointmentResponseForCustomerDetail.getNailsServices().add(nailsServiceForCustomerDetail);
+            }
+            customerDetailResponse.getAppointments().add(appointmentResponseForCustomerDetail);
+        }
+        return customerDetailResponse;
     }
 
 
