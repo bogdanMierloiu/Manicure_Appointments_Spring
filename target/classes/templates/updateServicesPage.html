@@ -37,11 +37,11 @@
 </ul>
 <form action="#" th:action="@{/appointment/update-services}" th:object="${appointmentId}" method="post">
     <table class="table table-dark">
-        <input type="hidden" name="id" th:value="${appointmentId}">
+        <input type="hidden" name="id" th:value="${appointmentId}" >
         <tr>
             <td> Services (press CTRL + click -> for multiple choice)</td>
             <td>
-                <select class="form-select" multiple aria-label="multiple select example" name="nailsServicesIds">
+                <select class="form-select" multiple aria-label="multiple select example" name="nailsServicesIds" required>
                     <option value="" selected> -- </option>
                     <option th:each="service: ${servicesFromDB}"
                             th:value="${service.id}"
