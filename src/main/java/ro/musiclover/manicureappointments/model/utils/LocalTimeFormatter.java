@@ -1,4 +1,4 @@
-package ro.musiclover.manicureappointments.model;
+package ro.musiclover.manicureappointments.model.utils;
 
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;

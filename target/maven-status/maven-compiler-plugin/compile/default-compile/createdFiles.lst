@@ -1,3 +1,4 @@
+ro\musiclover\manicureappointments\controller\web\IndexController.class
 ro\musiclover\manicureappointments\mapper\ManicuristMapperImpl.class
 ro\musiclover\manicureappointments\model\customer\CustomerResponse.class
 ro\musiclover\manicureappointments\model\customer\RequestUpdatePhoneNumberCustomer.class
@@ -21,6 +22,7 @@ ro\musiclover\manicureappointments\entity\Appointment$AppointmentBuilder.class
 ro\musiclover\manicureappointments\repository\MyRepository.class
 ro\musiclover\manicureappointments\repository\NailsCareRepository.class
 ro\musiclover\manicureappointments\model\customer\FindByNameRequest.class
+ro\musiclover\manicureappointments\security\CustomUserDetails.class
 ro\musiclover\manicureappointments\mapper\NailsServiceMapperImpl.class
 ro\musiclover\manicureappointments\model\nails_services\RequestUpdateName.class
 ro\musiclover\manicureappointments\model\nails_services\NailsCareResponse.class
@@ -47,8 +49,10 @@ ro\musiclover\manicureappointments\repository\AppointmentRepository.class
 ro\musiclover\manicureappointments\controller\AppointmentController.class
 ro\musiclover\manicureappointments\controller\EmailController.class
 ro\musiclover\manicureappointments\model\customer\RequestUpdateLastNameCustomer$RequestUpdateLastNameCustomerBuilder.class
+ro\musiclover\manicureappointments\security\WebSecurityConfig.class
 ro\musiclover\manicureappointments\model\IdRequest.class
 ro\musiclover\manicureappointments\entity\NailsCare$NailsCareBuilder.class
+ro\musiclover\manicureappointments\security\CustomerUserDetailsService.class
 ro\musiclover\manicureappointments\model\appointment\FindByDateRequest.class
 ro\musiclover\manicureappointments\controller\NailsServiceController.class
 ro\musiclover\manicureappointments\model\customer\RequestUpdateFirstNameCustomer.class
@@ -86,6 +90,7 @@ ro\musiclover\manicureappointments\entity\Manicurist.class
 ro\musiclover\manicureappointments\model\customer\CreateCustomerRequest.class
 ro\musiclover\manicureappointments\entity\Customer$CustomerBuilder.class
 ro\musiclover\manicureappointments\model\appointment\RequestUpdateCustomer.class
+ro\musiclover\manicureappointments\security\PasswordEncoder.class
 ro\musiclover\manicureappointments\model\manicurist\UpdateManicuristRequest.class
 ro\musiclover\manicureappointments\model\appointment\DateBetweenRequestForWeb$DateBetweenRequestForWebBuilder.class
 ro\musiclover\manicureappointments\model\nails_services\NailsServiceRequest.class

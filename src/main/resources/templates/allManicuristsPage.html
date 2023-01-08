@@ -39,11 +39,10 @@
 <form th:action="@{/manicurist/goToCreateManicuristPage}">
     <button type="submit" class="btn btn-success"> Add new manicurist</button>
 </form>
-
+<form th:if="${manicurists.isEmpty() }">
+    <h3> No Manicurists </h3>
+</form>
 <table class="table table-dark">
-    <form th:if="${manicurists.isEmpty() }">
-        <h3> No Manicurists </h3>
-    </form>
     <thead>
     <tr>
         <th>Id</th>
@@ -77,6 +76,7 @@
 
     </tr>
     </tbody>
+
 </table>
 </body>
 </html>

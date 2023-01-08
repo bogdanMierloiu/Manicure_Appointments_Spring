@@ -8,17 +8,13 @@ import ro.musiclover.manicureappointments.entity.Customer;
 import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.exception.BusinessException;
 import ro.musiclover.manicureappointments.mapper.AppointmentMapper;
-import ro.musiclover.manicureappointments.model.EmailDetails;
+import ro.musiclover.manicureappointments.model.utils.EmailDetails;
 import ro.musiclover.manicureappointments.model.appointment.*;
-import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
-import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
 
-import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse;
 import ro.musiclover.manicureappointments.repository.*;
 
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -64,7 +60,7 @@ public class AppointmentService {
         emailDetails.setRecipient(customer.getEmail());
         emailDetails.setSubject("Appointment confirmed");
         emailDetails.setMsgBody("Your appointment is confirmed at: " + appointmentToSave.getAppointmentDateTime());
-//        emailService.sendSimpleMail(emailDetails);
+        emailService.sendSimpleMail(emailDetails);
 
         return appointmentMapper.map(appointmentRepository.save(appointmentToSave));
     }
@@ -101,7 +97,7 @@ public class AppointmentService {
         emailDetails.setRecipient(appointmentToUpdate.getCustomer().getEmail());
         emailDetails.setSubject("Appointment date&time changed");
         emailDetails.setMsgBody("Your appointment is changed at: " + appointmentToUpdate.getAppointmentDateTime());
-//        emailService.sendSimpleMail(emailDetails);
+        emailService.sendSimpleMail(emailDetails);
     }
 
     public void updateNailsServices(Integer id, RequestUpdateServices requestUpdateServices) {
@@ -155,7 +151,7 @@ public class AppointmentService {
     public Integer revenueForDay(DateRequest date) {
         List<Appointment> appointments = appointmentRepository.findByAppointmentDateBetween(
                 date.getDate().atStartOfDay(), date.getDate().plusDays(1).atStartOfDay());
-        Integer total = 0;
+        var total = 0;
         for (Appointment appointment : appointments) {
             for (NailsCare nailsCare : appointment.getNailsCares()) {
                 total += nailsCare.getPrice();

@@ -12,9 +12,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ManicuristMapper {
 
-    ManicuristResponse map(Manicurist manicurist);
-
     Manicurist map(ManicuristRequest manicuristRequest);
+    ManicuristResponse map(Manicurist manicurist);
 
     List<ManicuristResponse> map(List<Manicurist> all);
 }

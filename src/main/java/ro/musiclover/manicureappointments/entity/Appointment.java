@@ -25,9 +25,7 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-//    @JsonDeserialize(using = LocalDateDeserializer.class)
-//    @JsonSerialize(using = LocalDateSerializer.class)
-//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+
     @Future(message = "Please check the date")
     private LocalDateTime appointmentDateTime;
 

@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
     font-family: "Times New Roman", sans-serif;
 }
 
@@ -30,12 +30,7 @@ form {
     width: 100%;
     padding: 2px 2px;
     margin: 1px 0;
-    box-sizing: border-box;
-}
-
-div {
-    padding: 1px;
-    margin: 5px;
+    /*box-sizing: border-box;*/
 }
 
 .column {

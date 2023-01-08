@@ -1,4 +1,4 @@
-package ro.musiclover.manicureappointments.controller;
+package ro.musiclover.manicureappointments.controller.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

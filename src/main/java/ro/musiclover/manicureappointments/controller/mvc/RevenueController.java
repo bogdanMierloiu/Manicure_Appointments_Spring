@@ -1,20 +1,14 @@
-package ro.musiclover.manicureappointments.controller.web;
+package ro.musiclover.manicureappointments.controller.mvc;
 
 import lombok.RequiredArgsConstructor;
-import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import ro.musiclover.manicureappointments.model.appointment.DateBetweenRequest;
 import ro.musiclover.manicureappointments.model.appointment.DateBetweenRequestForWeb;
 import ro.musiclover.manicureappointments.model.appointment.DateRequest;
-import ro.musiclover.manicureappointments.model.appointment.FindByDateRequest;
 import ro.musiclover.manicureappointments.service.AppointmentService;
-
-import java.time.LocalDateTime;
 
 @Controller
 @RequiredArgsConstructor

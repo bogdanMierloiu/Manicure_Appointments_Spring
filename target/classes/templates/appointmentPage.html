@@ -65,8 +65,8 @@
 <form th:action="@{/appointment/listBetween}">
     <div>
         <button type="submit" class="btn btn-success">Search</button>
-        <input type="date" name="dateFrom">
-        <input type="date" name="dateTo">
+        <input type="date" name="dateFrom" required>
+        <input type="date" name="dateTo" required>
     </div>
 </form>
 

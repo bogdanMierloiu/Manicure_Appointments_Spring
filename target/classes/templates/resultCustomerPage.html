@@ -37,28 +37,29 @@
     </li>
 </ul>
 <div>
-<h2 th:each="customer: ${customers}">
-    <span th:text="${customer.firstName} + ' ' + ${customer.lastName}"></span>
-</h2>
+    <h1 th:each="customer: ${customers}">
+        <span th:text="${customer.firstName} + ' ' + ${customer.lastName}"></span>
+    </h1>
 </div>
 <div>
-<table class="table table-dark">
-    <thead>
-    <tr>
-        <th>Appointment date</th>
-        <th>Services</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody th:each="customer: ${customers}">
-    <tr th:each="appointment: ${customer.getAppointments()}">
-        <td><span th:text="${appointment.appointmentDateTime}"></span></td>
-        <td th:each="service:${appointment.getNailsServices()}">
-            <span th:text="${service.serviceName}"></span>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th>Appointment date</th>
+            <th>Services</th>
+        </tr>
+        </thead>
+        <tbody th:each="customer: ${customers}">
+        <tr th:each="appointment: ${customer.getAppointments()}">
+            <td><span th:text="${appointment.appointmentDateTime}"></span></td>
+            <td>
+                <ul th:each="service:${appointment.getNailsServices()}">
+                    <li th:text="${service.serviceName}">Services</li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package ro.musiclover.manicureappointments.controller.web;
+package ro.musiclover.manicureappointments.controller.mvc;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ro.musiclover.manicureappointments.model.UpdateRequest;
+import ro.musiclover.manicureappointments.model.utils.UpdateRequest;
 import ro.musiclover.manicureappointments.model.manicurist.CreateManicuristRequest;
-import ro.musiclover.manicureappointments.model.IdRequest;
+import ro.musiclover.manicureappointments.model.utils.IdRequest;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristRequest;
 import ro.musiclover.manicureappointments.model.manicurist.UpdateManicuristRequest;
 import ro.musiclover.manicureappointments.service.ManicuristService;
