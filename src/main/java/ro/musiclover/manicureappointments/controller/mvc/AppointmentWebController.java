@@ -82,6 +82,8 @@ public class AppointmentWebController {
                              Model model) {
         appointmentService.updateAppointmentDateTime(request);
         model.addAttribute("appointments", appointmentService.findAll());
+        model.addAttribute("allCustomers", customerService.getAllCustomers());
+        model.addAttribute("allServices", nailsService.allServices());
         return "allAppointmentsPage";
     }
 
@@ -90,6 +92,8 @@ public class AppointmentWebController {
                                  Model model) {
         appointmentService.updateCustomer(request.getId(), request);
         model.addAttribute("appointments", appointmentService.findAll());
+        model.addAttribute("allCustomers", customerService.getAllCustomers());
+        model.addAttribute("allServices", nailsService.allServices());
         return "allAppointmentsPage";
     }
 
@@ -100,6 +104,8 @@ public class AppointmentWebController {
                 .nailsServicesIds(request.getNailsServicesIds())
                 .build();
         appointmentService.updateNailsServices(request.getId(), requestUpdateServices);
+        model.addAttribute("allCustomers", customerService.getAllCustomers());
+        model.addAttribute("allServices", nailsService.allServices());
         model.addAttribute("appointments", appointmentService.findAll());
         return "allAppointmentsPage";
     }
@@ -115,6 +121,8 @@ public class AppointmentWebController {
     public String delete(@ModelAttribute(value = "deleteRequest") IdRequest request, Model model) {
         appointmentService.delete(request.getId());
         model.addAttribute("appointments", appointmentService.findAll());
+        model.addAttribute("allCustomers", customerService.getAllCustomers());
+        model.addAttribute("allServices", nailsService.allServices());
         return "allAppointmentsPage";
     }
 }

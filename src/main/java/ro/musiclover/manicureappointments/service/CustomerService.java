@@ -118,6 +118,16 @@ public class CustomerService {
         customerToUpdate.setPhoneNumber(customerRequest.getPhoneNumber());
     }
 
+    public void updateFirstLastName(Integer id, RequestUpdateNameCustomer customerRequest) {
+        Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
+                () -> new BusinessException(
+                        String.format("CustomerWebController with id: %s not found", id)
+                )
+        );
+        customerToUpdate.setFirstName(customerRequest.getFirstName());
+        customerToUpdate.setLastName(customerRequest.getLastName());
+    }
+
 
     public void updateStatus(Integer id, CustomerUpdateStatus customerUpdateStatus) {
         Customer customer = customerRepository.findById(id).orElseThrow(
@@ -127,7 +137,7 @@ public class CustomerService {
     }
 
 
-    public void updateFirstName(Integer id, RequestUpdateFirstNameCustomer request) {
+    public void updateFirstName(Integer id, RequestUpdateNameCustomer request) {
         Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
                 () -> new BusinessException(
                         String.format("CustomerWebController with id: %s not found", id)

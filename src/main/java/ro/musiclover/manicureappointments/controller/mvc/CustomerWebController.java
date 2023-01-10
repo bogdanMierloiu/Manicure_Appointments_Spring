@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ro.musiclover.manicureappointments.entity.Customer;
 import ro.musiclover.manicureappointments.model.utils.IdRequest;
 import ro.musiclover.manicureappointments.model.customer.*;
 import ro.musiclover.manicureappointments.service.CustomerService;
@@ -44,10 +45,17 @@ public class CustomerWebController {
         return "customerDetailsPage";
     }
 
-
     @GetMapping("/goToCreateCustomerPage")
     public String goToCreateCustomerPage() {
         return "customerCreatePage";
+    }
+
+    @GetMapping("/goToUpdateName")
+    public String goToUpdateName(@ModelAttribute("value=idRequest") IdRequest request, Model model) {
+        CustomerResponse customer = customerService.findCustomerById(request.getId());
+        model.addAttribute("customer", customer);
+        return "customerUpdateNamePage";
+
     }
 
     @PostMapping("/create-new-customer")
@@ -66,13 +74,6 @@ public class CustomerWebController {
         return "allCustomersPage";
     }
 
-    @GetMapping("/findByFirstName")
-    public String findByFirstName(@ModelAttribute(value = "name") FindByNameRequest request, Model model) {
-        List<CustomerDetailResponse> customersResult = customerService.findByFirstName(request.getFirstName());
-        model.addAttribute("customers", customersResult);
-        return "resultCustomerPage";
-    }
-
     @PostMapping("/deleteById")
     public String deleteById(@ModelAttribute(value = "deleteRequest") IdRequest request, Model model) {
         customerService.deleteById(request.getId());
@@ -80,21 +81,14 @@ public class CustomerWebController {
         return "allCustomersPage";
     }
 
-    @PostMapping("/update-firstname")
-    public String updateFirstName(@ModelAttribute(value = "updateFirstName") RequestUpdateFirstNameCustomer request,
+    @PostMapping("/update-name")
+    public String updateFirstName(@ModelAttribute(value = "updateRequest") RequestUpdateNameCustomer request,
                                   Model model) {
-        customerService.updateFirstName(request.getId(), request);
+        customerService.updateFirstLastName(request.getId(), request);
         model.addAttribute("customers", customerService.getAllCustomers());
         return "allCustomersPage";
     }
 
-    @PostMapping("/update-lastname")
-    public String updateFirstName(@ModelAttribute(value = "updateLastName") RequestUpdateLastNameCustomer request,
-                                  Model model) {
-        customerService.updateLastName(request.getId(), request);
-        model.addAttribute("customers", customerService.getAllCustomers());
-        return "allCustomersPage";
-    }
 
     @PostMapping("/update-phoneNumber")
     public String updateFirstName(@ModelAttribute(value = "updatePhoneNumber") RequestUpdatePhoneNumberCustomer request,

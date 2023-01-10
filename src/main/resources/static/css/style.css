@@ -1,29 +1,8 @@
-* {
-    /*box-sizing: border-box;*/
-    font-family: "Times New Roman", sans-serif;
+*{
+    font-family: sans-serif;
 }
-
-html, body {
-    background-size: cover;
-    height: 100%;
-    background: bisque;
-}
-ul{
-    margin: 5px;
-}
-
-h1 {
-    font-family: "Harlow Solid Italic", serif;
-    font-size: 3em;
-    letter-spacing: -2px;
-    padding-left: 10px;
-    margin: 1px;
-}
-
-h2 {
-    font-family: "Georgia", serif;
-    font-size: 2em;
-    margin: 5px;
+h1, h2, h3, h4, h5, h6 {
+    color: snow;
 }
 
 form {
@@ -54,16 +33,6 @@ form {
     font-size: 20px;
     letter-spacing: 2px;
     cursor: pointer;
-}
-
-button:first-child:hover {
-    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
-    background-size: 500%;
-}
-
-button:last-child:hover {
-    background: linear-gradient(90deg, #fa7199, #f5ce62, #e43603, #fa7199);
-    background-size: 500%;
 }
 
 input::placeholder {

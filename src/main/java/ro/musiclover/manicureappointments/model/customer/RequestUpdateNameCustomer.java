@@ -6,17 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
-import java.util.Date;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestUpdateFirstNameCustomer {
+public class RequestUpdateNameCustomer {
 
     private Integer id;
 
     @NotBlank(message = "Invalid first name")
     private String firstName;
+    @NotBlank(message = "Invalid last name")
+    private String lastName;
 
    }

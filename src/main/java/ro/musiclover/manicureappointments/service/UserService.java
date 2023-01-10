@@ -26,6 +26,10 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
+
 
     public void validatePhoneNumber(String string) {
         if (string.isBlank() ||

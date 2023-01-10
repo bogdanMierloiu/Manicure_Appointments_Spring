@@ -8,7 +8,9 @@
     <link th:href="@{/css/style.css}" rel="stylesheet">
     <style>
         body {
-            background-image: url(/images/background4.jpg);
+            background-image: url(/images/b10.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
         }
     </style>
 </head>
@@ -17,58 +19,80 @@
 <ul class="nav nav-pills nav-justified">
     <li class="nav-item">
         <form th:action="@{/welcome}">
-            <button class="nav-link active" aria-current="page">Home</button>
+            <button class="nav-link active"
+                    style="background-color:transparent;
+                    font-weight: bold;
+                    font-size: large;"
+                    aria-current="page"> Home
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/manicurist}">
-            <button class="nav-link active">Manicurists</button>
+            <button class="nav-link active" style="background-color:transparent; font-weight: bold;
+                    font-size: large;">Manicurists
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/customer}">
-            <button class="nav-link active">Customers</button>
+            <button class="nav-link active" style="background-color:transparent;font-weight: bold;
+                    font-size: large;">Customers
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/appointment}">
-            <button class="nav-link active">Appointments</button>
+            <button class="nav-link active" style="background-color:transparent;font-weight: bold;
+                    font-size: large;">Appointments
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/nails-service}">
-            <button class="nav-link active">Nails Services</button>
+            <button class="nav-link active" style="background-color:transparent; font-weight: bold;
+                    font-size: large;">Nails Services
+            </button>
         </form>
     </li>
 </ul>
 
-<h2> Choose an option </h2>
+<div style="padding-top: 30px; padding-left: 5px">
 
-<form th:action="@{/appointment/allAppointments}">
-    <div>
-    <button type="submit" class="btn btn-success">View all appointments</button>
-    </div>
-</form>
+    <form th:action="@{/appointment/allAppointments}">
+        <div>
+            <button type="submit" class="btn btn-success">View all appointments</button>
+        </div>
+    </form>
 
-<form th:action="@{/appointment/goToCreateAppointmentPage}">
-    <div>
-        <button type="submit" class="btn btn-success"> Add new appointment</button>
-    </div>
-</form>
-<form th:action="@{/appointment/findByDate}">
-    <div>
-        <button type="submit" class="btn btn-success"> Search</button>
-        <input type="date" name="date" required>
-    </div>
-</form>
+    <form th:action="@{/appointment/goToCreateAppointmentPage}">
+        <div>
+            <button type="submit" class="btn btn-success"> Add new appointment</button>
+        </div>
+    </form>
+    <form th:action="@{/appointment/findByDate}">
+        <div style="display:inline-grid">
+            <div>
+                <button type="submit" class="btn btn-success"> Search by date</button>
+            </div>
+            <div style="padding-top: 5px">
+                <input style="background-color:transparent; color: snow" type="date" name="date" required>
+            </div>
+        </div>
+    </form>
 
-<form th:action="@{/appointment/listBetween}">
-    <div>
-        <button type="submit" class="btn btn-success">Search</button>
-        <input type="date" name="dateFrom" required>
-        <input type="date" name="dateTo" required>
-    </div>
-</form>
+    <form th:action="@{/appointment/listBetween}">
+        <div style="display:inline-grid">
+            <div>
+                <button type="submit" class="btn btn-success">Search by range</button>
+            </div>
+            <div style="padding-top: 5px">
+                <input style="background-color: transparent; color: snow" type="date" name="dateFrom" required>
+                <input style="background-color: transparent; color: snow" type="date" name="dateTo" required>
+            </div>
+        </div>
+    </form>
 
+</div>
 </body>
 </html>

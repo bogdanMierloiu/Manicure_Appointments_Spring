@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import ro.musiclover.manicureappointments.entity.NailsCare;
 import ro.musiclover.manicureappointments.model.customer.CustomerResponseForAppointment;
 import ro.musiclover.manicureappointments.model.manicurist.ManicuristResponseForAppointment;
@@ -19,6 +20,7 @@ import java.util.Set;
 
 public class AppointmentResponse {
     private Integer id;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime appointmentDateTime;
     private ManicuristResponseForAppointment manicurist;
     private CustomerResponseForAppointment customer;
