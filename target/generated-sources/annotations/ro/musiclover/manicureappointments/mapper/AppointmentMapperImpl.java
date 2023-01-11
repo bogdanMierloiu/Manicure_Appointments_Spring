@@ -18,7 +18,7 @@ import ro.musiclover.manicureappointments.model.nails_services.NailsCareResponse
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-10T14:41:08+0200",
+    date = "2023-01-11T18:33:24+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component

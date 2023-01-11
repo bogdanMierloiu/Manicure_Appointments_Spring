@@ -1,13 +1,14 @@
 package ro.musiclover.manicureappointments.controller.mvc;
 
 import lombok.RequiredArgsConstructor;
+import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ro.musiclover.manicureappointments.entity.Customer;
+import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCustomerDetail;
 import ro.musiclover.manicureappointments.model.utils.IdRequest;
 import ro.musiclover.manicureappointments.model.customer.*;
 import ro.musiclover.manicureappointments.service.CustomerService;
@@ -55,6 +56,22 @@ public class CustomerWebController {
         CustomerResponse customer = customerService.findCustomerById(request.getId());
         model.addAttribute("customer", customer);
         return "customerUpdateNamePage";
+    }
+
+    @GetMapping("/findByFirstName")
+    public String findByFirstName(@ModelAttribute FindByNameRequest request, Model model) {
+        CustomerResponse customer = customerService.findByFirstName(request.getFirstName());
+        model.addAttribute("customer", customer);
+        return "customerDetailsPage";
+    }
+
+    @GetMapping("/customerWithDetails")
+    public String customerWithDetails(@ModelAttribute IdRequest request, Model model) {
+        CustomerDetailResponse customer = customerService.customerWithAppointments(request.getId());
+        List<NailsServiceForCustomerDetail> nailsServices;
+
+        model.addAttribute("customer", customer);
+        return "customerWithAppointmentsPage";
 
     }
 

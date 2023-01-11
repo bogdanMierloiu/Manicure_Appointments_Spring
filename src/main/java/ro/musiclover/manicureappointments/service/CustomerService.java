@@ -70,20 +70,18 @@ public class CustomerService {
     }
 
 
-    public List<CustomerDetailResponse> findByFirstName(String firstName) {
+    public CustomerResponse findByFirstName(String firstName) {
         if (firstName.isBlank()) {
             throw new IllegalArgumentException("Invalid name");
         }
-        List<Customer> customerListFromDB = customerRepository.findByFirstName(firstName);
-        List<CustomerDetailResponse> customerDetailResponseList = new ArrayList<>();
-        for (Customer customer : customerListFromDB) {
-            CustomerDetailResponse customerDetailResponse = createCustomerDetailsResponse(customer);
-            customerDetailResponseList.add(customerDetailResponse);
-        }
-        if (customerDetailResponseList.isEmpty()) {
-            throw new BusinessException("Not found");
-        }
-        return customerDetailResponseList;
+        Customer customer = customerRepository.findByFirstName(firstName);
+        return customerMapper.map(customer);
+    }
+
+    public CustomerDetailResponse customerWithAppointments(Integer id) {
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> new BusinessException(
+                "CustomerWebController not found"));
+        return createCustomerDetailsResponse(customer);
     }
 
     private CustomerDetailResponse createCustomerDetailsResponse(Customer customer) {

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class Customer {
     private String phoneNumber;
 
     @Past
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @NotBlank
     private String email;

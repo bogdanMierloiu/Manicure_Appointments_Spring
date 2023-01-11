@@ -6,97 +6,138 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+        body {
+            background-image: url(/images/b10.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
 <body>
+
 <ul class="nav nav-pills nav-justified">
     <li class="nav-item">
         <form th:action="@{/welcome}">
-            <button class="nav-link active" aria-current="page">Home</button>
+            <button class="nav-link active"
+                    style="background-color:transparent;
+                    font-weight: bold;
+                    font-size: large;"
+                    aria-current="page"> Home
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/manicurist}">
-            <button class="nav-link active">Manicurists</button>
+            <button class="nav-link active" style="background-color:transparent; font-weight: bold;
+                    font-size: large;">Manicurists
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/customer}">
-            <button class="nav-link active">Customers</button>
+            <button class="nav-link active" style="background-color:transparent;font-weight: bold;
+                    font-size: large;">Customers
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/appointment}">
-            <button class="nav-link active">Appointments</button>
+            <button class="nav-link active" style="background-color:transparent;font-weight: bold;
+                    font-size: large;">Appointments
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/nails-service}">
-            <button class="nav-link active">Nails Services</button>
+            <button class="nav-link active" style="background-color:transparent; font-weight: bold;
+                    font-size: large;">Nails Services
+            </button>
         </form>
     </li>
 </ul>
 
-<div class="container text-center">
+<div class="container text-center" style="padding-top: 50px">
     <div style="text-align: center">
-        <h1> Create Appointment </h1>
+        <h2 style="color: snow; font-family: sans-serif"> Add an appointment </h2>
     </div>
-    <form action="#" th:action="@{/appointment/create-new-appointment}" method="post"
-          style="max-width: 600px; margin: 0 auto ">
-        <div class="m-3">
-            <div class="form-group row">
-                <label class="col-form-label col-4"> Date </label>
-                <div class="col-8">
-                    <input type="datetime-local" name="appointmentDateTime" required>
+    <div class="container text-center">
+        <form th:action="@{/appointment/create-new-appointment}" method="post"
+              style="max-width: 600px; margin: 0 auto ">
+            <div class="m-3">
+                <div class="form-group row">
+                    <label class="col-form-label col-4"
+                           style="background-color: transparent; display: flex; color: snow">
+                        Date </label>
+                    <div class="col-8">
+                        <input style="background-color: transparent; color: snow; display: flex;
+                                text-align: left"
+                               type="datetime-local"
+                               name="appointmentDateTime" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label style="background-color: transparent; display: flex; color: snow"
+                           class="col-form-label col-4">
+                        Manicurist </label>
+                    <div class="col-8">
+                        <select style="background-color: transparent; color: snow"
+                                class="form-select"
+                                aria-label="Default select example" name="manicuristId" required>
+                            <option value=""> --</option>
+                            <option style="color: black" th:each="manicurist: ${manicurists}"
+                                    th:value="${manicurist.id}"
+                                    th:text="${manicurist.firstName} + ' ' + ${manicurist.lastName}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label style="background-color: transparent; display: flex; color: snow"
+                           class="col-form-label col-4">
+                        Customer </label>
+                    <div class="col-8">
+                        <select style="background-color: transparent; color: snow" class="form-select"
+                                aria-label="Default select example" name="customerId" required>
+                            <option value="" selected> --</option>
+                            <option style="color: black" th:each="customer: ${customers}"
+                                    th:value="${customer.id}"
+                                    th:text="${customer.firstName} + ' ' + ${customer.lastName}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label style="background-color: transparent; display: flex; color: snow"
+                           class="col-form-label col-4"> Services
+                        </label>
+                    <div class="col-8">
+                        <select style="background-color: transparent; color: snow" class="form-select" multiple
+                                aria-label="multiple select example"
+                                name="nailsServicesIds"
+                                required>
+                            <option value="" selected> --</option>
+                            <option th:each="service: ${services}"
+                                    th:value="${service.id}"
+                                    th:text="${service.serviceName}">
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-form-label col-4"> Manicurist </label>
-                <div class="col-8">
-                    <select class="form-select" aria-label="Default select example" name="manicuristId" required>
-                        <option value=""> --</option>
-                        <option th:each="manicurist: ${manicurists}"
-                                th:value="${manicurist.id}"
-                                th:text="${manicurist.firstName} + ' ' + ${manicurist.lastName}">
-                        </option>
-                    </select>
-                </div>
+            <div style="display: inline-block; padding: 10px">
+                    <button style="background-color: transparent; color: snow" type="submit" value="Create"
+                            class="btn btn-success">Create
+                    </button>
+                    <form th:action="@{/appointment/allAppointments}">
+                        <button style="background-color: transparent; color: snow" type="submit" class="btn btn-danger">
+                            Cancel
+                        </button>
+                    </form>
             </div>
-            <div class="form-group row">
-                <label class="col-form-label col-4"> Customer </label>
-                <div class="col-8">
-                    <select class="form-select" aria-label="Default select example" name="customerId" required>
-                        <option value="" selected> --</option>
-                        <option th:each="customer: ${customers}"
-                                th:value="${customer.id}"
-                                th:text="${customer.firstName} + ' ' + ${customer.lastName}">
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-form-label col-4"> Services (press CTRL + click -> for multiple choice) </label>
-                <div class="col-8">
-                    <select class="form-select" multiple aria-label="multiple select example"
-                            name="nailsServicesIds"
-                            required>
-                        <option value="" selected> --</option>
-                        <option th:each="service: ${services}"
-                                th:value="${service.id}"
-                                th:text="${service.serviceName}">
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div>
-                <button type="submit" value="Create" class="btn btn-success">Create</button>
-            </div>
-        </div>
-    </form>
-    <div>
-        <form th:action="@{/appointment/allAppointments}">
-            <button type="submit" class="btn btn-danger">Cancel</button>
         </form>
     </div>
+
 </div>
 </body>
 

@@ -38,8 +38,8 @@ public class ManicuristWebController {
     }
 
     @GetMapping("manicurist/goToUpdateManicuristPage")
-    public String goToUpdateManicuristPage(@ModelAttribute(value = "deleteRequest") UpdateRequest request, Model model){
-        model.addAttribute("manicuristId", request.getId());
+    public String goToUpdateManicuristPage(@ModelAttribute(value = "request") IdRequest request, Model model) {
+        model.addAttribute("manicurist", manicuristService.findManicuristById(request.getId()));
         return "updateManicuristPage";
     }
 
@@ -63,7 +63,6 @@ public class ManicuristWebController {
     public String goToCreateManicuristPage() {
         return "manicuristCreatePage";
     }
-
 
 
     @PostMapping("/manicurist/createNewManicurist")

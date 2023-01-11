@@ -1,22 +1,19 @@
 package ro.musiclover.manicureappointments.model.manicurist;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import ro.musiclover.manicureappointments.entity.Appointment;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 @Data
 public class ManicuristResponse {
-    
+
     private Integer id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private Date hireDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDate hireDate;
 
 }

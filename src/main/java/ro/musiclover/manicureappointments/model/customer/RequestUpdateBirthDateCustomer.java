@@ -20,7 +20,7 @@ public class RequestUpdateBirthDateCustomer {
     private Integer id;
     @Past
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date birthDate;
+    private LocalDate birthDate;
 
 
 }

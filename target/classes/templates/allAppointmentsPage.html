@@ -99,21 +99,31 @@
             <th></th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style="font-weight: bold">
         <tr th:each="appointment: ${appointments}">
             <td>
-                <p th:text="${#temporals.format(appointment.appointmentDateTime, 'dd-MM-yyyy HH:mm')}">Appointment date
-                & time</p>
-                <form th:action="@{/appointment/update-date}" method="post">
-                    <button type="submit" style="background-color: transparent; color: snow"
-                    >Change date&time
-                    </button>
-                    <input type="hidden" name="id" th:value="${appointment.id}">
-                    <input style="background-color:transparent; color: snow" type="datetime-local"
-                           name="appointmentDateTime" required>
-                </form>
+                <div>
+                    <p th:text="${#temporals.format(appointment.appointmentDateTime, 'dd-MM-yyyy HH:mm')}">Appointment
+                        date
+                        & time</p>
+                </div>
+                <div style="display: grid">
+                    <form th:action="@{/appointment/update-date}" method="post">
+                        <button type="submit" style="background-color: transparent; color: snow"
+                        >Change date&time
+                        </button>
+                        <input type="hidden" name="id" th:value="${appointment.id}">
+                        <input style="background-color:transparent; color: snow; padding-right: 5px"
+                               type="datetime-local"
+                               name="appointmentDateTime" required>
+                    </form>
+                </div>
             </td>
-            <td><span th:text="${appointment.manicurist.getFirstName() + ' ' + appointment.manicurist.getLastName()}">Manicurist</span>
+            <td>
+                <div>
+                <span
+                        th:text="${appointment.manicurist.getFirstName() + ' ' + appointment.manicurist.getLastName()}">Manicurist</span>
+                </div>
             </td>
             <td>
                 <span th:text="${appointment.customer.getFirstName() + ' ' + appointment.customer.getLastName()}">Customer</span>
@@ -127,10 +137,10 @@
                         <input type="hidden" name="id" th:value="${appointment.id}">
                         <div style="padding: 2px; width: 73%; font-size: small ">
                             <select class="form-select" aria-label="Default select example"
-                                    style="background-color:transparent; color: black; background-size: 10px"
+                                    style="background-color:transparent; color: snow; background-size: 10px"
                                     name="customerId" required>
                                 <option value="" selected> --</option>
-                                <option th:each="customer: ${allCustomers}"
+                                <option style="color: black" th:each="customer: ${allCustomers}"
                                         th:value="${customer.id}"
                                         th:text="${customer.firstName} + ' ' + ${customer.lastName}">
                                 </option>
@@ -147,7 +157,9 @@
             <td>
                 <form th:action="@{/appointment/goToUpdateServices}">
                     <input type="hidden" name="id" th:value="${appointment.id}">
-                    <button type="submit" style="background-color: transparent" class="btn btn-primary btn-sm">Change services</button>
+                    <button type="submit" style="background-color: transparent" class="btn btn-primary btn-sm">Change
+                        services
+                    </button>
                 </form>
             </td>
             <td>

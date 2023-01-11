@@ -1,8 +1,6 @@
 package ro.musiclover.manicureappointments.mapper;
 
-import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
@@ -12,7 +10,7 @@ import ro.musiclover.manicureappointments.model.customer.CustomerResponse;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-10T14:41:08+0200",
+    date = "2023-01-11T21:07:13+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 18.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -30,9 +28,7 @@ public class CustomerMapperImpl implements CustomerMapper {
         customer.firstName( customerRequest.getFirstName() );
         customer.lastName( customerRequest.getLastName() );
         customer.phoneNumber( customerRequest.getPhoneNumber() );
-        if ( customerRequest.getBirthDate() != null ) {
-            customer.birthDate( Date.from( customerRequest.getBirthDate().atStartOfDay( ZoneOffset.UTC ).toInstant() ) );
-        }
+        customer.birthDate( customerRequest.getBirthDate() );
         customer.email( customerRequest.getEmail() );
         customer.active( customerRequest.getActive() );
 

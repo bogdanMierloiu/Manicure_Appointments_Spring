@@ -8,7 +8,9 @@
     <link th:href="@{/css/style.css}" rel="stylesheet">
     <style>
         body {
-            background-image: url(/images/background2.jpg);
+            background-image: url(/images/b10.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
         }
     </style>
 </head>
@@ -17,53 +19,72 @@
 <ul class="nav nav-pills nav-justified">
     <li class="nav-item">
         <form th:action="@{/welcome}">
-            <button class="nav-link active" aria-current="page">Home</button>
+            <button class="nav-link active"
+                    style="background-color:transparent;
+                    font-weight: bold;
+                    font-size: large;"
+                    aria-current="page"> Home
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/manicurist}">
-            <button class="nav-link active">Manicurists</button>
+            <button class="nav-link active" style="background-color:transparent; font-weight: bold;
+                    font-size: large;">Manicurists
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/customer}">
-            <button class="nav-link active">Customers</button>
+            <button class="nav-link active" style="background-color:transparent;font-weight: bold;
+                    font-size: large;">Customers
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/appointment}">
-            <button class="nav-link active">Appointments</button>
+            <button class="nav-link active" style="background-color:transparent;font-weight: bold;
+                    font-size: large;">Appointments
+            </button>
         </form>
     </li>
     <li class="nav-item">
         <form th:action="@{/nails-service}">
-            <button class="nav-link active">Nails Services</button>
+            <button class="nav-link active" style="background-color:transparent; font-weight: bold;
+                    font-size: large;">Nails Services
+            </button>
         </form>
     </li>
 </ul>
 
-<form th:action="@{/revenue/forPeriod}">
-    <div class="buttons">
-        <input type="date" name="dateFrom" required>
-        <input type="date" name="dateTo" required>
-        <button type="submit" class="btn btn-success"> Calculate </button>
-    </div>
-    <div>
-    <input th:value="${result}">
-    </div>
-</form>
-
-<form th:action="@{/revenue/forDay}">
-    <div class="buttons">
-        <input type="date" name="date" required>
-        <button type="submit" class="btn btn-success"> Calculate </button>
-    </div>
-    <div>
-    <input th:value="${resultForDay}" >
-    </div>
-</form>
-
-
+<div class="container" style="padding: 30px 10px 10px;"></div>
+<div>
+    <form th:action="@{/revenue/forPeriod}">
+        <div class="buttons">
+            <input style="background-color: transparent; color: snow" type="date" name="dateFrom" required>
+            <input style="background-color: transparent; color: snow" type="date" name="dateTo" required>
+            <button style="background-color: transparent; color: snow" type="submit" class="btn btn-success"> Revenue
+                for period
+            </button>
+        </div>
+        <div>
+            <input style="background-color: transparent; color: snow"  th:value="${result +' RON'}">
+        </div>
+    </form>
+</div>
+<div>
+    <form th:action="@{/revenue/forDay}">
+        <div class="buttons">
+            <input style="background-color: transparent; color: snow" type="date" name="date" required>
+            <button style="background-color: transparent; color: snow" type="submit" class="btn btn-success"> Revenue
+                for day
+            </button>
+        </div>
+        <div>
+            <input style="background-color: transparent; color: snow"  th:value="${resultForDay + ' RON'}">
+        </div>
+    </form>
+</div>
 
 
 </body>

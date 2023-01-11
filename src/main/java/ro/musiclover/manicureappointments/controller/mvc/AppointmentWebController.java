@@ -55,7 +55,8 @@ public class AppointmentWebController {
                 .nailsServicesIds(request.getNailsServicesIds())
                 .build();
         appointmentService.createAppointment(appointmentRequest);
-
+        model.addAttribute("allCustomers", customerService.getAllCustomers());
+        model.addAttribute("allServices", nailsService.allServices());
         model.addAttribute("appointments", appointmentService.findAll());
         return "allAppointmentsPage";
     }

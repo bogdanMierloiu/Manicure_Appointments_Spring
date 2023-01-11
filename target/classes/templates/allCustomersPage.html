@@ -88,22 +88,23 @@
             <th>Delete</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style="font-weight: bold">
         <tr th:each="customer: ${customers}">
             <td>
-                <div>
+                <div style="padding-bottom: 10px; padding-left: 2px">
                     <span th:text="${customer.firstName + ' ' + customer.lastName}">Name</span>
                 </div>
                 <div>
                     <form th:action="@{/customer/goToUpdateName}">
                         <input type="hidden" name="id" th:value="${customer.id}">
-                        <button type="submit" style="background-color: transparent; color: snow">Change name</button>
+                        <button type="submit"
+                                style="background-color: transparent; color: snow; width: 60%" >Change name</button>
                     </form>
                 </div>
             </td>
             <td>
-                <form th:action="@{/customer/findByFirstName}">
-                    <input type="hidden" name="firstName" th:value="${customer.firstName}">
+                <form th:action="@{/customer/customerWithDetails}">
+                    <input type="hidden" name="id" th:value="${customer.getId()}">
                     <button type="submit" style="background-color: transparent; color: snow"> View Appointments</button>
                 </form>
             </td>

@@ -45,7 +45,7 @@ public class CustomerController {
     }
 
     @GetMapping("find/name/{firstName}")
-    public List<CustomerDetailResponse> findByName(@PathVariable String firstName) {
+    public CustomerResponse findByName(@PathVariable String firstName) {
         return customerService.findByFirstName(firstName);
     }
 
@@ -63,6 +63,11 @@ public class CustomerController {
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable Integer id) {
         customerService.deleteById(id);
+    }
+
+    @GetMapping("/customer-with-appointments/{id}")
+    public CustomerDetailResponse customerWithAppointments(@PathVariable Integer id){
+        return customerService.customerWithAppointments(id);
     }
 
 
