@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class IdRequest {
-    private Integer id;
+    public Integer id;
 }

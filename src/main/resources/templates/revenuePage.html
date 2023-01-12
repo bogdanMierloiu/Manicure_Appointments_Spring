@@ -67,8 +67,9 @@
                 for period
             </button>
         </div>
-        <div>
-            <input style="background-color: transparent; color: snow"  th:value="${result +' RON'}">
+        <div style="padding-top: 10px; padding-bottom: 10px">
+            <span style="background-color: transparent; color: snow"
+                  th:text="${result +' RON' != null} ? ${result} : '  '"></span>
         </div>
     </form>
 </div>
@@ -80,8 +81,9 @@
                 for day
             </button>
         </div>
-        <div>
-            <input style="background-color: transparent; color: snow"  th:value="${resultForDay + ' RON'}">
+        <div style="padding-top: 10px">
+            <span style="background-color: transparent; color: snow"
+                  th:text="${resultForDay + ' RON' != null} ? ${resultForDay} : '  '"></span>
         </div>
     </form>
 </div>

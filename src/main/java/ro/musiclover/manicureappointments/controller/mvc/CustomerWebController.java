@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ro.musiclover.manicureappointments.entity.Appointment;
+import ro.musiclover.manicureappointments.entity.Customer;
+import ro.musiclover.manicureappointments.entity.NailsCare;
+import ro.musiclover.manicureappointments.model.appointment.AppointmentResponseForCustomerDetail;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCustomerDetail;
 import ro.musiclover.manicureappointments.model.utils.IdRequest;
 import ro.musiclover.manicureappointments.model.customer.*;
 import ro.musiclover.manicureappointments.service.CustomerService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -68,9 +73,15 @@ public class CustomerWebController {
     @GetMapping("/customerWithDetails")
     public String customerWithDetails(@ModelAttribute IdRequest request, Model model) {
         CustomerDetailResponse customer = customerService.customerWithAppointments(request.getId());
-        List<NailsServiceForCustomerDetail> nailsServices;
-
+        //TODO: resolve this situation !
+        List<AppointmentResponseForCustomerDetail> appointments = customer.getAppointments();
+        List<NailsServiceForCustomerDetail> nailsServices = new ArrayList<>();
+        for (AppointmentResponseForCustomerDetail appointment : appointments) {
+            nailsServices.addAll(appointment.getNailsServices());
+        }
+        model.addAttribute("servicesForCustomer", nailsServices);
         model.addAttribute("customer", customer);
+        model.addAttribute("appointmentsForCustomer", appointments);
         return "customerWithAppointmentsPage";
 
     }

@@ -15,6 +15,7 @@
         }
     </style>
 </head>
+
 <body>
 <ul class="nav nav-pills nav-justified">
     <li class="nav-item">
@@ -56,8 +57,9 @@
         </form>
     </li>
 </ul>
+
 <div style="padding: 20px">
-    <div style="padding: 5px;" th:object="${customer}">
+    <div style="padding-left: 10px; padding-top: 30px" th:object="${customer}">
         <h2 style="color: snow; font-family: sans-serif"
             th:text="${customer.getFirstName()} + ' ' + ${customer.getLastName()}">
         </h2>
@@ -80,6 +82,7 @@
                             & time</p>
                     </div>
                     <div style="display: grid">
+                        <label th:value="${appointment.id}"></label>
                         <form th:action="@{/appointment/update-date}" method="post">
                             <button type="submit" style="background-color: transparent; color: snow"
                             >Change date&time
@@ -91,8 +94,8 @@
                         </form>
                     </div>
                 </td>
-                <td th:object="${customer.appointments}">
-                    <ul th:each="service: ${customer.appointments}">
+                <td>
+                    <ul th:each="service: ${servicesForCustomer}">
                         <li th:text="${service.serviceName}">Services</li>
                     </ul>
                 </td>
