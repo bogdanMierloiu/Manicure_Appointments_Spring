@@ -15,30 +15,24 @@ import java.util.List;
 @RequiredArgsConstructor
 @Validated
 public class AppointmentController {
-
     private final AppointmentService appointmentService;
-
     @PostMapping("create")
     public AppointmentResponse createAppointment(@RequestBody @Valid AppointmentRequest appointmentRequest) {
         return appointmentService.createAppointment(appointmentRequest);
     }
-
     @GetMapping("find/{id}")
     public AppointmentResponse findById(@PathVariable Integer id) {
         return appointmentService.findById(id);
     }
 
-
     @GetMapping("find/date")
     public List<AppointmentResponse> findByDate(@RequestBody DateRequest date) {
         return appointmentService.findByAppointmentByDate(date);
     }
-
     @GetMapping("/find/between")
     public List<AppointmentResponse> findBetween(@RequestBody DateBetweenRequest dateBetweenRequest) {
         return appointmentService.listBetween(dateBetweenRequest.getDateFrom(), dateBetweenRequest.getDateTo());
     }
-
     @GetMapping("/list")
     public List<AppointmentResponse> findAll() {
         return appointmentService.findAll();

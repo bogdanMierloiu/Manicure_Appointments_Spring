@@ -61,16 +61,21 @@
 <div style="padding-top: 30px; padding-left: 5px; display:grid">
     <form th:action="@{/appointment/goToCreateAppointmentPage}">
         <div>
-            <button type="submit" class="btn btn-success"> + Add new appointment</button>
+            <button type="submit" class="btn btn-success">
+                + Add new appointment
+            </button>
         </div>
     </form>
     <form th:action="@{/appointment/findByDate}">
         <div style="display:inline-grid">
             <div>
-                <button type="submit" class="btn btn-success"> Search by date</button>
+                <button type="submit" class="btn btn-success">
+                    Search by date
+                </button>
             </div>
             <div style="padding-top: 5px">
-                <input style="background-color:transparent; color: snow" type="date" name="date" required>
+                <input style="background-color:transparent; color: snow"
+                       type="date" name="date" required>
             </div>
         </div>
     </form>
@@ -103,9 +108,8 @@
         <tr th:each="appointment: ${appointments}">
             <td>
                 <div>
-                    <p th:text="${#temporals.format(appointment.appointmentDateTime, 'dd-MM-yyyy HH:mm')}">Appointment
-                        date
-                        & time</p>
+                    <p th:text="${#temporals.format(appointment.appointmentDateTime, 'dd-MM-yyyy HH:mm')}">
+                        Appointment date & time</p>
                 </div>
                 <div style="display: grid">
                     <form th:action="@{/appointment/update-date}" method="post">

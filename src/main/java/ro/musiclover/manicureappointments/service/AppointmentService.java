@@ -24,12 +24,11 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class AppointmentService {
     private final AppointmentRepository appointmentRepository;
-    private final AppointmentMapper appointmentMapper;
     private final ManicuristRepository manicuristRepository;
     private final CustomerRepository customerRepository;
     private final NailsCareRepository nailsCareRepository;
-
     private final EmailService emailService;
+    private final AppointmentMapper appointmentMapper;
 
     public AppointmentResponse createAppointment(AppointmentRequest appointmentRequest) {
         for (Appointment appointment : appointmentRepository.findAll()) {
@@ -37,16 +36,12 @@ public class AppointmentService {
                 throw new BusinessException("You already have an appointment at this date and time");
             }
         }
-
         Appointment appointmentToSave = appointmentMapper.map(appointmentRequest);
-
         appointmentToSave.setManicurist(manicuristRepository.findById(appointmentRequest.getManicuristId()).orElseThrow(
                 () -> new BusinessException("Manicurist not found")));
-
         Customer customer = customerRepository.findById(appointmentRequest.getCustomerId()).orElseThrow(
                 () -> new BusinessException("Customer not found"));
         appointmentToSave.setCustomer(customer);
-
         Set<NailsCare> nailsCares = new HashSet<>();
         for (Integer id : appointmentRequest.getNailsServicesIds()) {
             NailsCare nailsCare = nailsCareRepository.findById(id).orElseThrow(
@@ -55,13 +50,11 @@ public class AppointmentService {
             nailsCares.add(nailsCare);
         }
         appointmentToSave.getNailsCares().addAll(nailsCares);
-
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setRecipient(customer.getEmail());
         emailDetails.setSubject("Appointment confirmed");
         emailDetails.setMsgBody("Your appointment is confirmed at: " + appointmentToSave.getAppointmentDateTime());
         emailService.sendSimpleMail(emailDetails);
-
         return appointmentMapper.map(appointmentRepository.save(appointmentToSave));
     }
 

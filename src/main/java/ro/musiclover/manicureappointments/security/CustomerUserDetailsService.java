@@ -9,12 +9,14 @@ import org.springframework.stereotype.Service;
 import ro.musiclover.manicureappointments.entity.User;
 import ro.musiclover.manicureappointments.repository.UserRepository;
 @Service
-
+@RequiredArgsConstructor
 public class CustomerUserDetailsService implements UserDetailsService {
-
-    @Autowired
     private UserRepository userRepository;
-
+    public CustomerUserDetailsService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
+//    @Autowired
+//    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

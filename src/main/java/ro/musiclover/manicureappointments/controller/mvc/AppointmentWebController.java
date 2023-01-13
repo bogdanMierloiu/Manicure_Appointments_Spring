@@ -13,11 +13,9 @@ import ro.musiclover.manicureappointments.service.AppointmentService;
 import ro.musiclover.manicureappointments.service.CustomerService;
 import ro.musiclover.manicureappointments.service.ManicuristService;
 import ro.musiclover.manicureappointments.service.NailsCareService;
-
 @RequiredArgsConstructor
 @Controller
 public class AppointmentWebController {
-
     private final AppointmentService appointmentService;
     private final NailsCareService nailsService;
     private final ManicuristService manicuristService;
@@ -35,13 +33,11 @@ public class AppointmentWebController {
         model.addAttribute("allServices", nailsService.allServices());
         return "allAppointmentsPage";
     }
-
     @GetMapping("/appointment/goToCreateAppointmentPage")
     public String goToCreateAppointmentPage(Model model) {
         model.addAttribute("manicurists", manicuristService.allManicurists());
         model.addAttribute("customers", customerService.getAllCustomers());
         model.addAttribute("services", nailsService.allServices());
-
         return "appointmentCreatePage";
     }
 

@@ -5,16 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ro.musiclover.manicureappointments.entity.Appointment;
 
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
     List<Appointment> findAllByOrderByAppointmentDateTimeDesc();
-
 
     @Query("select t from Appointment t where t.appointmentDateTime BETWEEN :startDate AND :endDate")
     List<Appointment> findByAppointmentDateBetween(
