@@ -1,4 +1,5 @@
 package ro.musiclover.manicureappointments.entity;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -6,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.*;
 import org.hibernate.envers.Audited;
+
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import java.time.LocalDateTime;
@@ -23,7 +25,6 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Future(message = "Please check the date")
     private LocalDateTime appointmentDateTime;
     @ManyToOne(fetch = FetchType.LAZY)
     private Manicurist manicurist;

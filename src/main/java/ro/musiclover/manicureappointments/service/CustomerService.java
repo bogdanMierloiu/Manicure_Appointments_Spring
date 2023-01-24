@@ -14,6 +14,8 @@ import ro.musiclover.manicureappointments.model.nails_services.NailsServiceForCu
 import ro.musiclover.manicureappointments.repository.CustomerRepository;
 import ro.musiclover.manicureappointments.repository.MyRepository;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,26 +137,6 @@ public class CustomerService {
     }
 
 
-    public void updateFirstName(Integer id, RequestUpdateNameCustomer request) {
-        Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
-                () -> new BusinessException(
-                        String.format("CustomerWebController with id: %s not found", id)
-                )
-        );
-        customerToUpdate.setFirstName(request.getFirstName());
-    }
-
-
-    public void updateLastName(Integer id, RequestUpdateLastNameCustomer request) {
-        Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
-                () -> new BusinessException(
-                        String.format("CustomerWebController with id: %s not found", id)
-                )
-        );
-        customerToUpdate.setLastName(request.getLastName());
-    }
-
-
     public void updatePhoneNumber(Integer id, RequestUpdatePhoneNumberCustomer request) {
         validatePhoneNumber(request.getPhoneNumber());
         Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
@@ -207,6 +189,51 @@ public class CustomerService {
                 string.length() < 10) {
             throw new BusinessException("Invalid phone number. Try again -> only with digits and minimum 10");
         }
+    }
+
+    public int getAge(int id) {
+        Customer customer = customerRepository.findById(id).orElseThrow();
+        return (int) ChronoUnit.YEARS.between(customer.getBirthDate(), LocalDate.now());
+    }
+
+    public int under22() {
+        int total = 0;
+        for (Customer customer : customerRepository.findAll()) {
+            if (getAge(customer.getId()) <= 22) {
+                total += 1;
+            }
+        }
+        return total;
+    }
+
+    public int between23and30() {
+        int total = 0;
+        for (Customer customer : customerRepository.findAll()) {
+            if (getAge(customer.getId()) > 22 && getAge(customer.getId()) <= 30) {
+                total += 1;
+            }
+        }
+        return total;
+    }
+
+    public int between31and40() {
+        int total = 0;
+        for (Customer customer : customerRepository.findAll()) {
+            if (getAge(customer.getId()) > 30 && getAge(customer.getId()) <= 40) {
+                total += 1;
+            }
+        }
+        return total;
+    }
+
+    public int olderThan41() {
+        int total = 0;
+        for (Customer customer : customerRepository.findAll()) {
+            if (getAge(customer.getId()) > 40) {
+                total += 1;
+            }
+        }
+        return total;
     }
 
 

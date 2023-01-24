@@ -95,7 +95,7 @@
                     </div>
                 </td>
                 <td>
-                    <ul th:each="service: ${servicesForCustomer}">
+                    <ul th:each="service: ${appointment.nailsServices}">
                         <li th:text="${service.serviceName}">Services</li>
                     </ul>
                 </td>
@@ -106,3 +106,4 @@
 </div>
 </body>
 </html>
+

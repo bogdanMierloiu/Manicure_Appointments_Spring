@@ -46,3 +46,7 @@ input::placeholder {
     margin: 5px;
     scale: inherit;
 }
+
+#piechart{
+    background-color: transparent;
+}

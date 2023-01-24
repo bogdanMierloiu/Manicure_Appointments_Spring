@@ -19,6 +19,8 @@ import ro.musiclover.manicureappointments.service.CustomerService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @RequiredArgsConstructor
 @Controller
@@ -36,6 +38,17 @@ public class CustomerWebController {
     public String goToAllCustomers(Model model) {
         model.addAttribute("customers", customerService.getAllCustomers());
         return "allCustomersPage";
+    }
+
+    @GetMapping("/google-charts")
+    public String getPieChart(Model model) {
+        Map<String, Integer> graphData = new TreeMap<>();
+        graphData.put("Under 22 years", customerService.under22());
+        graphData.put("Between 23 and 30 years", customerService.between23and30());
+        graphData.put("Between 31 and 40 years ", customerService.between31and40());
+        graphData.put("Older than 41 years", customerService.olderThan41());
+        model.addAttribute("chartData", graphData);
+        return "google-charts";
     }
 
     @GetMapping("/allActiveCustomers")
@@ -73,17 +86,8 @@ public class CustomerWebController {
     @GetMapping("/customerWithDetails")
     public String customerWithDetails(@ModelAttribute IdRequest request, Model model) {
         CustomerDetailResponse customer = customerService.customerWithAppointments(request.getId());
-        //TODO: resolve this situation !
-        List<AppointmentResponseForCustomerDetail> appointments = customer.getAppointments();
-        List<NailsServiceForCustomerDetail> nailsServices = new ArrayList<>();
-        for (AppointmentResponseForCustomerDetail appointment : appointments) {
-            nailsServices.addAll(appointment.getNailsServices());
-        }
-        model.addAttribute("servicesForCustomer", nailsServices);
         model.addAttribute("customer", customer);
-        model.addAttribute("appointmentsForCustomer", appointments);
         return "customerWithAppointmentsPage";
-
     }
 
     @PostMapping("/create-new-customer")

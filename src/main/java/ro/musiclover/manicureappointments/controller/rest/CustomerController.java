@@ -24,6 +24,7 @@ public class CustomerController {
     public CustomerResponse createCustomer(@RequestBody @Valid CustomerRequest customerRequest) {
         return customerService.createCustomer(customerRequest);
     }
+
     @GetMapping("list")
     public List<CustomerResponse> getAllCustomers() {
         return customerService.getAllCustomers();
@@ -66,9 +67,25 @@ public class CustomerController {
     }
 
     @GetMapping("/customer-with-appointments/{id}")
-    public CustomerDetailResponse customerWithAppointments(@PathVariable Integer id){
+    public CustomerDetailResponse customerWithAppointments(@PathVariable Integer id) {
         return customerService.customerWithAppointments(id);
     }
+
+    @GetMapping("age/{id}")
+    public int getAge(@PathVariable int id) {
+        return customerService.getAge(id);
+    }
+
+    @GetMapping("under_22")
+    public int under22() {
+        return customerService.under22();
+    }
+
+    @GetMapping("between23_30")
+    public int between22and30() {
+        return customerService.between23and30();
+    }
+
 
 
 }

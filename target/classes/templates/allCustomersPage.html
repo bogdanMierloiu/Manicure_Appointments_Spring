@@ -77,6 +77,9 @@
             </div>
         </div>
     </form>
+    <form th:action="@{/customer/google-charts}">
+        <button type="submit" class="btn btn-success"> Charts</button>
+    </form>
 </div>
 <div style="padding: 5px">
     <table class="table" style="background-color: transparent; color: snow; border: snow">
@@ -98,7 +101,8 @@
                     <form th:action="@{/customer/goToUpdateName}">
                         <input type="hidden" name="id" th:value="${customer.id}">
                         <button type="submit"
-                                style="background-color: transparent; color: snow; width: 60%" >Change name</button>
+                                style="background-color: transparent; color: snow; width: 60%">Change name
+                        </button>
                     </form>
                 </div>
             </td>
@@ -124,5 +128,6 @@
         </tbody>
     </table>
 </div>
+
 </body>
 </html>
