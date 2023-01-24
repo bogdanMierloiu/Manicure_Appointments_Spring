@@ -34,9 +34,13 @@ public class IndexController {
         userService.createUser(user);
         return "register_success";
     }
-
     @GetMapping("/goToApplication")
     public String goToApplication(){
+        return "welcomePage";
+    }
+
+    @GetMapping("/welcome")
+    public String gotoWelcomePage() {
         return "welcomePage";
     }
 }

@@ -6,11 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ro.musiclover.manicureappointments.model.utils.IdRequest;
-import ro.musiclover.manicureappointments.model.nails_services.CreateNailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.NailsServiceRequest;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdateName;
 import ro.musiclover.manicureappointments.model.nails_services.RequestUpdatePrice;
+import ro.musiclover.manicureappointments.model.utils.IdRequest;
 import ro.musiclover.manicureappointments.service.NailsCareService;
 
 @RequiredArgsConstructor
@@ -30,40 +29,37 @@ public class NailsServiceWebController {
         return "allNailsServicesPage";
     }
 
-    @PostMapping("/nails-service/delete")
-    public String deleteService(@ModelAttribute(value = "deleteRequest") IdRequest request, Model model) {
-        nailsService.deleteService(request.getId());
-        model.addAttribute("services", nailsService.allServices());
-        return "allNailsServicesPage";
-    }
-
-    @PostMapping("nails-service/update-name")
-    public String updateServiceName(@ModelAttribute(value = "updateNameRequest") RequestUpdateName request, Model model) {
-        nailsService.updateServiceName(request);
-        model.addAttribute("services", nailsService.allServices());
-        return "allNailsServicesPage";
-    }
-
-    @PostMapping("nails-service/update-price")
-    public String updateServicePrice(@ModelAttribute(value = "updatePriceRequest") RequestUpdatePrice request, Model model) {
-        nailsService.updateServicePrice(request);
-        model.addAttribute("services", nailsService.allServices());
-        return "allNailsServicesPage";
-    }
-
     @GetMapping("/nails-service/goToCreateServicePage")
     public String goToCreateServicePage() {
         return "createServicePage";
     }
 
     @PostMapping("/nails-service/createService")
-    public String createService(@ModelAttribute(value = "createServiceRequest") CreateNailsServiceRequest request,
+    public String createService(@ModelAttribute NailsServiceRequest nailsServiceRequest,
                                 Model model) {
-        NailsServiceRequest nailsServiceRequest = NailsServiceRequest.builder()
-                .serviceName(request.getServiceName())
-                .price(request.getPrice())
-                .build();
         nailsService.createService(nailsServiceRequest);
+        model.addAttribute("services", nailsService.allServices());
+        return "allNailsServicesPage";
+    }
+
+    @PostMapping("nails-service/update-name")
+    public String updateServiceName(@ModelAttribute RequestUpdateName request, Model model) {
+        nailsService.updateServiceName(request);
+        model.addAttribute("services", nailsService.allServices());
+        return "allNailsServicesPage";
+    }
+
+    @PostMapping("nails-service/update-price")
+    public String updateServicePrice(@ModelAttribute RequestUpdatePrice request, Model model) {
+        nailsService.updateServicePrice(request);
+        model.addAttribute("services", nailsService.allServices());
+        return "allNailsServicesPage";
+    }
+
+
+    @PostMapping("/nails-service/delete")
+    public String deleteService(@ModelAttribute(value = "deleteRequest") IdRequest request, Model model) {
+        nailsService.deleteService(request.getId());
         model.addAttribute("services", nailsService.allServices());
         return "allNailsServicesPage";
     }

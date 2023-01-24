@@ -17,7 +17,7 @@ import java.util.List;
 public class AppointmentRequest {
 
     private Integer id;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Future(message = "Please check the date")
     private LocalDateTime appointmentDateTime;
 

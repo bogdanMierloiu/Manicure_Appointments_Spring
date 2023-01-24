@@ -6,13 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ro.musiclover.manicureappointments.model.utils.IdRequest;
-import ro.musiclover.manicureappointments.model.utils.UpdateRequest;
 import ro.musiclover.manicureappointments.model.appointment.*;
+import ro.musiclover.manicureappointments.model.utils.IdRequest;
 import ro.musiclover.manicureappointments.service.AppointmentService;
 import ro.musiclover.manicureappointments.service.CustomerService;
 import ro.musiclover.manicureappointments.service.ManicuristService;
 import ro.musiclover.manicureappointments.service.NailsCareService;
+
 @RequiredArgsConstructor
 @Controller
 public class AppointmentWebController {
@@ -33,6 +33,7 @@ public class AppointmentWebController {
         model.addAttribute("allServices", nailsService.allServices());
         return "allAppointmentsPage";
     }
+
     @GetMapping("/appointment/goToCreateAppointmentPage")
     public String goToCreateAppointmentPage(Model model) {
         model.addAttribute("manicurists", manicuristService.allManicurists());
@@ -42,14 +43,8 @@ public class AppointmentWebController {
     }
 
     @PostMapping("/appointment/create-new-appointment")
-    public String createNewAppointment(@ModelAttribute(value = "createAppointmentRequest") CreateAppointmentRequest request,
+    public String createNewAppointment(@ModelAttribute AppointmentRequest appointmentRequest,
                                        Model model) {
-        AppointmentRequest appointmentRequest = AppointmentRequest.builder()
-                .appointmentDateTime(request.getAppointmentDateTime())
-                .manicuristId(request.getManicuristId())
-                .customerId(request.getCustomerId())
-                .nailsServicesIds(request.getNailsServicesIds())
-                .build();
         appointmentService.createAppointment(appointmentRequest);
         model.addAttribute("allCustomers", customerService.getAllCustomers());
         model.addAttribute("allServices", nailsService.allServices());
@@ -58,16 +53,13 @@ public class AppointmentWebController {
     }
 
     @GetMapping("/appointment/findByDate")
-    public String findByDate(@ModelAttribute(value = "dateRequest") FindByDateRequest request, Model model) {
-        DateRequest dateRequest = DateRequest.builder()
-                .date(request.getDate())
-                .build();
+    public String findByDate(@ModelAttribute DateRequest dateRequest, Model model) {
         model.addAttribute("appointments", appointmentService.findByAppointmentByDate(dateRequest));
         return "resultAppointmentPage";
     }
 
     @GetMapping("/appointment/listBetween")
-    public String listBetween(@ModelAttribute(value = "dateRequest") DateBetweenRequestForWeb request,
+    public String listBetween(@ModelAttribute DateBetweenRequestForWeb request,
                               Model model) {
         model.addAttribute("appointmentsBetween", appointmentService.listBetween(
                 request.getDateFrom().atStartOfDay(), request.getDateTo().plusDays(1).atStartOfDay()));
@@ -75,7 +67,7 @@ public class AppointmentWebController {
     }
 
     @PostMapping("/appointment/update-date")
-    public String updateDate(@ModelAttribute(value = "updateDateRequest") RequestUpdateDate request,
+    public String updateDate(@ModelAttribute RequestUpdateDate request,
                              Model model) {
         appointmentService.updateAppointmentDateTime(request);
         model.addAttribute("appointments", appointmentService.findAll());
@@ -85,7 +77,7 @@ public class AppointmentWebController {
     }
 
     @PostMapping("/appointment/update-customer")
-    public String updateCustomer(@ModelAttribute(value = "updateCustomerRequest") RequestUpdateCustomer request,
+    public String updateCustomer(@ModelAttribute RequestUpdateCustomer request,
                                  Model model) {
         appointmentService.updateCustomer(request.getId(), request);
         model.addAttribute("appointments", appointmentService.findAll());
@@ -95,12 +87,9 @@ public class AppointmentWebController {
     }
 
     @PostMapping("/appointment/update-services")
-    public String updateServices(@ModelAttribute(value = "updateServicesRequest") RequestUpdateServicesForWeb request,
+    public String updateServices(@ModelAttribute RequestUpdateServices requestUpdateServices,
                                  Model model) {
-        RequestUpdateServices requestUpdateServices = RequestUpdateServices.builder()
-                .nailsServicesIds(request.getNailsServicesIds())
-                .build();
-        appointmentService.updateNailsServices(request.getId(), requestUpdateServices);
+        appointmentService.updateNailsServices(requestUpdateServices.getId(), requestUpdateServices);
         model.addAttribute("allCustomers", customerService.getAllCustomers());
         model.addAttribute("allServices", nailsService.allServices());
         model.addAttribute("appointments", appointmentService.findAll());
@@ -108,14 +97,14 @@ public class AppointmentWebController {
     }
 
     @GetMapping("/appointment/goToUpdateServices")
-    public String goToUpdateServices(@ModelAttribute(value = "updateRequest") UpdateRequest request, Model model) {
+    public String goToUpdateServices(@ModelAttribute IdRequest request, Model model) {
         model.addAttribute("appointmentId", request.getId());
         model.addAttribute("servicesFromDB", nailsService.allServices());
         return "updateServicesPage";
     }
 
     @GetMapping("/appointment/delete")
-    public String delete(@ModelAttribute(value = "deleteRequest") IdRequest request, Model model) {
+    public String delete(@ModelAttribute IdRequest request, Model model) {
         appointmentService.delete(request.getId());
         model.addAttribute("appointments", appointmentService.findAll());
         model.addAttribute("allCustomers", customerService.getAllCustomers());

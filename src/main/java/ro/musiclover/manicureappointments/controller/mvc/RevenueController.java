@@ -22,7 +22,7 @@ public class RevenueController {
     }
 
     @GetMapping("/revenue/forPeriod")
-    public String revenueForPeriod(@ModelAttribute(value = "dateBetweenRequest") DateBetweenRequestForWeb dateRequest, Model model) {
+    public String revenueForPeriod(@ModelAttribute DateBetweenRequestForWeb dateRequest, Model model) {
         DateBetweenRequest dateBetweenRequest = DateBetweenRequest.builder()
                 .dateFrom(dateRequest.getDateFrom().atStartOfDay())
                 .dateTo(dateRequest.getDateTo().plusDays(1).atStartOfDay())
@@ -33,7 +33,7 @@ public class RevenueController {
     }
 
     @GetMapping("revenue/forDay")
-    public String revenueForDay(@ModelAttribute(value = "dateRequest") DateRequest dateRequest, Model model) {
+    public String revenueForDay(@ModelAttribute DateRequest dateRequest, Model model) {
         Integer resultForDay = appointmentService.revenueForDay(dateRequest);
         model.addAttribute("resultForDay", resultForDay);
         return "revenuePage";
