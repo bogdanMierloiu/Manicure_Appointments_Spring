@@ -136,6 +136,14 @@
                     <target>16</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>ro.musiclover.manicureappointments.Application</mainClass>
+                    <layout>JAR</layout>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
