@@ -32,3 +32,4 @@ tmp/
 target/
 !**/src/main/**
 src/main/resources/application.properties
+target
