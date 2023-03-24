@@ -1,6 +1,8 @@
 # Compiled class file
 *.class
-
+*.properties
+!**/src/main/**/target/
+!**/src/test/**/target/
 # Log file
 *.log
 
@@ -18,6 +20,7 @@
 *.zip
 *.tar.gz
 *.rar
+
 
 .idea
 *.iml

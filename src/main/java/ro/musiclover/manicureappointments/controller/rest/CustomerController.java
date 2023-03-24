@@ -51,9 +51,9 @@ public class CustomerController {
     }
 
 
-    @PatchMapping("update/{id}")
-    public void updateCustomerById(@PathVariable Integer id, @RequestBody @Valid CustomerRequest customerRequest) {
-        customerService.updateCustomer(id, customerRequest);
+    @PatchMapping("/update")
+    public void updateCustomerById(@RequestBody CustomerRequest customerRequest) {
+        customerService.updateCustomer(customerRequest);
     }
 
     @PatchMapping("update/status/{id}")
@@ -85,7 +85,6 @@ public class CustomerController {
     public int between22and30() {
         return customerService.between23and30();
     }
-
 
 
 }

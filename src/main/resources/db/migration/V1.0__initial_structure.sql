@@ -2,7 +2,7 @@ CREATE TABLE `manicurist`
 (
     `id`           int NOT NULL AUTO_INCREMENT,
     `first_name`   varchar(255) DEFAULT NULL,
-    `hire_date`    datetime(6)  DEFAULT NULL,
+    `hire_date`    date  DEFAULT NULL,
     `last_name`    varchar(255) DEFAULT NULL,
     `phone_number` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`)

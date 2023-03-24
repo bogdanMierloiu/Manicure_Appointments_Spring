@@ -1,4 +1,3 @@
-
 CREATE TABLE `revinfo`
 (
     `rev`      int NOT NULL AUTO_INCREMENT,
@@ -12,7 +11,7 @@ CREATE TABLE `manicurist_aud`
     `rev`          int NOT NULL,
     `revtype`      tinyint      DEFAULT NULL,
     `first_name`   varchar(255) DEFAULT NULL,
-    `hire_date`    datetime(6) DEFAULT NULL,
+    `hire_date`    date DEFAULT NULL,
     `last_name`    varchar(255) DEFAULT NULL,
     `phone_number` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`, `rev`),
@@ -48,15 +47,14 @@ CREATE TABLE `nails_care_aud`
 
 CREATE TABLE `appointment_aud`
 (
-    `id`               int NOT NULL,
-    `rev`              int NOT NULL,
-    `revtype`          tinyint DEFAULT NULL,
-    `appointment_date` date    DEFAULT NULL,
-    `appointment_time` time    DEFAULT NULL,
-    `customer_id`      int     DEFAULT NULL,
-    `manicurist_id`    int     DEFAULT NULL,
+    `id`                    int NOT NULL,
+    `rev`                   int NOT NULL,
+    `revtype`               tinyint DEFAULT NULL,
+    `appointment_date_time` datetime(6) DEFAULT NULL,
+    `customer_id`           int     DEFAULT NULL,
+    `manicurist_id`         int     DEFAULT NULL,
     PRIMARY KEY (`id`, `rev`),
-    KEY                `FKlmkpkowitkecxb2u8obk10e56` (`rev`),
+    KEY                     `FKlmkpkowitkecxb2u8obk10e56` (`rev`),
     CONSTRAINT `FKlmkpkowitkecxb2u8obk10e56` FOREIGN KEY (`rev`) REFERENCES `revinfo` (`rev`)
 );
 CREATE TABLE `appointment_services_aud`

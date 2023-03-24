@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +27,6 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
-
-    private final MyRepository myRepository;
 
 
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
@@ -106,16 +105,33 @@ public class CustomerService {
     }
 
 
-    public void updateCustomer(Integer id, CustomerRequest customerRequest) {
+    public void updateCustomer(CustomerRequest customerRequest) {
+
         validatePhoneNumber(customerRequest.getPhoneNumber());
-        Customer customerToUpdate = customerRepository.findById(id).orElseThrow(
+        Customer customerToUpdate = customerRepository.findById(customerRequest.getId()).orElseThrow(
                 () -> new BusinessException(
-                        String.format("CustomerWebController with id: %s not found", id)
+                        String.format("CustomerWebController with id: %s not found", customerRequest.getId())
                 )
         );
-        customerToUpdate.setFirstName(customerRequest.getFirstName());
-        customerToUpdate.setLastName(customerRequest.getLastName());
-        customerToUpdate.setPhoneNumber(customerRequest.getPhoneNumber());
+        if (!(customerToUpdate == null)) {
+            customerToUpdate.setFirstName(
+                    customerRequest.getFirstName() != null ? customerRequest.getFirstName() : customerToUpdate.getFirstName());
+            customerToUpdate.setLastName(
+                    customerRequest.getLastName() != null ? customerRequest.getLastName() : customerToUpdate.getLastName());
+            if (customerRequest.getPhoneNumber() != null) {
+                validatePhoneNumber(customerRequest.getPhoneNumber());
+                customerToUpdate.setPhoneNumber(customerRequest.getPhoneNumber());
+            } else {
+                customerToUpdate.setPhoneNumber(customerToUpdate.getPhoneNumber());
+            }
+            customerToUpdate.setBirthDate(
+                    customerRequest.getBirthDate() != null ? customerRequest.getBirthDate() : customerToUpdate.getBirthDate());
+            customerToUpdate.setEmail(
+                    customerRequest.getEmail() != null ? customerRequest.getEmail() : customerToUpdate.getEmail());
+            customerToUpdate.setActive(
+                    customerRequest.getActive() != null ? customerRequest.getActive() : customerToUpdate.getActive());
+        }
+
     }
 
     public void updateFirstLastName(Integer id, RequestUpdateNameCustomer customerRequest) {

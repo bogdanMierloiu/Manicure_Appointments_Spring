@@ -1,14 +1,12 @@
 package ro.musiclover.manicureappointments.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import lombok.*;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
-
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity

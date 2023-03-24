@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("appointment")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 @RequiredArgsConstructor
 @Validated
 public class AppointmentController {
