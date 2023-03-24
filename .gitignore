@@ -3,6 +3,7 @@
 *.properties
 !**/src/main/**/target/
 !**/src/test/**/target/
+!target/**
 # Log file
 *.log
 
